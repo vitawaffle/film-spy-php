@@ -32,7 +32,7 @@ services:
             - './services/php/conf:/usr/local/etc'
             - './services/php/log:/var/log/php'
             - './src/film-spy:/var/www/film-spy'
-        working_dir: /var/www
+        working_dir: /var/www/film-spy
     postgres:
         build: services/postgres
         container_name: film-spy_postgres
@@ -57,6 +57,11 @@ services:
             - '3000:3000'
         volumes:
             - './services/shared:/shared'
+            - './src/film-spy-client:/var/www/film-spy-client'
+        working_dir: /var/www/film-spy-client
+        command:
+            - npm
+            - start
 networks:
     film-spy:
 volumes:
