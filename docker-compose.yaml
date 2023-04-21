@@ -48,6 +48,15 @@ services:
             POSTGRES_USER: ${DOCKER_COMPOSE_POSTGRES_USER-postgres}
             POSTGRES_PASSWORD: ${DOCKER_COMPOSE_POSTGRES_PASSWORD-postgres}
             POSTGRES_DB: film_spy
+    node:
+        build: services/node
+        container_name: film-spy_node
+        networks:
+            - film-spy
+        ports:
+            - '3000:3000'
+        volumes:
+            - './services/shared:/shared'
 networks:
     film-spy:
 volumes:
