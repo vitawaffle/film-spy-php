@@ -1,7 +1,14 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Router from 'router';
+import { Layout } from 'features/ui';
 
 const App = () => (
-  <h1>Hello, World!</h1>
+  <BrowserRouter>
+    <Layout>
+      <Router />
+    </Layout>
+  </BrowserRouter>
 );
 
 export default App;
