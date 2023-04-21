@@ -1,0 +1,54 @@
+services:
+    nginx:
+        build: services/nginx
+        container_name: film-spy_nginx
+        networks:
+            - film-spy
+        depends_on:
+            - php
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - './services/shared:/shared'
+            - './services/nginx/conf:/etc/nginx'
+            - './services/nginx/log:/var/log/nginx'
+            - './src/film-spy:/var/www/film-spy'
+    php:
+        build:
+            context: services/php
+            args:
+                GIT_USER_NAME: $DOCKER_COMPOSE_GIT_USER_NAME
+                GIT_USER_EMAIL: $DOCKER_COMPOSE_GIT_USER_EMAIL
+        container_name: film-spy_php
+        networks:
+            - film-spy
+        depends_on:
+            - postgres
+        ports:
+            - '9000:9000'
+        volumes:
+            - './services/shared:/shared'
+            - './services/php/conf:/usr/local/etc'
+            - './services/php/log:/var/log/php'
+            - './src/film-spy:/var/www/film-spy'
+        working_dir: /var/www
+    postgres:
+        build: services/postgres
+        container_name: film-spy_postgres
+        networks:
+            - film-spy
+        ports:
+            - '5432:5432'
+        volumes:
+            - './services/shared:/shared'
+            - './services/postgres/sql:/docker-entrypoint-initdb.d'
+            - 'film-spy_postgres-data:/var/lib/postgresql/data'
+        environment:
+            POSTGRES_USER: ${DOCKER_COMPOSE_POSTGRES_USER-postgres}
+            POSTGRES_PASSWORD: ${DOCKER_COMPOSE_POSTGRES_PASSWORD-postgres}
+            POSTGRES_DB: film_spy
+networks:
+    film-spy:
+volumes:
+    film-spy_postgres-data:
