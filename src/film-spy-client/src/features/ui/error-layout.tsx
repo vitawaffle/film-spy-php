@@ -15,13 +15,13 @@ const ErrorLayout = ({
   description,
 }: ErrorLayoutProps) => (
   <Stack spacing={2}>
-    <Typography variant="h2" component="h2">
+    <Typography variant="h2" component="h2" align="center">
       {code}
     </Typography>
-    <Typography variant="h3" component="h3">
+    <Typography variant="h3" component="h3" align="center">
       {name}
     </Typography>
-    <Typography>
+    <Typography align="center">
       {description}
     </Typography>
     {children}

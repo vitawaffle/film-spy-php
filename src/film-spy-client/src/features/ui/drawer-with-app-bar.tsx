@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Box,
+  Button, 
   Container,
   Divider,
   IconButton,
@@ -11,17 +13,32 @@ import {
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
+  Home as HomeIcon,
 } from '@mui/icons-material';
 import { ChildrenProps } from 'props';
+import { useAppSelector } from 'hooks';
+import { selectIsAuthenticated } from 'app-slice';
+import { strings } from 'localization';
 import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
+import DrawerLink from './drawer-link';
+
+const links = [
+  {
+    to: '/home',
+    text: strings.common.home,
+    icon: <HomeIcon />
+  },
+];
 
 const DrawerWithAppBar = ({ children }: ChildrenProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDrawerOpen = () => setIsOpen(true);
   const handleDrawerClose = () => setIsOpen(false);
+
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -39,9 +56,19 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
             Film Spy
           </Typography>
+          {!isAuthenticated && (
+            <Button component={Link} to="/login" color="inherit">
+              {strings.common.logIn}
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={isOpen}>
@@ -52,11 +79,23 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
         </DrawerHeader>
         <Divider />
         <List>
+          {links.map(({ to, text, icon }, i) => (
+            <DrawerLink
+              key={i}
+              to={to}
+              text={text}
+              icon={icon}
+              isDrawerOpen={isOpen}
+            />
+          ))}
         </List>
       </Drawer>
-      <Container>
-        {children}
-      </Container>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <Container>
+          {children}
+        </Container>
+      </Box>
     </Box>
   );
 };
