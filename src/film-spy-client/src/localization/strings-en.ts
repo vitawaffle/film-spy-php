@@ -7,11 +7,16 @@ const stringsEn: LocaleTemplate = {
     home: 'Home',
     email: 'Email',
     password: 'Password',
+    passwordConfirmation: 'Password confirmation',
     rememberMe: 'Remember me',
-    invalidCredentials: 'Invalid credentials',
+    name: 'Name',
   },
   validation: {
     required: 'This field is required',
+    email: 'Invalid email format',
+    password: 'Password must be at least 8 characters long',
+    passwordMismatch: 'Password mismatch',
+    invalidCredentials: 'Invalid credentials',
   },
   pages: {
     errors: {

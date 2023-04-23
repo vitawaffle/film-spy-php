@@ -16,11 +16,16 @@ export type LocaleTemplate = {
     home: string,
     email: string,
     password: string,
+    passwordConfirmation: string,
     rememberMe: string,
-    invalidCredentials: string,
+    name: string,
   },
   validation: {
     required: string,
+    email: string,
+    password: string,
+    passwordMismatch: string,
+    invalidCredentials: string,
   },
   pages: {
     errors: {

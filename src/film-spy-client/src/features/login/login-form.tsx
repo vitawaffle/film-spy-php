@@ -67,7 +67,7 @@ const LoginForm = () => {
       return strings.validation.required;
 
     if (isInvalidCredentials)
-      return strings.common.invalidCredentials;
+      return strings.validation.invalidCredentials;
 
     return undefined;
   };

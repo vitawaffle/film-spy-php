@@ -7,11 +7,16 @@ const stringsRu: LocaleTemplate = {
     home: 'Домой',
     email: 'Электронная почта',
     password: 'Пароль',
+    passwordConfirmation: 'Подтверждение пароля',
     rememberMe: 'Запомнить меня',
-    invalidCredentials: 'Неверные учётные данные',
+    name: 'Имя',
   },
   validation: {
     required: 'Это поле обязательно',
+    email: 'Неверный формат электронной почты',
+    password: 'Пароль должен состоять не менее чем из 8 символов',
+    passwordMismatch: 'Пароли не совпадают',
+    invalidCredentials: 'Неверные учётные данные',
   },
   pages: {
     errors: {
