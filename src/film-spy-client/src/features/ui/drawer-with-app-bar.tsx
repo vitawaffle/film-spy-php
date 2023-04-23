@@ -65,9 +65,14 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
             Film Spy
           </Typography>
           {!isAuthenticated && (
-            <Button component={Link} to="/login" color="inherit">
-              {strings.common.logIn}
-            </Button>
+            <>
+              <Button component={Link} to="/signin" color="inherit">
+                {strings.common.signIn}
+              </Button>
+              <Button component={Link} to="/login" color="inherit">
+                {strings.common.logIn}
+              </Button>
+            </>
           )}
         </Toolbar>
       </AppBar>

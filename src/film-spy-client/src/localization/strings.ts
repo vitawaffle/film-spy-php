@@ -12,6 +12,7 @@ export default strings;
 export type LocaleTemplate = {
   common: {
     logIn: string,
+    signIn: string,
     home: string,
     email: string,
     password: string,
