@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   Checkbox,
   Button,
+  LinearProgress,
 } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import yup from 'schema';
@@ -75,6 +76,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(login)}>
       <Stack spacing={2}>
+        {isLoading && <LinearProgress />}
         <TextField
           {...register('email', { onChange })}
           id="email"

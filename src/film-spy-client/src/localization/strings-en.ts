@@ -3,6 +3,7 @@ import { LocaleTemplate } from './strings';
 const stringsEn: LocaleTemplate = {
   common: {
     logIn: 'Log in',
+    logOut: 'Log out',
     signIn: 'Sign in',
     home: 'Home',
     email: 'Email',

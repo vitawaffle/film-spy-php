@@ -3,6 +3,7 @@ import { LocaleTemplate } from './strings';
 const stringsRu: LocaleTemplate = {
   common: {
     logIn: 'Войти',
+    logOut: 'Выйти',
     signIn: 'Зарегистрироваться',
     home: 'Домой',
     email: 'Электронная почта',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
   Button, 
@@ -16,7 +16,7 @@ import {
   Home as HomeIcon,
 } from '@mui/icons-material';
 import { ChildrenProps } from 'props';
-import { useAppSelector } from 'hooks';
+import { useAppSelector, useLogout } from 'hooks';
 import { selectIsAuthenticated } from 'app-slice';
 import { strings } from 'localization';
 import AppBar from './app-bar';
@@ -34,9 +34,17 @@ const links = [
 
 const DrawerWithAppBar = ({ children }: ChildrenProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const logout = useLogout();
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => setIsOpen(true);
   const handleDrawerClose = () => setIsOpen(false);
+
+  const handleLogoutClick = async () => {
+    await logout();
+
+    navigate('/home');
+  };
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
@@ -73,6 +81,11 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
                 {strings.common.logIn}
               </Button>
             </>
+          )}
+          {isAuthenticated && (
+            <Button onClick={handleLogoutClick} color="inherit">
+              {strings.common.logOut}
+            </Button>
           )}
         </Toolbar>
       </AppBar>

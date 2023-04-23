@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Stack, TextField, Button } from '@mui/material';
+import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import yup from 'schema';
 import { useCheckAuthentication } from 'hooks';
 import { isUnprocessableContentError } from 'utils';
@@ -95,6 +95,7 @@ const SigninForm = () => {
   return (
     <form onSubmit={handleSubmit(signin)}>
       <Stack spacing={2}>
+        {isLoading && <LinearProgress />}
         <TextField
           {...register('name')}
           id="name"
@@ -110,7 +111,9 @@ const SigninForm = () => {
           }
         />
         <TextField
-          {...register('email')}
+          {...register('email', {
+            onChange: () => setIsEmailNotUnique(false),
+          })}
           id="email"
           type="email"
           label={strings.common.email}
