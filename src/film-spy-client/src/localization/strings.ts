@@ -13,6 +13,13 @@ export type LocaleTemplate = {
   common: {
     logIn: string,
     home: string,
+    email: string,
+    password: string,
+    rememberMe: string,
+    invalidCredentials: string,
+  },
+  validation: {
+    required: string,
   },
   pages: {
     errors: {

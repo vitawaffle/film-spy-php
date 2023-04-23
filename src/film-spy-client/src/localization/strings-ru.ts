@@ -4,6 +4,13 @@ const stringsRu: LocaleTemplate = {
   common: {
     logIn: 'Войти',
     home: 'Домой',
+    email: 'Электронная почта',
+    password: 'Пароль',
+    rememberMe: 'Запомнить меня',
+    invalidCredentials: 'Неверные учётные данные',
+  },
+  validation: {
+    required: 'Это поле обязательно',
   },
   pages: {
     errors: {

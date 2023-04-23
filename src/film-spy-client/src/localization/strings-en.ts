@@ -4,6 +4,13 @@ const stringsEn: LocaleTemplate = {
   common: {
     logIn: 'Log in',
     home: 'Home',
+    email: 'Email',
+    password: 'Password',
+    rememberMe: 'Remember me',
+    invalidCredentials: 'Invalid credentials',
+  },
+  validation: {
+    required: 'This field is required',
   },
   pages: {
     errors: {

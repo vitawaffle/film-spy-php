@@ -1,7 +1,8 @@
 import React from 'react';
+import { LoginForm } from 'features/login';
 
 const Login = () => (
-  <div />
+  <LoginForm />
 );
 
 export default Login;
