@@ -66,6 +66,9 @@ const SigninForm = () => {
     if (errors?.email?.type === 'email')
       return strings.validation.email;
 
+    if (isEmailNotUnique)
+      return strings.validation.notUniqueEmail;
+
     return undefined;
   };
 
@@ -113,7 +116,7 @@ const SigninForm = () => {
           label={strings.common.email}
           required
           disabled={isLoading}
-          error={!!errors.email}
+          error={!!errors.email || isEmailNotUnique}
           helperText={emailHelperText()}
         />
         <TextField

@@ -26,6 +26,7 @@ export type LocaleTemplate = {
     password: string,
     passwordMismatch: string,
     invalidCredentials: string,
+    notUniqueEmail: string,
   },
   pages: {
     errors: {

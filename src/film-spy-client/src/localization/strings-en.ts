@@ -17,6 +17,7 @@ const stringsEn: LocaleTemplate = {
     password: 'Password must be at least 8 characters long',
     passwordMismatch: 'Password mismatch',
     invalidCredentials: 'Invalid credentials',
+    notUniqueEmail: 'This email is already taken',
   },
   pages: {
     errors: {

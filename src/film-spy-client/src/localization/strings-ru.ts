@@ -17,6 +17,7 @@ const stringsRu: LocaleTemplate = {
     password: 'Пароль должен состоять не менее чем из 8 символов',
     passwordMismatch: 'Пароли не совпадают',
     invalidCredentials: 'Неверные учётные данные',
+    notUniqueEmail: 'Этот адрес электронной почты уже занят',
   },
   pages: {
     errors: {
