@@ -24,6 +24,10 @@ const stringsEn: LocaleTemplate = {
     errors: {
       notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
     },
+    rooms: {
+      rooms: 'Rooms',
+      noContent: 'Not content',
+    },
   },
 };
 

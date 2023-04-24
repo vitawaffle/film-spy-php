@@ -33,5 +33,9 @@ export type LocaleTemplate = {
     errors: {
       notFound: string,
     },
+    rooms: {
+      rooms: string,
+      noContent: string,
+    },
   },
 };

@@ -6,9 +6,11 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import client from 'client';
 import { Room } from 'models';
+import { strings } from 'localization';
 
 const RoomList = () => {
   const [rooms, setRooms] = useState<Room[]>([]);
@@ -18,7 +20,7 @@ const RoomList = () => {
     setIsLoading(true);
 
     try {
-      setRooms((await client.get<Room[]>('/rooms')).data);
+      setRooms((await client.get<Room[]>('/api/rooms')).data);
     } finally {
       setIsLoading(false);
     }
@@ -30,23 +32,32 @@ const RoomList = () => {
 
   return (
     <>
+      <Typography variant="h3" component="h3">
+        {strings.pages.rooms.rooms}
+      </Typography>
       {isLoading && (
         <Box sx={{ dispay: 'flex' }}>
           <CircularProgress />
         </Box>
       )}
       {!isLoading && (
-        <List>
-          {rooms.map(({ id, name }) => (
-            <ListItem key={id} disablePadding>
-              <ListItemButton>
-                <ListItemText>
-                  {name}
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        rooms.length > 0 ? (
+          <List>
+            {rooms.map(({ id, name }) => (
+              <ListItem key={id} disablePadding>
+                <ListItemButton>
+                  <ListItemText>
+                    {name}
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography>
+            {strings.pages.rooms.noContent}
+          </Typography>
+        )
       )}
     </>
   );

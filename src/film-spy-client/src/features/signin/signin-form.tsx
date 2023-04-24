@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import yup from 'schema';
-import { useCheckAuthentication } from 'hooks';
+import { useCheckAuthentication, useInitCsrf } from 'hooks';
 import { isUnprocessableContentError } from 'utils';
 import client from 'client';
 import { strings } from 'localization';
@@ -25,6 +25,7 @@ const SigninForm = () => {
   const [isEmailNotUnique, setIsEmailNotUnique] = useState(false);
   const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
+  const initCsrf = useInitCsrf();
 
   const signin = async({
     name,
@@ -36,6 +37,8 @@ const SigninForm = () => {
     setIsEmailNotUnique(false);
 
     try {
+      await initCsrf();
+
       await client.post('/register', {
         name,
         email,

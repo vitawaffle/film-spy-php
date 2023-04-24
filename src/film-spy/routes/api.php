@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')
-    ->domain('/rooms')
+    ->prefix('/rooms')
     ->controller(RoomController::class)
     ->group(function () {
         Route::get('/', 'getAll');

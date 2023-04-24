@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { AxiosError } from 'axios';
 import {
   Stack,
   TextField,
@@ -14,7 +13,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import yup from 'schema';
 import client from 'client';
-import { useCheckAuthentication } from 'hooks';
+import { useCheckAuthentication, useInitCsrf } from 'hooks';
 import { strings } from 'localization';
 import { isUnprocessableContentError } from 'utils';
 
@@ -33,12 +32,15 @@ const LoginForm = () => {
   const [isInvalidCredentials, setIsInvalidCredentials] = useState(false);
   const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
+  const initCsrf = useInitCsrf();
 
   const login = async ({ email, password, isRemember }: FieldValues) => {
     setIsLoading(true);
     setIsInvalidCredentials(false);
 
     try {
+      await initCsrf();
+
       await client.post('/login', {
         email,
         password,
