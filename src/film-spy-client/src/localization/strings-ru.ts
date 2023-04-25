@@ -39,6 +39,9 @@ const stringsRu: LocaleTemplate = {
       createRoomModal: {
         createRoom: 'Создать комнату',
       },
+      roomList: {
+        searchName: 'Найти по имени',
+      },
     },
   },
 };

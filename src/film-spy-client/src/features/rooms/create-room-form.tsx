@@ -6,8 +6,13 @@ import yup from 'schema';
 import client from 'client';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
+import { useLoadRooms } from 'features/rooms';
 
-const CreateRoomForm = () => {
+type CreateRoomFormProps = {
+  onSuccess?: () => void,
+};
+
+const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps) => {
   const createRoomSchema = yup.object({
     name: yup.string().required().max(32),
     password: yup.string(),
@@ -19,6 +24,7 @@ const CreateRoomForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isNameNotUnique, setIsNameNotUnique] = useState(false);
+  const loadRooms = useLoadRooms();
 
   const createRoom = async ({ name, password }: FieldValues) => {
     setIsLoading(true);
@@ -29,6 +35,11 @@ const CreateRoomForm = () => {
         name,
         password,
       });
+
+      await loadRooms();
+
+      if (onSuccess)
+        onSuccess();
     } catch (error: unknown) {
       if (isUnprocessableContentError(error)) {
         setIsNameNotUnique(true);
@@ -47,7 +58,7 @@ const CreateRoomForm = () => {
       return strings.validation.required;
 
     if (isNameNotUnique)
-      return strings.common.name;
+      return strings.validation.notUniqueName;
 
     return undefined;
   };

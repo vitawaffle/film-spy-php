@@ -48,6 +48,9 @@ export type LocaleTemplate = {
       createRoomModal: {
         createRoom: string,
       },
+      roomList: {
+        searchName: string,
+      },
     },
   },
 };

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->foreignIdFor(User::class)->constrained();
         });
     }

@@ -32,6 +32,8 @@ const CreateRoomModal = ({
 }: CreateRoomModalProps) => {
   const handleClose = () => setIsOpen(false);
 
+  const handleSuccess = () => setIsOpen(false);
+
   return (
     <Modal
       open={isOpen}
@@ -55,7 +57,7 @@ const CreateRoomModal = ({
             >
               {strings.features.rooms.createRoomModal.createRoom}
             </Typography>
-            <CreateRoomForm />
+            <CreateRoomForm onSuccess={handleSuccess} />
           </Stack>
         </Box>
       </Fade>

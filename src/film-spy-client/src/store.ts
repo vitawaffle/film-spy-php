@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import app from 'app-slice';
+import { roomReducer as room } from 'features/rooms';
 
 const store = configureStore({
   reducer: {
     app,
+    room,
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import {
   Box,
   CircularProgress,
@@ -7,28 +7,32 @@ import {
   ListItemButton,
   ListItemText,
   Typography,
+  Stack,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
-import client from 'client';
-import { Room } from 'models';
+import SearchIcon from '@mui/icons-material/Search';
 import { strings } from 'localization';
+import { useAppSelector } from 'hooks';
+import { selectRooms, selectIsLoading, useLoadRooms } from 'features/rooms';
+import { Room } from 'models';
 
 const RoomList = () => {
-  const [rooms, setRooms] = useState<Room[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const loadRooms = async () => {
-    setIsLoading(true);
-
-    try {
-      setRooms((await client.get<Room[]>('/api/rooms')).data);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const isLoading = useAppSelector(selectIsLoading);
+  const rooms = useAppSelector(selectRooms);
+  const loadRooms = useLoadRooms();
 
   useEffect(() => {
     loadRooms();
   }, []);
+
+  const [searchName, setSearchName] = useState('');
+
+  const handleSearchNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchName(event.currentTarget.value);
+  };
+
+  const filterBySearchName = (room: Room) => room.name.match(searchName);
 
   return (
     <>
@@ -39,17 +43,32 @@ const RoomList = () => {
       )}
       {!isLoading && (
         rooms.length > 0 ? (
-          <List>
-            {rooms.map(({ id, name }) => (
-              <ListItem key={id} disablePadding>
-                <ListItemButton>
-                  <ListItemText>
-                    {name}
-                  </ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+          <Stack>
+            <TextField
+              id="searchName"
+              label={strings.features.rooms.roomList.searchName}
+              value={searchName}
+              onChange={handleSearchNameChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                )
+              }}
+            />
+            <List>
+              {rooms.filter(filterBySearchName).map(({ id, name }) => (
+                <ListItem key={id} disablePadding>
+                  <ListItemButton>
+                    <ListItemText>
+                      {name}
+                    </ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Stack>
         ) : (
           <Typography>
             {strings.pages.rooms.noContent}
