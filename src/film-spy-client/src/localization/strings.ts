@@ -20,6 +20,8 @@ export type LocaleTemplate = {
     passwordConfirmation: string,
     rememberMe: string,
     name: string,
+    create: string,
+    rooms: string,
   },
   validation: {
     required: string,
@@ -28,14 +30,24 @@ export type LocaleTemplate = {
     passwordMismatch: string,
     invalidCredentials: string,
     notUniqueEmail: string,
+    notUniqueName: string,
   },
   pages: {
     errors: {
       notFound: string,
     },
     rooms: {
-      rooms: string,
       noContent: string,
+    },
+  },
+  features: {
+    rooms: {
+      createRoomForm: {
+        keepEmpty: string,
+      },
+      createRoomModal: {
+        createRoom: string,
+      },
     },
   },
 };

@@ -32,9 +32,6 @@ const RoomList = () => {
 
   return (
     <>
-      <Typography variant="h3" component="h3">
-        {strings.pages.rooms.rooms}
-      </Typography>
       {isLoading && (
         <Box sx={{ dispay: 'flex' }}>
           <CircularProgress />

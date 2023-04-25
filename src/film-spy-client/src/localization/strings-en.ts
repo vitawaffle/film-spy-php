@@ -11,6 +11,8 @@ const stringsEn: LocaleTemplate = {
     passwordConfirmation: 'Password confirmation',
     rememberMe: 'Remember me',
     name: 'Name',
+    create: 'Create',
+    rooms: 'Rooms',
   },
   validation: {
     required: 'This field is required',
@@ -19,14 +21,24 @@ const stringsEn: LocaleTemplate = {
     passwordMismatch: 'Password mismatch',
     invalidCredentials: 'Invalid credentials',
     notUniqueEmail: 'This email is already taken',
+    notUniqueName: 'This name is already exists',
   },
   pages: {
     errors: {
       notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
     },
     rooms: {
-      rooms: 'Rooms',
-      noContent: 'Not content',
+      noContent: 'No content',
+    },
+  },
+  features: {
+    rooms: {
+      createRoomForm: {
+        keepEmpty: 'Keep this field empty if room password is not needed',
+      },
+      createRoomModal: {
+        createRoom: 'Create room',
+      },
     },
   },
 };

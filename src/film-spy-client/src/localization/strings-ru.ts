@@ -11,6 +11,8 @@ const stringsRu: LocaleTemplate = {
     passwordConfirmation: 'Подтверждение пароля',
     rememberMe: 'Запомнить меня',
     name: 'Имя',
+    create: 'Создать',
+    rooms: 'Комнаты',
   },
   validation: {
     required: 'Это поле обязательно',
@@ -19,14 +21,24 @@ const stringsRu: LocaleTemplate = {
     passwordMismatch: 'Пароли не совпадают',
     invalidCredentials: 'Неверные учётные данные',
     notUniqueEmail: 'Этот адрес электронной почты уже занят',
+    notUniqueName: 'Такое имя уже существует',
   },
   pages: {
     errors: {
       notFound: 'Упс! Кажется, вы заблудились. Такой страницы не существует. Попробуйте вернуться на главную.',
     },
     rooms: {
-      rooms: 'Комнаты',
       noContent: 'Ничего не найдено',
+    },
+  },
+  features: {
+    rooms: {
+      createRoomForm: {
+        keepEmpty: 'Оставьте это поле пустым, если пароль к команте не нужен',
+      },
+      createRoomModal: {
+        createRoom: 'Создать комнату',
+      },
     },
   },
 };
