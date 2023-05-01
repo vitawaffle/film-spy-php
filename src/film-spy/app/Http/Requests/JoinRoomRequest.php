@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\RoomPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ConnectToRoomRequest extends FormRequest
+class JoinRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +24,7 @@ class ConnectToRoomRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'password' => 'nullable',
+            'password' => ['nullable', new RoomPassword],
         ];
     }
 }

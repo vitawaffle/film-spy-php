@@ -13,8 +13,14 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { strings } from 'localization';
-import { useAppSelector } from 'hooks';
-import { selectRooms, selectIsLoading, useLoadRooms } from 'features/rooms';
+import { useAppSelector, useAppDispatch } from 'hooks';
+import {
+  selectRooms,
+  selectIsLoading,
+  useLoadRooms,
+  setSelectedRoomId,
+  setIsJoinRoomModalOpen,
+} from 'features/rooms';
 import { Room } from 'models';
 
 const RoomList = () => {
@@ -33,6 +39,13 @@ const RoomList = () => {
   };
 
   const filterBySearchName = (room: Room) => room.name.match(searchName);
+
+  const dispatch = useAppDispatch();
+
+  const handleJoinRoomClick = (roomId: number) => () => {
+    dispatch(setSelectedRoomId(roomId));
+    dispatch(setIsJoinRoomModalOpen(true));
+  };
 
   return (
     <>
@@ -60,7 +73,7 @@ const RoomList = () => {
             <List>
               {rooms.filter(filterBySearchName).map(({ id, name }) => (
                 <ListItem key={id} disablePadding>
-                  <ListItemButton>
+                  <ListItemButton onClick={handleJoinRoomClick(id)}>
                     <ListItemText>
                       {name}
                     </ListItemText>

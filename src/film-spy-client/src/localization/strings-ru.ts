@@ -13,6 +13,7 @@ const stringsRu: LocaleTemplate = {
     name: 'Имя',
     create: 'Создать',
     rooms: 'Комнаты',
+    join: 'Присоедениться',
   },
   validation: {
     required: 'Это поле обязательно',
@@ -22,6 +23,7 @@ const stringsRu: LocaleTemplate = {
     invalidCredentials: 'Неверные учётные данные',
     notUniqueEmail: 'Этот адрес электронной почты уже занят',
     notUniqueName: 'Такое имя уже существует',
+    invalidPassword: 'Неверный пароль',
   },
   pages: {
     errors: {
@@ -41,6 +43,12 @@ const stringsRu: LocaleTemplate = {
       },
       roomList: {
         searchName: 'Найти по имени',
+      },
+      joinRoomForm: {
+        keepEmpty: 'Оставьте это поле пустым, если в комнате нет пароля',
+      },
+      joinRoomModal: {
+        joinRoom: 'Присоедениться',
       },
     },
   },

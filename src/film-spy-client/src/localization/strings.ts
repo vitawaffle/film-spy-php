@@ -22,6 +22,7 @@ export type LocaleTemplate = {
     name: string,
     create: string,
     rooms: string,
+    join: string,
   },
   validation: {
     required: string,
@@ -31,6 +32,7 @@ export type LocaleTemplate = {
     invalidCredentials: string,
     notUniqueEmail: string,
     notUniqueName: string,
+    invalidPassword: string,
   },
   pages: {
     errors: {
@@ -50,6 +52,12 @@ export type LocaleTemplate = {
       },
       roomList: {
         searchName: string,
+      },
+      joinRoomForm: {
+        keepEmpty: string,
+      },
+      joinRoomModal: {
+        joinRoom: string,
       },
     },
   },

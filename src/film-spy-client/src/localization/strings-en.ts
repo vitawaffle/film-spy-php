@@ -13,6 +13,7 @@ const stringsEn: LocaleTemplate = {
     name: 'Name',
     create: 'Create',
     rooms: 'Rooms',
+    join: 'Join',
   },
   validation: {
     required: 'This field is required',
@@ -22,6 +23,7 @@ const stringsEn: LocaleTemplate = {
     invalidCredentials: 'Invalid credentials',
     notUniqueEmail: 'This email is already taken',
     notUniqueName: 'This name is already exists',
+    invalidPassword: 'Invalid password',
   },
   pages: {
     errors: {
@@ -41,6 +43,12 @@ const stringsEn: LocaleTemplate = {
       },
       roomList: {
         searchName: 'Search by name',
+      },
+      joinRoomForm: {
+        keepEmpty: 'Keep this field empty if the room does not have a password',
+      },
+      joinRoomModal: {
+        joinRoom: 'Join',
       },
     },
   },
