@@ -1,8 +1,5 @@
-import { AxiosError } from 'axios';
+import isErrorStatus from './is-error-status';
 
-const isUnprocessableContentError = (error: unknown) =>
-  error instanceof AxiosError
-    && error.response !== undefined
-    && error.response.status === 422;
+const isUnprocessableContentError = (error: unknown) => isErrorStatus(error, 422);
 
 export default isUnprocessableContentError;

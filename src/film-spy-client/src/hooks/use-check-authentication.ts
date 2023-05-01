@@ -1,6 +1,7 @@
 import { useAppDispatch } from 'hooks';
 import { authenticate, unauthenticate } from 'app-slice';
 import client from 'client';
+import { isUnauthenticatedError } from 'utils';
 
 const useCheckAuthentication = () => {
   const dispatch = useAppDispatch();
@@ -12,8 +13,8 @@ const useCheckAuthentication = () => {
       dispatch(authenticate());
 
       return true;
-    } catch (error: any) {
-      if (error.response.status === 401) {
+    } catch (error: unknown) {
+      if (isUnauthenticatedError(error)) {
         dispatch(unauthenticate());
 
         return false;
