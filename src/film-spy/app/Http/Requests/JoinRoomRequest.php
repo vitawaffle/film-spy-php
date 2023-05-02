@@ -24,7 +24,7 @@ class JoinRoomRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'password' => ['nullable', new RoomPassword],
+            'password' => [new RoomPassword],
         ];
     }
 }
