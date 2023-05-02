@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Typography, Button } from '@mui/material';
 import { useAppSelector } from 'hooks';
 import { selectIsAuthenticated } from 'app-slice';
-import { RoomList, CreateRoomModal } from 'features/rooms';
+import { RoomList, CreateRoomModal, JoinRoomModal } from 'features/rooms';
 import { strings } from 'localization';
 
 const Home = () => {
@@ -19,6 +19,7 @@ const Home = () => {
             isOpen={isCreateRoomModalOpen}
             setIsOpen={setIsCreateRoomModalOpen}
           />
+          <JoinRoomModal />
           <Typography variant="h3" component="h3">
             {strings.common.rooms}
           </Typography>

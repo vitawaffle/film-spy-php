@@ -1,16 +1,18 @@
 import { useAppDispatch } from 'hooks';
-import { authenticate, unauthenticate } from 'app-slice';
+import { authenticate, unauthenticate, setUser } from 'app-slice';
 import client from 'client';
 import { isUnauthenticatedError } from 'utils';
+import { User } from 'models';
 
 const useCheckAuthentication = () => {
   const dispatch = useAppDispatch();
 
   const checkAuthentication = async () => {
     try {
-      await client.get('/api/user');
+      const user = (await client.get<User>('/api/users/me')).data;
 
       dispatch(authenticate());
+      dispatch(setUser(user));
 
       return true;
     } catch (error: unknown) {

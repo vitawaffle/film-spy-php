@@ -32,6 +32,9 @@ const stringsEn: LocaleTemplate = {
     rooms: {
       noContent: 'No content',
     },
+    home: {
+      currentRoom: 'Current room',
+    },
   },
   features: {
     rooms: {

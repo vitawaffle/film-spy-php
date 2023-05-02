@@ -32,6 +32,9 @@ const stringsRu: LocaleTemplate = {
     rooms: {
       noContent: 'Ничего не найдено',
     },
+    home: {
+      currentRoom: 'Текущая комната',
+    },
   },
   features: {
     rooms: {

@@ -16,6 +16,13 @@ class Room extends Model
         'user_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = ['password'];
+
     public function user(): BelongsTo
     {
         return $this->belonsgTo(User::class);

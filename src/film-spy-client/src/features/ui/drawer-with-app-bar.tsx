@@ -14,23 +14,16 @@ import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   Home as HomeIcon,
+  SportsEsports as SportsEsportsIcon,
 } from '@mui/icons-material';
 import { ChildrenProps } from 'props';
 import { useAppSelector, useLogout } from 'hooks';
-import { selectIsAuthenticated } from 'app-slice';
+import { selectIsAuthenticated, selectUser } from 'app-slice';
 import { strings } from 'localization';
 import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
 import DrawerLink from './drawer-link';
-
-const links = [
-  {
-    to: '/home',
-    text: strings.common.home,
-    icon: <HomeIcon />
-  },
-];
 
 const DrawerWithAppBar = ({ children }: ChildrenProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +40,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
   };
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const user = useAppSelector(selectUser);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -97,15 +91,20 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {links.map(({ to, text, icon }, i) => (
+          <DrawerLink
+            to="/home"
+            text={strings.common.home}
+            icon={<HomeIcon />}
+            isDrawerOpen={isOpen}
+          />
+          {isAuthenticated && user?.room && (
             <DrawerLink
-              key={i}
-              to={to}
-              text={text}
-              icon={icon}
+              to="/room"
+              text={strings.pages.home.currentRoom}
+              icon={<SportsEsportsIcon />}
               isDrawerOpen={isOpen}
             />
-          ))}
+          )}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

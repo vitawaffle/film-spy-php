@@ -41,6 +41,9 @@ export type LocaleTemplate = {
     rooms: {
       noContent: string,
     },
+    home: {
+      currentRoom: string,
+    },
   },
   features: {
     rooms: {
