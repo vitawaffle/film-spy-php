@@ -14,6 +14,8 @@ const stringsRu: LocaleTemplate = {
     create: 'Создать',
     rooms: 'Комнаты',
     join: 'Присоедениться',
+    current: 'Вы здесь',
+    refresh: 'Обновить',
   },
   validation: {
     required: 'Это поле обязательно',

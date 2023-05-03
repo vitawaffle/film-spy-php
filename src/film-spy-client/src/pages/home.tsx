@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import { Stack, Typography, Button } from '@mui/material';
+import {
+  Create as CreateIcon,
+  Refresh as RefreshIcon,
+} from '@mui/icons-material';
 import { useAppSelector } from 'hooks';
 import { selectIsAuthenticated } from 'app-slice';
-import { RoomList, CreateRoomModal, JoinRoomModal } from 'features/rooms';
+import {
+  RoomList,
+  CreateRoomModal,
+  JoinRoomModal,
+  useLoadRooms,
+} from 'features/rooms';
 import { strings } from 'localization';
 
 const Home = () => {
@@ -11,10 +20,16 @@ const Home = () => {
 
   const handleCreateRoomClick = () => setIsCreateRoomModalOpen(true);
 
+  const loadRooms = useLoadRooms();
+
+  const handleRefreshClick = async () => {
+    await loadRooms();
+  };
+
   return (
     <>
       {isAuthenticated && (
-        <Stack spacing={2}>
+        <Stack spacing={3}>
           <CreateRoomModal
             isOpen={isCreateRoomModalOpen}
             setIsOpen={setIsCreateRoomModalOpen}
@@ -23,9 +38,22 @@ const Home = () => {
           <Typography variant="h3" component="h3">
             {strings.common.rooms}
           </Typography>
-          <Button onClick={handleCreateRoomClick} variant="contained">
-            {strings.common.create}
-          </Button>
+          <Stack spacing={2} direction="row">
+            <Button
+              onClick={handleCreateRoomClick}
+              variant="contained"
+              startIcon={<CreateIcon />}
+            >
+              {strings.common.create}
+            </Button>
+            <Button
+              onClick={handleRefreshClick}
+              variant="outlined"
+              startIcon={<RefreshIcon />}
+            >
+              {strings.common.refresh}
+            </Button>
+          </Stack>
           <RoomList />
         </Stack>
       )}

@@ -20,7 +20,7 @@ class JoinRoom
      */
     public function __construct(
         private readonly Room $joinedRoom,
-        private readonly Room $outedRoom,
+        private readonly ?Room $outedRoom,
         private readonly User $user,
     ) {
         //

@@ -14,6 +14,8 @@ const stringsEn: LocaleTemplate = {
     create: 'Create',
     rooms: 'Rooms',
     join: 'Join',
+    current: 'Current',
+    refresh: 'Refresh',
   },
   validation: {
     required: 'This field is required',

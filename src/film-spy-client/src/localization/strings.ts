@@ -23,6 +23,8 @@ export type LocaleTemplate = {
     create: string,
     rooms: string,
     join: string,
+    current: string,
+    refresh: string,
   },
   validation: {
     required: string,

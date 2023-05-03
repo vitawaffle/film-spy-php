@@ -1,4 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   CircularProgress,
@@ -6,12 +7,16 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   Typography,
   Stack,
   TextField,
   InputAdornment,
 } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import {
+  Search as SearchIcon,
+  ArrowForwardIos as ArrowForwardIosIcon,
+} from '@mui/icons-material';
 import { strings } from 'localization';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import {
@@ -22,6 +27,7 @@ import {
   setIsJoinRoomModalOpen,
 } from 'features/rooms';
 import { Room } from 'models';
+import { selectUser } from 'app-slice';
 
 const RoomList = () => {
   const isLoading = useAppSelector(selectIsLoading);
@@ -41,11 +47,24 @@ const RoomList = () => {
   const filterBySearchName = (room: Room) => room.name.match(searchName);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const user = useAppSelector(selectUser);
+
+  const isCurrentRoom = (roomId: number) => user?.room?.id === roomId;
 
   const handleJoinRoomClick = (roomId: number) => () => {
+    if (isCurrentRoom(roomId)) {
+      navigate('/room');
+
+      return;
+    }
+
     dispatch(setSelectedRoomId(roomId));
     dispatch(setIsJoinRoomModalOpen(true));
   };
+
+  const text = ({ id, name }: Room) =>
+    name + (isCurrentRoom(id)? ` (${strings.common.current})` : '');
 
   return (
     <>
@@ -71,11 +90,16 @@ const RoomList = () => {
               }}
             />
             <List>
-              {rooms.filter(filterBySearchName).map(({ id, name }) => (
+              {rooms.filter(filterBySearchName).map(({ id, name, user_id }) => (
                 <ListItem key={id} disablePadding>
                   <ListItemButton onClick={handleJoinRoomClick(id)}>
+                    {isCurrentRoom(id) && (
+                      <ListItemIcon>
+                        <ArrowForwardIosIcon />
+                      </ListItemIcon>
+                    )}
                     <ListItemText>
-                      {name}
+                      {text({ id, name, user_id })}
                     </ListItemText>
                   </ListItemButton>
                 </ListItem>

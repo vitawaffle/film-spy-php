@@ -7,7 +7,7 @@ import yup from 'schema';
 import client from 'client';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
-import { useAppSelector, useAppDispatch } from 'hooks';
+import { useAppSelector, useAppDispatch, useCheckAuthentication } from 'hooks';
 import { selectSelectedRoomId, setIsJoinRoomModalOpen } from 'features/rooms';
 
 const JoinRoomForm = () => {
@@ -24,6 +24,7 @@ const JoinRoomForm = () => {
   const selectedRoomId = useAppSelector(selectSelectedRoomId);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const checkAuthentication = useCheckAuthentication();
 
   const joinRoom = async ({ password }: FieldValues) => {
     setIsLoading(true);
@@ -34,6 +35,8 @@ const JoinRoomForm = () => {
         room_id: selectedRoomId,
         password,
       });
+
+      await checkAuthentication();
 
       dispatch(setIsJoinRoomModalOpen(false));
 
@@ -57,13 +60,16 @@ const JoinRoomForm = () => {
       : strings.features.rooms.joinRoomForm.keepEmpty;
   };
 
+  const onChange = () => setIsInvalidPassword(false);
+
   return (
     <form onSubmit={handleSubmit(joinRoom)}>
       <Stack spacing={2}>
         {isLoading && <LinearProgress />}
         <TextField
-          {...register('password')}
+          {...register('password', { onChange })}
           id="password"
+          type="password"
           label={strings.common.password}
           disabled={isLoading}
           autoFocus
