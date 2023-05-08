@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\JoinRoom;
-use App\Listeners\{BroadcastJoinRoom, BroadcastOutRoom};
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,10 +17,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
-        JoinRoom::class => [
-            BroadcastJoinRoom::class,
-            BroadcastOutRoom::class,
         ],
     ];
 
