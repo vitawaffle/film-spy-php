@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\{JoinRoom, LeaveRoom};
 use App\Http\Requests\{CreateRoomRequest, JoinRoomRequest};
 use App\Models\{Room, User};
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Auth, Gate};
 
 class RoomController extends Controller
 {
@@ -22,12 +23,26 @@ class RoomController extends Controller
         return Room::all()->toArray();
     }
 
+    /** @return User[] */
+    public function getUsers(int $roomId): array
+    {
+        if (!Gate::allow('get-users-for-room', $roomId))
+            abort(403);
+
+        return Room::find($roomId)->users();
+    }
+
     public function join(JoinRoomRequest $request): void
     {
+        $room = Room::find($request->validated()['room_id']);
         $user = User::find(Auth::id());
 
-        $user->room_id = $request->validated()['room_id'];
+        if (null !== $user->room_id)
+            LeaveRoom::dispatch($user);
 
+        $user->room_id = $room->id;
         $user->save();
+
+        JoinRoom::dispatch($user);
     }
 }

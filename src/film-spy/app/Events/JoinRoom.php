@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\{Room, User};
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -18,10 +18,7 @@ class JoinRoom implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(
-        private readonly Room $room,
-        private readonly User $user,
-    ) {
+    public function __construct(private readonly User $user) {
         //
     }
 
@@ -33,7 +30,7 @@ class JoinRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms'.$this->room->id),
+            new PrivateChannel('rooms'.$this->user->room_id),
         ];
     }
 }

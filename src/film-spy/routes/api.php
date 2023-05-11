@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')
     ->controller(RoomController::class)
     ->group(function () {
         Route::get('/', 'getAll');
+        Route::get('/{id}/users', 'getUsers');
         Route::post('/create', 'create');
         Route::post('/join', 'join');
     });
