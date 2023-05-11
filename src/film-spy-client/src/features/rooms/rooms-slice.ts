@@ -2,22 +2,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 import { Room } from 'models';
 
-export type RoomState = {
+export type RoomsState = {
   rooms: Room[],
   isLoading: boolean,
   selectedRoomId: number,
   isJoinRoomModalOpen: boolean,
 };
 
-const initialState: RoomState = {
+const initialState: RoomsState = {
   rooms: [],
   isLoading: false,
   selectedRoomId: 0,
   isJoinRoomModalOpen: false,
 };
 
-export const roomSlice = createSlice({
-  name: 'room',
+export const roomsSlice = createSlice({
+  name: 'rooms',
   initialState,
   reducers: {
     setRooms: (state, { payload }: PayloadAction<Room[]> ) => {
@@ -35,16 +35,16 @@ export const roomSlice = createSlice({
   },
 });
 
-export default roomSlice.reducer;
+export default roomsSlice.reducer;
 
 export const {
   setRooms,
   setIsLoading,
   setSelectedRoomId,
   setIsJoinRoomModalOpen,
-} = roomSlice.actions;
+} = roomsSlice.actions;
 
-export const selectRooms = (state: RootState) => state.room.rooms;
-export const selectIsLoading = (state: RootState) => state.room.isLoading;
-export const selectSelectedRoomId = (state: RootState) => state.room.selectedRoomId;
-export const selectIsJoinRoomModalOpen = (state: RootState) => state.room.isJoinRoomModalOpen;
+export const selectRooms = (state: RootState) => state.rooms.rooms;
+export const selectIsLoading = (state: RootState) => state.rooms.isLoading;
+export const selectSelectedRoomId = (state: RootState) => state.rooms.selectedRoomId;
+export const selectIsJoinRoomModalOpen = (state: RootState) => state.rooms.isJoinRoomModalOpen;

@@ -31,9 +31,6 @@ const stringsRu: LocaleTemplate = {
     errors: {
       notFound: 'Упс! Кажется, вы заблудились. Такой страницы не существует. Попробуйте вернуться на главную.',
     },
-    rooms: {
-      noContent: 'Ничего не найдено',
-    },
     home: {
       currentRoom: 'Текущая комната',
     },
@@ -48,6 +45,7 @@ const stringsRu: LocaleTemplate = {
       },
       roomList: {
         searchName: 'Найти по имени',
+        noContent: 'Ничего не найдено',
       },
       joinRoomForm: {
         keepEmpty: 'Оставьте это поле пустым, если в комнате нет пароля',

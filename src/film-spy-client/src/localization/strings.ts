@@ -40,9 +40,6 @@ export type LocaleTemplate = {
     errors: {
       notFound: string,
     },
-    rooms: {
-      noContent: string,
-    },
     home: {
       currentRoom: string,
     },
@@ -57,6 +54,7 @@ export type LocaleTemplate = {
       },
       roomList: {
         searchName: string,
+        noContent: string,
       },
       joinRoomForm: {
         keepEmpty: string,

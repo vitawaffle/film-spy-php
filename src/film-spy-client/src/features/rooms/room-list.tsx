@@ -67,52 +67,49 @@ const RoomList = () => {
     name + (isCurrentRoom(id)? ` (${strings.common.current})` : '');
 
   return (
-    <>
-      {isLoading && (
-        <Box sx={{ dispay: 'flex' }}>
-          <CircularProgress />
-        </Box>
-      )}
-      {!isLoading && (
-        rooms.length > 0 ? (
-          <Stack>
-            <TextField
-              id="searchName"
-              label={strings.features.rooms.roomList.searchName}
-              value={searchName}
-              onChange={handleSearchNameChange}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <List>
-              {rooms.filter(filterBySearchName).map(({ id, name, user_id }) => (
-                <ListItem key={id} disablePadding>
-                  <ListItemButton onClick={handleJoinRoomClick(id)}>
-                    {isCurrentRoom(id) && (
-                      <ListItemIcon>
-                        <ArrowForwardIosIcon />
-                      </ListItemIcon>
-                    )}
-                    <ListItemText>
-                      {text({ id, name, user_id })}
-                    </ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Stack>
-        ) : (
-          <Typography>
-            {strings.pages.rooms.noContent}
-          </Typography>
-        )
-      )}
-    </>
+    isLoading ? (
+      <Box sx={{ dispay: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    ) : (
+      rooms.length === 0 ? (
+        <Typography>
+          {strings.features.rooms.roomList.noContent}
+        </Typography>
+      ) : (
+        <Stack>
+          <TextField
+            id="searchName"
+            label={strings.features.rooms.roomList.searchName}
+            value={searchName}
+            onChange={handleSearchNameChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              )
+            }}
+          />
+          <List>
+            {rooms.filter(filterBySearchName).map(({ id, name, user_id }) => (
+              <ListItem key={id} disablePadding>
+                <ListItemButton onClick={handleJoinRoomClick(id)}>
+                  {isCurrentRoom(id) && (
+                    <ListItemIcon>
+                      <ArrowForwardIosIcon />
+                    </ListItemIcon>
+                  )}
+                  <ListItemText>
+                    {text({ id, name, user_id })}
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Stack>
+      )
+    )
   );
 };
 

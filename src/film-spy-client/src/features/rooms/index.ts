@@ -4,7 +4,7 @@ export { default as CreateRoomModal } from './create-room-modal';
 export { default as JoinRoomForm } from './join-room-form';
 export { default as JoinRoomModal } from './join-room-modal';
 export {
-  default as roomReducer,
+  default as roomsReducer,
   setRooms,
   setIsLoading,
   setSelectedRoomId,
@@ -13,5 +13,5 @@ export {
   selectIsLoading,
   selectSelectedRoomId,
   selectIsJoinRoomModalOpen,
-} from './room-slice';
+} from './rooms-slice';
 export { default as useLoadRooms } from './use-load-rooms';

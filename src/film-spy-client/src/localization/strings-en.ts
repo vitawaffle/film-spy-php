@@ -31,9 +31,6 @@ const stringsEn: LocaleTemplate = {
     errors: {
       notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
     },
-    rooms: {
-      noContent: 'No content',
-    },
     home: {
       currentRoom: 'Current room',
     },
@@ -48,6 +45,7 @@ const stringsEn: LocaleTemplate = {
       },
       roomList: {
         searchName: 'Search by name',
+        noContent: 'No content',
       },
       joinRoomForm: {
         keepEmpty: 'Keep this field empty if the room does not have a password',
