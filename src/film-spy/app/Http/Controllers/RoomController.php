@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\{JoinRoom, LeaveRoom};
-use App\Http\Requests\{CreateRoomRequest, JoinRoomRequest};
+use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest};
 use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
 
@@ -44,5 +44,13 @@ class RoomController extends Controller
         $user->save();
 
         JoinRoom::dispatch($user);
+    }
+
+    public function delete(DeleteRoomRequest $request): void
+    {
+        $room = Room::find($request->validated()['room_id']);
+
+        if (!Gate::allows('room-owner', $room))
+            abort(403);
     }
 }

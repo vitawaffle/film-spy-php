@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, Typography, Button } from '@mui/material';
+import { Card, CardContent, Stack, Typography, Button } from '@mui/material';
 import {
   Create as CreateIcon,
   Refresh as RefreshIcon,
@@ -29,33 +29,37 @@ const Home = () => {
   return (
     <>
       {isAuthenticated && (
-        <Stack spacing={3}>
-          <CreateRoomModal
-            isOpen={isCreateRoomModalOpen}
-            setIsOpen={setIsCreateRoomModalOpen}
-          />
-          <JoinRoomModal />
-          <Typography variant="h3" component="h3">
-            {strings.common.rooms}
-          </Typography>
-          <Stack spacing={2} direction="row">
-            <Button
-              onClick={handleCreateRoomClick}
-              variant="contained"
-              startIcon={<CreateIcon />}
-            >
-              {strings.common.create}
-            </Button>
-            <Button
-              onClick={handleRefreshClick}
-              variant="outlined"
-              startIcon={<RefreshIcon />}
-            >
-              {strings.common.refresh}
-            </Button>
-          </Stack>
-          <RoomList />
-        </Stack>
+        <Card>
+          <CardContent>
+            <Stack spacing={3}>
+              <CreateRoomModal
+                isOpen={isCreateRoomModalOpen}
+                setIsOpen={setIsCreateRoomModalOpen}
+              />
+              <JoinRoomModal />
+              <Typography variant="h3" component="h3">
+                {strings.common.rooms}
+              </Typography>
+              <Stack spacing={2} direction="row">
+                <Button
+                  onClick={handleCreateRoomClick}
+                  variant="contained"
+                  startIcon={<CreateIcon />}
+                >
+                  {strings.common.create}
+                </Button>
+                <Button
+                  onClick={handleRefreshClick}
+                  variant="outlined"
+                  startIcon={<RefreshIcon />}
+                >
+                  {strings.common.refresh}
+                </Button>
+              </Stack>
+              <RoomList />
+            </Stack>
+          </CardContent>
+        </Card>
       )}
     </>
   );

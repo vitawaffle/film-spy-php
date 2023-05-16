@@ -16,6 +16,10 @@ const stringsRu: LocaleTemplate = {
     join: 'Присоедениться',
     current: 'Вы здесь',
     refresh: 'Обновить',
+    players: 'Игроки',
+    deleteRoom: 'Удалить комнату',
+    ok: 'Хорошо',
+    cancel: 'Отмена',
   },
   validation: {
     required: 'Это поле обязательно',

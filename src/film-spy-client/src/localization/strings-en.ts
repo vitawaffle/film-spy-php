@@ -16,6 +16,10 @@ const stringsEn: LocaleTemplate = {
     join: 'Join',
     current: 'Current',
     refresh: 'Refresh',
+    players: 'Players',
+    deleteRoom: 'Delete room',
+    ok: 'Ok',
+    cancel: 'Cancel',
   },
   validation: {
     required: 'This field is required',

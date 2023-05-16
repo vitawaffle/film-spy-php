@@ -1,5 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  Grid,
+  Card,
+  CardContent,
+  Stack,
+  Typography,
+  Button,
+} from '@mui/material';
 import { useLoadUsers, UserList } from 'features/room';
+import { strings } from 'localization';
+import { Modal } from 'features/ui';
 
 const Room = () => {
   const loadUsers = useLoadUsers();
@@ -8,8 +18,71 @@ const Room = () => {
     loadUsers();
   }, []);
 
+  const [isDeleteRoomModalOpen, setIsDeleteRoomModalOpen] = useState(false);
+
+  const handleDeleteRoomClick = () => {
+    setIsDeleteRoomModalOpen(true);
+  };
+
+  const handleDeleteRoomOkClick = () => {
+    console.log('ok');
+  };
+
+  const handleDeleteRoomCancelClick = () => {
+    setIsDeleteRoomModalOpen(false);
+  };
+
   return (
-    <UserList />
+    <>
+      <Modal
+        isOpen={isDeleteRoomModalOpen}
+        setIsOpen={setIsDeleteRoomModalOpen}
+        id="delete-room"
+        title={strings.common.deleteRoom + '?'}
+      >
+        <Stack spacing={2} direction="row">
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleDeleteRoomOkClick}
+          >
+            {strings.common.ok}
+          </Button>
+          <Button variant="outlined" onClick={handleDeleteRoomCancelClick}>
+            {strings.common.cancel}
+          </Button>
+        </Stack>
+      </Modal>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Stack spacing={3}>
+                <Typography variant="h3" component="h3">
+                  {strings.common.players}
+                </Typography>
+                <UserList />
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Stack spacing={3}>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={handleDeleteRoomClick}
+                >
+                  {strings.common.deleteRoom}
+                </Button>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

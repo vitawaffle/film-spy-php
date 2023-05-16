@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\{Gate, Log};
+use App\Models\{Room, User};
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define(
             'get-users-of-room',
             fn (User $user, int $roomId) => $user->room_id === $roomId,
+        );
+
+        Gate::define(
+            'room-owner',
+            fn (User $user, Room $room) => $user->id === $room->user_id,
         );
     }
 }

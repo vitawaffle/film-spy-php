@@ -20,10 +20,10 @@ const UserList = () => {
       </Box>
     ) : (
       <List>
-        {users.map(user => (
+        {users.map((user, i) => (
           <ListItem key={user.id} disablePadding>
             <ListItemText>
-              {user.name}
+              {i + 1}. {user.name}
             </ListItemText>
           </ListItem>
         ))}

@@ -95,11 +95,6 @@ const RoomList = () => {
             {rooms.filter(filterBySearchName).map(({ id, name, user_id }) => (
               <ListItem key={id} disablePadding>
                 <ListItemButton onClick={handleJoinRoomClick(id)}>
-                  {isCurrentRoom(id) && (
-                    <ListItemIcon>
-                      <ArrowForwardIosIcon />
-                    </ListItemIcon>
-                  )}
                   <ListItemText>
                     {text({ id, name, user_id })}
                   </ListItemText>

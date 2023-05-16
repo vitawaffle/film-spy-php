@@ -25,6 +25,10 @@ export type LocaleTemplate = {
     join: string,
     current: string,
     refresh: string,
+    players: string,
+    deleteRoom: string,
+    ok: string,
+    cancel: string,
   },
   validation: {
     required: string,
