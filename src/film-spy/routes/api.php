@@ -29,4 +29,5 @@ Route::middleware('auth:sanctum')
         Route::get('/{id}/users', 'getUsers');
         Route::post('/create', 'create');
         Route::post('/join', 'join');
+        Route::post('/delete', 'delete');
     });
