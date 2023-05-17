@@ -13,6 +13,7 @@ import {
 import { strings } from 'localization';
 import { Modal } from 'features/ui';
 import { useLoadUsers, UserList } from 'features/room';
+import { selectRooms, selectSelectedRoomId } from 'features/rooms';
 import { selectUser } from 'app-slice';
 import { useAppSelector, useCheckAuthentication } from 'hooks';
 import client from 'client';
@@ -53,6 +54,15 @@ const Room = () => {
 
   const handleDeleteRoomCancelClick = () => {
     setIsDeleteRoomModalOpen(false);
+  };
+
+  const rooms = useAppSelector(selectRooms);
+  const selectedRoomId = useAppSelector(selectSelectedRoomId);
+
+  const isRoomOwner = () => {
+    const room = rooms.find(room => room.id === selectedRoomId);
+
+    return user !== undefined && room !== undefined && room.user_id === user.id;
   };
 
   return (
@@ -101,13 +111,15 @@ const Room = () => {
           <Card>
             <CardContent>
               <Stack spacing={3}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={handleDeleteRoomClick}
-                >
-                  {strings.common.deleteRoom}
-                </Button>
+                {isRoomOwner() && (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={handleDeleteRoomClick}
+                  >
+                    {strings.common.deleteRoom}
+                  </Button>
+                )}
               </Stack>
             </CardContent>
           </Card>

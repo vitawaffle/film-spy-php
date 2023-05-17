@@ -9,6 +9,7 @@ import {
   Toolbar,
   Typography,
   List,
+  CircularProgress,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -18,7 +19,12 @@ import {
 } from '@mui/icons-material';
 import { ChildrenProps } from 'props';
 import { useAppSelector, useLogout } from 'hooks';
-import { selectIsAuthenticated, selectUser } from 'app-slice';
+import {
+  selectIsAuthenticated,
+  selectUser,
+  selectIsCheckingAuthentication,
+  selectIsLoggingOut,
+} from 'app-slice';
 import { strings } from 'localization';
 import AppBar from './app-bar';
 import Drawer from './drawer';
@@ -41,6 +47,8 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectUser);
+  const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
+  const isLoggingOut = useAppSelector(selectIsLoggingOut);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -66,7 +74,15 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
           >
             Film Spy
           </Typography>
-          {!isAuthenticated && (
+          {(isCheckingAuthentication || isLoggingOut) ? (
+            <Box display="flex">
+              <CircularProgress color="inherit" />
+            </Box>
+          ) : isAuthenticated ? (
+            <Button onClick={handleLogoutClick} color="inherit">
+              {strings.common.logOut}
+            </Button>
+          ) : (
             <>
               <Button component={Link} to="/signin" color="inherit">
                 {strings.common.signIn}
@@ -75,11 +91,6 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
                 {strings.common.logIn}
               </Button>
             </>
-          )}
-          {isAuthenticated && (
-            <Button onClick={handleLogoutClick} color="inherit">
-              {strings.common.logOut}
-            </Button>
           )}
         </Toolbar>
       </AppBar>

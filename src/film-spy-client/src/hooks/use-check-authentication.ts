@@ -1,5 +1,10 @@
 import { useAppDispatch } from 'hooks';
-import { authenticate, unauthenticate, setUser } from 'app-slice';
+import {
+  authenticate,
+  unauthenticate,
+  setUser,
+  setIsCheckingAuthentication,
+} from 'app-slice';
 import client from 'client';
 import { isUnauthenticatedError } from 'utils';
 import { User } from 'models';
@@ -8,6 +13,8 @@ const useCheckAuthentication = () => {
   const dispatch = useAppDispatch();
 
   const checkAuthentication = async () => {
+    dispatch(setIsCheckingAuthentication(true));
+
     try {
       const user = (await client.get<User>('/api/users/me')).data;
 
@@ -23,6 +30,8 @@ const useCheckAuthentication = () => {
       }
 
       throw error;
+    } finally {
+      dispatch(setIsCheckingAuthentication(false));
     }
   };
 
