@@ -20,6 +20,8 @@ const stringsRu: LocaleTemplate = {
     deleteRoom: 'Удалить комнату',
     ok: 'Хорошо',
     cancel: 'Отмена',
+    leave: 'Выйти',
+    leaveRoom: 'Выйти из комнаты',
   },
   validation: {
     required: 'Это поле обязательно',

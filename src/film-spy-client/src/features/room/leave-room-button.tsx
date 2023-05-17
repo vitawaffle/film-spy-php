@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, LinearProgress } from '@mui/material';
-import { Dialog } from 'features/ui';
-import { strings } from 'localization';
+import { Button, Box, LinearProgress } from '@mui/material';
 import client from 'client';
-import { useCheckAuthentication, useAppSelector } from 'hooks';
-import { selectUser } from 'app-slice';
+import { useCheckAuthentication } from 'hooks';
+import { strings } from 'localization';
+import { Dialog } from 'features/ui';
 
-const DeleteRoomButton = () => {
+const LeaveRoomButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,7 +14,6 @@ const DeleteRoomButton = () => {
     setIsModalOpen(true);
   };
 
-  const user = useAppSelector(selectUser);
   const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
 
@@ -23,9 +21,7 @@ const DeleteRoomButton = () => {
     setIsLoading(true);
 
     try {
-      await client.post('/api/rooms/delete', {
-        room_id: user?.room?.id ?? 0,
-      });
+      await client.post('/api/rooms/leave');
 
       await checkAuthentication();
 
@@ -40,8 +36,8 @@ const DeleteRoomButton = () => {
       <Dialog
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
-        id="delete-room"
-        title={strings.common.deleteRoom + '?'}
+        id="leave-room"
+        title={strings.common.leaveRoom + '?'}
         onOk={handleOkClick}
         isOkDisabled={isLoading}
       >
@@ -51,15 +47,11 @@ const DeleteRoomButton = () => {
           </Box>
         )}
       </Dialog>
-      <Button
-        variant="outlined"
-        color="error"
-        onClick={handleClick}
-      >
-        {strings.common.deleteRoom}
+      <Button variant="outlined" onClick={handleClick}>
+        {strings.common.leave}
       </Button>
     </>
   );
 };
 
-export default DeleteRoomButton;
+export default LeaveRoomButton;

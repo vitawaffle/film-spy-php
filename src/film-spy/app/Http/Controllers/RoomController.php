@@ -60,4 +60,17 @@ class RoomController extends Controller
 
         $room->delete();
     }
+
+    public function leave(): void
+    {
+        $user = User::find(Auth::id());
+
+        if (null === $user->room_id)
+            return;
+
+        LeaveRoom::dispatch($user);
+
+        $user->room_id = null;
+        $user->save();
+    }
 }

@@ -29,6 +29,8 @@ export type LocaleTemplate = {
     deleteRoom: string,
     ok: string,
     cancel: string,
+    leave: string,
+    leaveRoom: string,
   },
   validation: {
     required: string,

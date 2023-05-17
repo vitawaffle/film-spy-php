@@ -30,4 +30,5 @@ Route::middleware('auth:sanctum')
         Route::post('/create', 'create');
         Route::post('/join', 'join');
         Route::post('/delete', 'delete');
+        Route::post('/leave', 'leave');
     });

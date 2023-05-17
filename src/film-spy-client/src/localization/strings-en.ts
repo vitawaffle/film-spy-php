@@ -20,6 +20,8 @@ const stringsEn: LocaleTemplate = {
     deleteRoom: 'Delete room',
     ok: 'Ok',
     cancel: 'Cancel',
+    leave: 'Leave',
+    leaveRoom: 'Leave room',
   },
   validation: {
     required: 'This field is required',

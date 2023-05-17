@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { ChildrenProps } from 'props';
 
-type ModalProps = ChildrenProps & {
+export type ModalProps = ChildrenProps & {
   isOpen: boolean,
   setIsOpen: (isOpen: boolean) => void,
   id?: string,
@@ -29,6 +29,7 @@ const style = {
 
 const Modal = ({ children, isOpen, setIsOpen, id, title }: ModalProps) => {
   const handleClose = () => setIsOpen(false);
+
   return (
     <MuiModal
       open={isOpen}

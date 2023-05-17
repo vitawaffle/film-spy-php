@@ -7,7 +7,12 @@ import {
   Typography,
 } from '@mui/material';
 import { strings } from 'localization';
-import { useLoadUsers, UserList, DeleteRoomButton } from 'features/room';
+import {
+  useLoadUsers,
+  UserList,
+  DeleteRoomButton,
+  LeaveRoomButton,
+} from 'features/room';
 import { selectUser } from 'app-slice';
 import { useAppSelector } from 'hooks';
 
@@ -45,6 +50,7 @@ const Room = () => {
           <Card>
             <CardContent>
               <Stack spacing={3}>
+                <LeaveRoomButton />
                 {isRoomOwner() && <DeleteRoomButton />}
               </Stack>
             </CardContent>
