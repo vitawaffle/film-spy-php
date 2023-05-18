@@ -30,7 +30,7 @@ class JoinRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms'.$this->user->room_id),
+            new PrivateChannel('rooms.'.$this->user->room_id),
         ];
     }
 }

@@ -18,18 +18,13 @@ import { useAppSelector } from 'hooks';
 
 const Room = () => {
   const loadUsers = useLoadUsers();
+  const user = useAppSelector(selectUser);
 
   useEffect(() => {
     loadUsers();
   }, []);
 
-  const user = useAppSelector(selectUser);
-
-  const isRoomOwner = () => {
-    return user !== undefined
-      && user?.room !== undefined
-      && user?.id === user?.room?.user_id;
-  };
+  const isRoomOwner = () => user?.id === user?.room?.user_id;
 
   return (
     <>

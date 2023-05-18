@@ -31,7 +31,7 @@ class DeleteRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms'.$this->room->id),
+            new PrivateChannel('rooms.'.$this->room->id),
         ];
     }
 }
