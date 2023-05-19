@@ -24,12 +24,12 @@ class RoomController extends Controller
     }
 
     /** @return User[] */
-    public function getUsers(int $roomId): array
+    public function getUsers(Room $room): array
     {
-        if (!Gate::allows('get-users-of-room', $roomId))
+        if (!Gate::allows('get-users-of-room', $room->id))
             abort(403);
 
-        return Room::find($roomId)->users->toArray();
+        return $room->users->toArray();
     }
 
     public function join(JoinRoomRequest $request): void

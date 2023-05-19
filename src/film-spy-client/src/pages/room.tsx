@@ -15,6 +15,7 @@ import {
 } from 'features/room';
 import { selectUser } from 'app-slice';
 import { useAppSelector } from 'hooks';
+import Echo from 'laravel-echo';
 
 const Room = () => {
   const loadUsers = useLoadUsers();
@@ -22,6 +23,11 @@ const Room = () => {
 
   useEffect(() => {
     loadUsers();
+
+    window.Echo.private(`rooms.${user?.room?.id ?? 0}`)
+      .listen('JoinRoom', (event: unknown) => {
+        console.log(event);
+      });
   }, []);
 
   const isRoomOwner = () => user?.id === user?.room?.user_id;

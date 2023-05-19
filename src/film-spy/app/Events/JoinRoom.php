@@ -18,7 +18,7 @@ class JoinRoom implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(private readonly User $user) {
+    public function __construct(public readonly User $user) {
         //
     }
 

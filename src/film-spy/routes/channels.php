@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\Broadcast;
+use App\Models\{Room, User};
+use Illuminate\Support\Facades\{Broadcast, Log};
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,12 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel(
-    'rooms.{roomId}',
-    fn (User $user, int $roomId) => $roomId === $user->room_id,
+    'rooms.{room}',
+    // fn (User $user, int $roomId) => $roomId === $user->room_id,
+    function (User $user, Room $room) {
+        Log::info($room->id);
+        Log::info($user->room_id);
+
+        return $room->id === $user->room_id;
+    }
 );

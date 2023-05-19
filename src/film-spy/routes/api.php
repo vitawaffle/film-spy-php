@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{RoomController, UserController};
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\{Broadcast, Route};
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +26,11 @@ Route::middleware('auth:sanctum')
     ->controller(RoomController::class)
     ->group(function () {
         Route::get('/', 'getAll');
-        Route::get('/{id}/users', 'getUsers');
+        Route::get('/{room}/users', 'getUsers');
         Route::post('/create', 'create');
         Route::post('/join', 'join');
         Route::post('/delete', 'delete');
         Route::post('/leave', 'leave');
     });
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);

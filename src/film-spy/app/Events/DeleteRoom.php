@@ -18,7 +18,7 @@ class DeleteRoom implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(private readonly Room $room)
+    public function __construct(public readonly Room $room)
     {
         //
     }

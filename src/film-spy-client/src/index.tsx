@@ -12,6 +12,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
+import client from 'client';
 
 ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -29,10 +30,20 @@ reportWebVitals();
 window.Pusher = Pusher;
 
 window.Echo = new Echo({
-  broadcast: 'pusher',
+  broadcaster: 'pusher',
   key: process.env.REACT_APP_PUSHER_APP_KEY,
   cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
-  forceTLS: true,
+  encrypted: true,
+  authorizer: (channel: any, options: any) => ({
+    authorize: (
+      socketId: any,
+      callback: any,
+    ) => client.post('/api/broadcasting/auth', {
+      socket_id: socketId,
+      channel_name: channel.name,
+    }).then(response => callback(false, response.data))
+      .catch(error => callback(true, error)),
+  }),
 });
 
 declare global {
