@@ -27,6 +27,12 @@ const Room = () => {
     window.Echo.private(`rooms.${user?.room?.id ?? 0}`)
       .listen('JoinRoom', (event: unknown) => {
         console.log(event);
+      })
+      .listen('LeaveRoom', (event: unknown) => {
+        console.log(event);
+      })
+      .listen('DeleteRoom', (event: unknown) => {
+        console.log(event);
       });
   }, []);
 
