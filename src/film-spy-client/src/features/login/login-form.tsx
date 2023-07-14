@@ -11,6 +11,7 @@ import {
   LinearProgress,
 } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import yup from 'schema';
 import client from 'client';
 import { useCheckAuthentication, useInitCsrf } from 'hooks';
@@ -40,20 +41,16 @@ const LoginForm = () => {
 
     try {
       await initCsrf();
-
       await client.post('/login', {
         email,
         password,
         remember: isRemember,
       });
-
       await checkAuthentication();
-
       navigate('/home');
     } catch (error: unknown) {
       if (isUnprocessableContentError(error)) {
         setIsInvalidCredentials(true);
-
         return;
       }
 
