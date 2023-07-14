@@ -27,12 +27,14 @@ class RoomPassword implements DataAwareRule, ValidationRule
      *
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
-    public function validate(string $attribute, mixed $value, Closure $fail): void
-    {
+    public function validate(
+        string $attribute,
+        mixed $value,
+        Closure $fail,
+    ): void {
         $room = Room::find($this->roomId);
 
-        if (null !== $room->password && $value !== $room->password) {
+        if (null !== $room->password && $value !== $room->password)
             $fail('Invalid room password');
-        }
     }
 }

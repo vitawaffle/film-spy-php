@@ -3,10 +3,7 @@
 namespace App\Events;
 
 use App\Models\Room;
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\{InteractsWithSockets, PrivateChannel};
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -31,7 +28,19 @@ class DeleteRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms.'.$this->room->id),
+            new PrivateChannel('rooms'),
+        ];
+    }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array<string, mixed>
+     */
+    public function broadcastWith(): array
+    {
+        return [
+            'room' => $this->room,
         ];
     }
 }

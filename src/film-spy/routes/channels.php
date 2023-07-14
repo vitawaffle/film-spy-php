@@ -20,11 +20,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 
 Broadcast::channel(
     'rooms.{room}',
-    // fn (User $user, int $roomId) => $roomId === $user->room_id,
-    function (User $user, Room $room) {
-        Log::info($room->id);
-        Log::info($user->room_id);
-
-        return $room->id === $user->room_id;
-    }
+    fn (User $user, Room $room) => $room->id === $user->room_id,
 );
