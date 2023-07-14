@@ -1,23 +1,29 @@
 import React from 'react';
+
 import { strings } from 'localization';
-import { CreateRoomForm } from 'features/rooms';
+import { CreateRoomForm } from 'features/room';
 import { Modal } from 'features/ui';
 
 type CreateRoomModalProps = {
   isOpen: boolean,
-  setIsOpen: (isOpen: boolean) => void,
+  onSuccess?: () => void,
+  onClose?: () => void,
 };
 
 const CreateRoomModal = ({
   isOpen,
-  setIsOpen,
+  onSuccess,
+  onClose,
 }: CreateRoomModalProps) => {
-  const handleSuccess = () => setIsOpen(false);
+  const handleSuccess = () => {
+    if (onSuccess)
+      onSuccess();
+  };
 
   return (
     <Modal
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      onClose={onClose}
       id="create-room"
       title={strings.features.rooms.createRoomModal.createRoom}
     >

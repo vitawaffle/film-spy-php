@@ -1,18 +1,20 @@
 import client from 'client';
 import { useAppDispatch } from 'hooks';
-import { setRooms, setIsLoading } from 'features/rooms';
+import { roomsLoadingStarted, roomsLoaded } from 'features/room';
 import { Room } from 'models';
 
 const useLoadRooms = () => {
   const dispatch = useAppDispatch();
 
   const loadRooms = async () => {
-    dispatch(setIsLoading(true));
+    dispatch(roomsLoadingStarted());
+
+    let rooms: Room[] = [];
 
     try {
-      dispatch(setRooms((await client.get<Room[]>('/api/rooms')).data));
+      rooms = (await client.get<Room[]>('/api/rooms')).data;
     } finally {
-      dispatch(setIsLoading(false));
+      dispatch(roomsLoaded(rooms));
     }
   };
 

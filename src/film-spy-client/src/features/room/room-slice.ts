@@ -1,13 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
-import { User } from 'models';
+import { Room, User } from 'models';
 
 export type RoomState = {
+  rooms: Room[],
+  isRoomsLoading: boolean,
+  selectedRoom?: Room,
+  isJoinRoomModalOpen: boolean,
+  currentRoom?: Room,
   users: User[],
   isUsersLoading: boolean,
 };
 
 const initialState: RoomState = {
+  rooms: [],
+  isRoomsLoading: false,
+  isJoinRoomModalOpen: false,
   users: [],
   isUsersLoading: false,
 };
@@ -16,17 +24,34 @@ export const roomSlice = createSlice({
   name: 'room',
   initialState,
   reducers: {
-    setUsers: (state, { payload }: PayloadAction<User[]>) => {
+    roomsLoadingStarted: state => {
+      state.isRoomsLoading = true;
+    },
+    roomsLoaded: (state, { payload }: PayloadAction<Room[]>) => {
+      state.rooms = payload;
+      state.isRoomsLoading = false;
+    },
+    roomSelected: (state, { payload }: PayloadAction<Room>) => {
+      state.selectedRoom = payload;
+      state.isJoinRoomModalOpen = true;
+    },
+    roomUnselected: state => {
+      state.selectedRoom = undefined;
+      state.isJoinRoomModalOpen = false;
+    },
+    roomJoined: (state, { payload }: PayloadAction<Room>) => {
+      state.currentRoom = payload;
+      state.isJoinRoomModalOpen = false;
+    },
+    roomLeft: state => {
+      state.currentRoom = undefined;
+    },
+    usersLoadingStarted: state => {
+      state.isUsersLoading = true;
+    },
+    usersLoaded: (state, { payload }) => {
       state.users = payload;
-    },
-    setIsUsersLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.isUsersLoading = payload;
-    },
-    addUser: (state, { payload }: PayloadAction<User>) => {
-      state.users = [...state.users, payload];
-    },
-    removeUser: (state, { payload }: PayloadAction<User>) => {
-      state.users = state.users.filter(user => user.id !== payload.id);
+      state.isUsersLoading = false;
     },
   },
 });
@@ -34,11 +59,23 @@ export const roomSlice = createSlice({
 export default roomSlice.reducer;
 
 export const {
-  setUsers,
-  setIsUsersLoading,
-  addUser,
-  removeUser,
+  roomsLoadingStarted,
+  roomsLoaded,
+  roomSelected,
+  roomUnselected,
+  roomJoined,
+  roomLeft,
+  usersLoadingStarted,
+  usersLoaded,
 } = roomSlice.actions;
 
-export const selectUsers = (state: RootState) => state.room.users;
-export const selectIsUsersLoading = (state: RootState) => state.room.isUsersLoading;
+export const selectRooms = ({ room }: RootState) => room.rooms;
+export const selectIsRoomsLoading = ({ room }: RootState) =>
+  room.isRoomsLoading;
+export const selectSelectedRoom = ({ room }: RootState) => room.selectedRoom;
+export const selectIsJoinRoomModalOpen = ({ room }: RootState) =>
+  room.isJoinRoomModalOpen;
+export const selectCurrentRoom = ({ room }: RootState) => room.currentRoom;
+export const selectUsers = ({ room }: RootState) => room.users;
+export const selectIsUsersLoading = ({ room }: RootState) =>
+  room.isUsersLoading;

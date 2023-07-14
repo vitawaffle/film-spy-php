@@ -1,24 +1,23 @@
 import client from 'client';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { setIsUsersLoading, setUsers } from 'features/room';
-import { User } from 'models';
-import { selectUser } from 'app-slice';
+import { selectCurrentRoom, usersLoadingStarted, usersLoaded } from 'features/room';
+import { User, Room } from 'models';
 
 const useLoadUsers = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const currentRoom = useAppSelector(selectCurrentRoom) as Room;
 
   const loadUsers = async () => {
-    dispatch(setIsUsersLoading(true));
+    dispatch(usersLoadingStarted());
+
+    let users: User[] = [];
 
     try {
-      const users = (await client.get<User[]>(
-        `/api/rooms/${user?.room?.id ?? 0}/users`,
+      users = (await client.get<User[]>(
+        `/api/rooms/${currentRoom.id}/users`,
       )).data;
-
-      dispatch(setUsers(users));
     } finally {
-      dispatch(setIsUsersLoading(false));
+      dispatch(usersLoaded(users));
     }
   };
 

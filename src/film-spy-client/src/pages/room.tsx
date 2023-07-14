@@ -15,16 +15,17 @@ import {
 } from 'features/room';
 import { selectUser } from 'app-slice';
 import { useAppSelector } from 'hooks';
-import Echo from 'laravel-echo';
+import { selectCurrentRoom } from 'features/room';
 
 const Room = () => {
   const loadUsers = useLoadUsers();
   const user = useAppSelector(selectUser);
+  const currentRoom = useAppSelector(selectCurrentRoom);
 
   useEffect(() => {
     loadUsers();
 
-    window.Echo.private(`rooms.${user?.room?.id ?? 0}`)
+    window.Echo.private(`rooms.${currentRoom?.id ?? 0}`)
       .listen('JoinRoom', (event: unknown) => {
         console.log(event);
       })
@@ -36,7 +37,7 @@ const Room = () => {
       });
   }, []);
 
-  const isRoomOwner = () => user?.id === user?.room?.user_id;
+  const isRoomOwner = () => user?.id === currentRoom?.user_id;
 
   return (
     <>

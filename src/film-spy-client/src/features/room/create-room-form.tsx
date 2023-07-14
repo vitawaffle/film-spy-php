@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import yup from 'schema';
 import client from 'client';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
-import { useLoadRooms } from 'features/rooms';
 
 type CreateRoomFormProps = {
   onSuccess?: () => void,
@@ -24,7 +24,6 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isNameNotUnique, setIsNameNotUnique] = useState(false);
-  const loadRooms = useLoadRooms();
 
   const createRoom = async ({ name, password }: FieldValues) => {
     setIsLoading(true);
@@ -36,14 +35,11 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps) => {
         password,
       });
 
-      await loadRooms();
-
       if (onSuccess)
         onSuccess();
     } catch (error: unknown) {
       if (isUnprocessableContentError(error)) {
         setIsNameNotUnique(true);
-
         return;
       }
 

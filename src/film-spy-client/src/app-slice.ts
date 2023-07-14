@@ -19,21 +19,23 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    authenticate: state => {
+    startedAuthenticating: state => {
+      state.isCheckingAuthentication = true;
+    },
+    authenticated: (state, { payload }: PayloadAction<User>) => {
+      state.user = payload;
       state.isAuthenticated = true;
     },
-    unauthenticate: state => {
+    endedAuthenticating: state => {
+      state.isCheckingAuthentication = false;
+    },
+    startedLoggingOut: state => {
+      state.isLoggingOut = true;
+    },
+    loggedOut: state => {
       state.isAuthenticated = false;
       state.user = undefined;
-    },
-    setUser: (state, { payload }: PayloadAction<User>) => {
-      state.user = payload;
-    },
-    setIsCheckingAuthentication: (state, { payload }: PayloadAction<boolean>) => {
-      state.isCheckingAuthentication = payload;
-    },
-    setIsLoggingOut: (state, { payload }: PayloadAction<boolean>) => {
-      state.isLoggingOut = payload;
+      state.isLoggingOut = false;
     },
   },
 });
@@ -41,15 +43,17 @@ export const appSlice = createSlice({
 export default appSlice.reducer;
 
 export const {
-  authenticate,
-  unauthenticate,
-  setUser,
-  setIsCheckingAuthentication,
-  setIsLoggingOut,
+  startedAuthenticating,
+  authenticated,
+  endedAuthenticating,
+  startedLoggingOut,
+  loggedOut,
 } = appSlice.actions;
 
-export const selectIsAuthenticated = (state: RootState) =>
-  state.app.isAuthenticated;
-export const selectUser = (state: RootState) => state.app.user;
-export const selectIsCheckingAuthentication = (state: RootState) => state.app.isCheckingAuthentication;
-export const selectIsLoggingOut = (state: RootState) => state.app.isLoggingOut;
+export const selectIsAuthenticated = ({ app }: RootState) =>
+  app.isAuthenticated;
+export const selectUser = ({ app }: RootState) => app.user;
+export const selectIsCheckingAuthentication = ({ app }: RootState) =>
+  app.isCheckingAuthentication;
+export const selectIsLoggingOut = ({ app }: RootState) =>
+  app.isLoggingOut;

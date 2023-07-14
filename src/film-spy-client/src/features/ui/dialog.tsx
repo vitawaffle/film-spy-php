@@ -1,22 +1,23 @@
 import React from 'react';
 import { Stack, Button } from '@mui/material';
+
 import { Modal, ModalProps } from 'features/ui';
 import { strings } from 'localization';
 
 type DialogProps = ModalProps & {
-  onOk?: () => Promise<void>,
-  onCancel?: () => Promise<void>,
+  onOk?: () => Promise<void> | void,
+  onCancel?: () => Promise<void> | void,
   isOkDisabled?: boolean,
 };
 
 const Dialog = ({
   children,
   isOpen,
-  setIsOpen,
   id,
   title,
   onOk,
   onCancel,
+  onClose,
   isOkDisabled,
 }: DialogProps) => {
   const handleOkClick = async () => {
@@ -28,13 +29,14 @@ const Dialog = ({
     if (onCancel)
       await onCancel();
 
-    setIsOpen(false);
+    if (onClose)
+      onClose();
   };
 
   return (
     <Modal
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      onClose={onClose}
       id={id}
       title={title}
     >

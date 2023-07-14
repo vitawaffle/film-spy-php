@@ -7,30 +7,26 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  ListItemIcon,
   Typography,
   Stack,
   TextField,
   InputAdornment,
 } from '@mui/material';
-import {
-  Search as SearchIcon,
-  ArrowForwardIos as ArrowForwardIosIcon,
-} from '@mui/icons-material';
+import { Search as SearchIcon } from '@mui/icons-material';
+
 import { strings } from 'localization';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import {
   selectRooms,
-  selectIsLoading,
+  selectIsRoomsLoading,
+  selectCurrentRoom,
   useLoadRooms,
-  setSelectedRoomId,
-  setIsJoinRoomModalOpen,
-} from 'features/rooms';
+  roomSelected,
+} from 'features/room';
 import { Room } from 'models';
-import { selectUser } from 'app-slice';
 
 const RoomList = () => {
-  const isLoading = useAppSelector(selectIsLoading);
+  const isRoomsLoading = useAppSelector(selectIsRoomsLoading);
   const rooms = useAppSelector(selectRooms);
   const loadRooms = useLoadRooms();
 
@@ -48,26 +44,24 @@ const RoomList = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector(selectUser);
+  const currentRoom = useAppSelector(selectCurrentRoom);
 
-  const isCurrentRoom = (roomId: number) => user?.room?.id === roomId;
+  const isCurrentRoom = (room: Room) => currentRoom?.id === room.id;
 
-  const handleJoinRoomClick = (roomId: number) => () => {
-    if (isCurrentRoom(roomId)) {
+  const handleJoinRoomClick = (room: Room) => () => {
+    if (isCurrentRoom(room)) {
       navigate('/room');
-
       return;
     }
 
-    dispatch(setSelectedRoomId(roomId));
-    dispatch(setIsJoinRoomModalOpen(true));
+    dispatch(roomSelected(room));
   };
 
-  const text = ({ id, name }: Room) =>
-    name + (isCurrentRoom(id)? ` (${strings.common.current})` : '');
+  const text = (room: Room) =>
+    room.name + (isCurrentRoom(room) ? ` (${strings.common.current})` : '');
 
   return (
-    isLoading ? (
+    isRoomsLoading ? (
       <Box sx={{ dispay: 'flex' }}>
         <CircularProgress />
       </Box>
@@ -92,11 +86,11 @@ const RoomList = () => {
             }}
           />
           <List>
-            {rooms.filter(filterBySearchName).map(({ id, name, user_id }) => (
-              <ListItem key={id} disablePadding>
-                <ListItemButton onClick={handleJoinRoomClick(id)}>
+            {rooms.filter(filterBySearchName).map(room => (
+              <ListItem key={room.id} disablePadding>
+                <ListItemButton onClick={handleJoinRoomClick(room)}>
                   <ListItemText>
-                    {text({ id, name, user_id })}
+                    {text(room)}
                   </ListItemText>
                 </ListItemButton>
               </ListItem>

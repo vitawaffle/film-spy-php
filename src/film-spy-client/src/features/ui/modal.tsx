@@ -7,11 +7,12 @@ import {
   Typography,
   Stack,
 } from '@mui/material';
+
 import { ChildrenProps } from 'props';
 
 export type ModalProps = ChildrenProps & {
   isOpen: boolean,
-  setIsOpen: (isOpen: boolean) => void,
+  onClose?: () => void,
   id?: string,
   title?: string,
 };
@@ -27,8 +28,11 @@ const style = {
   p: 4,
 };
 
-const Modal = ({ children, isOpen, setIsOpen, id, title }: ModalProps) => {
-  const handleClose = () => setIsOpen(false);
+const Modal = ({ children, isOpen, onClose, id, title }: ModalProps) => {
+  const handleClose = () => {
+    if (onClose)
+      onClose();
+  };
 
   return (
     <MuiModal

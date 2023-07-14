@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
+
 import { Dialog } from 'features/ui';
 import { strings } from 'localization';
 import client from 'client';
-import { useCheckAuthentication, useAppSelector } from 'hooks';
+import { useAppSelector } from 'hooks';
 import { selectUser } from 'app-slice';
 
 const DeleteRoomButton = () => {
@@ -16,10 +17,9 @@ const DeleteRoomButton = () => {
   };
 
   const user = useAppSelector(selectUser);
-  const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
 
-  const handleOkClick = async () => {
+  const handleOk = async () => {
     setIsLoading(true);
 
     try {
@@ -27,22 +27,25 @@ const DeleteRoomButton = () => {
         room_id: user?.room?.id ?? 0,
       });
 
-      await checkAuthentication();
-
       navigate('/home');
     } finally {
       setIsLoading(false);
     }
   };
 
+  const closeDialog = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Dialog
         isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
         id="delete-room"
         title={strings.common.deleteRoom + '?'}
-        onOk={handleOkClick}
+        onOk={handleOk}
+        onCancel={closeDialog}
+        onClose={closeDialog}
         isOkDisabled={isLoading}
       >
         {isLoading && (

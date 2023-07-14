@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
+
 import App from 'app';
 import store from 'store';
 import reportWebVitals from 'report-web-vitals';
@@ -34,7 +35,7 @@ window.Echo = new Echo({
   key: process.env.REACT_APP_PUSHER_APP_KEY,
   cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
   encrypted: true,
-  authorizer: (channel: any, options: any) => ({
+  authorizer: (channel: any) => ({
     authorize: (
       socketId: any,
       callback: any,

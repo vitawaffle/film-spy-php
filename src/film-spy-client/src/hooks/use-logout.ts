@@ -2,7 +2,7 @@ import client from 'client';
 import { useCheckAuthentication } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'hooks';
-import { setIsLoggingOut } from 'app-slice';
+import { startedLoggingOut, loggedOut } from 'app-slice';
 
 const useLogout = () => {
   const checkAuthentication = useCheckAuthentication();
@@ -10,16 +10,14 @@ const useLogout = () => {
   const dispatch = useAppDispatch();
 
   const logout = async () => {
-    dispatch(setIsLoggingOut(true));
+    dispatch(startedLoggingOut());
 
     try {
       await client.post('/logout');
-
       await checkAuthentication();
-
       navigate('/home');
     } finally {
-      dispatch(setIsLoggingOut(false));
+      dispatch(loggedOut());
     }
   };
 

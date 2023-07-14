@@ -4,6 +4,7 @@ import {
   Create as CreateIcon,
   Refresh as RefreshIcon,
 } from '@mui/icons-material';
+
 import { useAppSelector } from 'hooks';
 import { selectIsAuthenticated } from 'app-slice';
 import {
@@ -11,7 +12,7 @@ import {
   CreateRoomModal,
   JoinRoomModal,
   useLoadRooms,
-} from 'features/rooms';
+} from 'features/room';
 import { strings } from 'localization';
 
 const Home = () => {
@@ -26,6 +27,10 @@ const Home = () => {
     await loadRooms();
   };
 
+  const closeCreateRoomModal = () => {
+    setIsCreateRoomModalOpen(false);
+  };
+
   return (
     <>
       {isAuthenticated && (
@@ -34,7 +39,8 @@ const Home = () => {
             <Stack spacing={3}>
               <CreateRoomModal
                 isOpen={isCreateRoomModalOpen}
-                setIsOpen={setIsCreateRoomModalOpen}
+                onSuccess={closeCreateRoomModal}
+                onClose={closeCreateRoomModal}
               />
               <JoinRoomModal />
               <Typography variant="h3" component="h3">

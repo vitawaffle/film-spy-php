@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, LinearProgress } from '@mui/material';
+
 import client from 'client';
-import { useCheckAuthentication } from 'hooks';
 import { strings } from 'localization';
+import { useAppDispatch } from 'hooks';
 import { Dialog } from 'features/ui';
+import { roomLeft } from 'features/room';
 
 const LeaveRoomButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,31 +16,34 @@ const LeaveRoomButton = () => {
     setIsModalOpen(true);
   };
 
-  const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const handleOkClick = async () => {
+  const handleOk = async () => {
     setIsLoading(true);
 
     try {
       await client.post('/api/rooms/leave');
-
-      await checkAuthentication();
-
+      dispatch(roomLeft());
       navigate('/home');
     } finally {
       setIsLoading(false);
     }
   };
 
+  const closeDialog = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Dialog
         isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
         id="leave-room"
         title={strings.common.leaveRoom + '?'}
-        onOk={handleOkClick}
+        onOk={handleOk}
+        onCancel={closeDialog}
+        onClose={closeDialog}
         isOkDisabled={isLoading}
       >
         {isLoading && (

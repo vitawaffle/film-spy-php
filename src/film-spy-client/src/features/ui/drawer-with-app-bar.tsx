@@ -17,6 +17,7 @@ import {
   Home as HomeIcon,
   SportsEsports as SportsEsportsIcon,
 } from '@mui/icons-material';
+
 import { ChildrenProps } from 'props';
 import { useAppSelector, useLogout } from 'hooks';
 import {
@@ -26,6 +27,7 @@ import {
   selectIsLoggingOut,
 } from 'app-slice';
 import { strings } from 'localization';
+import { selectCurrentRoom } from 'features/room';
 import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
@@ -47,6 +49,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectUser);
+  const currentRoom = useAppSelector(selectCurrentRoom);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
   const isLoggingOut = useAppSelector(selectIsLoggingOut);
 
@@ -108,7 +111,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps) => {
             icon={<HomeIcon />}
             isDrawerOpen={isOpen}
           />
-          {isAuthenticated && user?.room && (
+          {isAuthenticated && currentRoom && (
             <DrawerLink
               to="/room"
               text={strings.pages.home.currentRoom}

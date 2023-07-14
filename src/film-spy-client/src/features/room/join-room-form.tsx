@@ -3,12 +3,14 @@ import { useForm, FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import yup from 'schema';
 import client from 'client';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
-import { useAppSelector, useAppDispatch, useCheckAuthentication } from 'hooks';
-import { selectSelectedRoomId, setIsJoinRoomModalOpen } from 'features/rooms';
+import { useAppSelector, useAppDispatch } from 'hooks';
+import { selectSelectedRoom, roomJoined } from 'features/room';
+import { Room } from 'models';
 
 const JoinRoomForm = () => {
   const joinRoomSchema = yup.object({
@@ -21,10 +23,9 @@ const JoinRoomForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
-  const selectedRoomId = useAppSelector(selectSelectedRoomId);
+  const selectedRoom = useAppSelector(selectSelectedRoom) as Room;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const checkAuthentication = useCheckAuthentication();
 
   const joinRoom = async ({ password }: FieldValues) => {
     setIsLoading(true);
@@ -32,19 +33,16 @@ const JoinRoomForm = () => {
 
     try {
       await client.post('/api/rooms/join', {
-        room_id: selectedRoomId,
+        room_id: selectedRoom.id,
         password,
       });
 
-      await checkAuthentication();
-
-      dispatch(setIsJoinRoomModalOpen(false));
+      dispatch(roomJoined(selectedRoom));
 
       navigate('/room');
     } catch (error: unknown) {
       if (isUnprocessableContentError(error)) {
         setIsInvalidPassword(true);
-
         return;
       }
 
@@ -85,4 +83,3 @@ const JoinRoomForm = () => {
 };
 
 export default JoinRoomForm;
-
