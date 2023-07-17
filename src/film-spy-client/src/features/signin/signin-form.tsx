@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
-import yup from 'schema';
-import { useCheckAuthentication, useInitCsrf } from 'hooks';
-import { isUnprocessableContentError } from 'utils';
+
 import client from 'client';
+import { useCheckAuthentication, useInitCsrf } from 'hooks';
+import yup from 'schema';
+import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
 
-const SigninForm = () => {
+const SigninForm = (): JSX.Element => {
   const signinSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().required().email(),
@@ -32,7 +34,7 @@ const SigninForm = () => {
     email,
     password,
     passwordConfirmation,
-  }: FieldValues) => {
+  }: FieldValues): Promise<void> => {
     setIsLoading(true);
     setIsEmailNotUnique(false);
 
@@ -62,7 +64,7 @@ const SigninForm = () => {
     }
   };
 
-  const emailHelperText = () => {
+  const emailHelperText = (): string | undefined => {
     if (errors?.email?.type === 'required')
       return strings.validation.required;
 
@@ -75,7 +77,7 @@ const SigninForm = () => {
     return undefined;
   };
 
-  const passwordHelperText = () => {
+  const passwordHelperText = (): string | undefined => {
     if (errors?.password?.type === 'required')
       return strings.validation.required;
 
@@ -85,7 +87,7 @@ const SigninForm = () => {
     return undefined;
   };
 
-  const passwordConfirmationHelperText = () => {
+  const passwordConfirmationHelperText = (): string | undefined => {
     if (errors?.passwordConfirmation?.type === 'required')
       return strings.validation.required;
 

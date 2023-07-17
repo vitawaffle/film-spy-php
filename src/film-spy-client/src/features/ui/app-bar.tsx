@@ -1,6 +1,8 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar from '@mui/material/AppBar';
+import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+
 import drawerWidth from './drawer-width';
 
 type AppBarProps = MuiAppBarProps & {

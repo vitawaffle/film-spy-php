@@ -8,7 +8,7 @@ import {
   Stack,
 } from '@mui/material';
 
-import { ChildrenProps } from 'props';
+import type { ChildrenProps } from 'props';
 
 export type ModalProps = ChildrenProps & {
   isOpen: boolean,
@@ -28,8 +28,8 @@ const style = {
   p: 4,
 };
 
-const Modal = ({ children, isOpen, onClose, id, title }: ModalProps) => {
-  const handleClose = () => {
+const Modal = ({ children, isOpen, onClose, id, title }: ModalProps): JSX.Element => {
+  const handleClose = (): void => {
     if (onClose)
       onClose();
   };

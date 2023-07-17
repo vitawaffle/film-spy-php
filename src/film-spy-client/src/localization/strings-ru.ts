@@ -1,4 +1,4 @@
-import { LocaleTemplate } from './strings';
+import type { LocaleTemplate } from './strings';
 
 const stringsRu: LocaleTemplate = {
   common: {

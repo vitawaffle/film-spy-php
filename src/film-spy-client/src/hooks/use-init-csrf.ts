@@ -1,7 +1,7 @@
 import client from 'client';
 
-const useInitCsrf = () => {
-  const initCsrf = async () => {
+const useInitCsrf = (): () => Promise<void> => {
+  const initCsrf = async (): Promise<void> => {
     await client.get('/sanctum/csrf-cookie');
   };
 

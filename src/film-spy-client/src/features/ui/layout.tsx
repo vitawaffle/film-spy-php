@@ -1,8 +1,9 @@
 import React from 'react';
-import { ChildrenProps } from 'props';
-import { DrawerWithAppBar } from 'features/ui';
 
-const Layout = ({ children }: ChildrenProps) => (
+import { DrawerWithAppBar } from 'features/ui';
+import type { ChildrenProps } from 'props';
+
+const Layout = ({ children }: ChildrenProps): JSX.Element => (
   <DrawerWithAppBar>
     {children}
   </DrawerWithAppBar>

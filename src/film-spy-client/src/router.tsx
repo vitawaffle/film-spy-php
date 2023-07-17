@@ -1,9 +1,10 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+
 import { Home, Error, Login, Signin, Room } from 'pages';
 import { NotFoundError } from 'pages/errors';
 
-const Router = () => (
+const Router = (): JSX.Element => (
   <Routes>
     <Route path="error" element={<Error />}>
       <Route path="not-found" element={<NotFoundError />} />

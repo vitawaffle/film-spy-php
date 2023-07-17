@@ -1,4 +1,4 @@
-import { Model } from 'models';
+import type { Model } from 'models';
 
 type Room = Model & {
   name: string,

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Stack, Button } from '@mui/material';
 
-import { Modal, ModalProps } from 'features/ui';
+import { Modal } from 'features/ui';
+import type { ModalProps } from 'features/ui';
 import { strings } from 'localization';
 
 type DialogProps = ModalProps & {
@@ -19,13 +20,13 @@ const Dialog = ({
   onCancel,
   onClose,
   isOkDisabled,
-}: DialogProps) => {
-  const handleOkClick = async () => {
+}: DialogProps): JSX.Element => {
+  const handleOkClick = async (): Promise<void> => {
     if (onOk)
       await onOk();
   };
 
-  const handleCancelClick = async () => {
+  const handleCancelClick = async (): Promise<void> => {
     if (onCancel)
       await onCancel();
 

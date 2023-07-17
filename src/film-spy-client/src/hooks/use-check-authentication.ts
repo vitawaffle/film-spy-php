@@ -1,4 +1,3 @@
-import { useAppDispatch } from 'hooks';
 import {
   startedAuthenticating,
   authenticated,
@@ -6,14 +5,15 @@ import {
   loggedOut,
 } from 'app-slice';
 import client from 'client';
-import { isUnauthenticatedError } from 'utils';
-import { User } from 'models';
 import { roomJoined } from 'features/room';
+import { useAppDispatch } from 'hooks';
+import { isUnauthenticatedError } from 'utils';
+import type { User } from 'models';
 
-const useCheckAuthentication = () => {
+const useCheckAuthentication = (): () => Promise<boolean> => {
   const dispatch = useAppDispatch();
 
-  const checkAuthentication = async () => {
+  const checkAuthentication = async (): Promise<boolean> => {
     dispatch(startedAuthenticating());
 
     try {
@@ -23,10 +23,12 @@ const useCheckAuthentication = () => {
         dispatch(roomJoined(user.room));
 
       dispatch(authenticated(user));
+
       return true;
     } catch (error: unknown) {
       if (isUnauthenticatedError(error)) {
         dispatch(loggedOut());
+
         return false;
       }
 

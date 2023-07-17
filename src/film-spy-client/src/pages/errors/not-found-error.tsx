@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+
 import { ErrorLayout } from 'features/ui';
 import { strings } from 'localization';
 
-const NotFoundError = () => (
+const NotFoundError = (): JSX.Element => (
   <ErrorLayout
     code={404}
     name="Not Found"

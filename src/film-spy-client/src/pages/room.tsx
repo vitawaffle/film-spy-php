@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Grid,
   Card,
@@ -6,38 +6,37 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { strings } from 'localization';
+
+import { selectUser } from 'app-slice';
 import {
-  useLoadUsers,
+  selectCurrentRoom,
   UserList,
   DeleteRoomButton,
   LeaveRoomButton,
 } from 'features/room';
-import { selectUser } from 'app-slice';
 import { useAppSelector } from 'hooks';
-import { selectCurrentRoom } from 'features/room';
+import { strings } from 'localization';
 
-const Room = () => {
-  const loadUsers = useLoadUsers();
+const Room = (): JSX.Element => {
   const user = useAppSelector(selectUser);
   const currentRoom = useAppSelector(selectCurrentRoom);
 
-  useEffect(() => {
-    loadUsers();
+  // useEffect(() => {
+  //   loadUsers();
 
-    window.Echo.private(`rooms.${currentRoom?.id ?? 0}`)
-      .listen('JoinRoom', (event: unknown) => {
-        console.log(event);
-      })
-      .listen('LeaveRoom', (event: unknown) => {
-        console.log(event);
-      })
-      .listen('DeleteRoom', (event: unknown) => {
-        console.log(event);
-      });
-  }, []);
+  //   window.Echo.private(`rooms.${currentRoom?.id ?? 0}`)
+  //     .listen('JoinRoom', (event: unknown) => {
+  //       console.log(event);
+  //     })
+  //     .listen('LeaveRoom', (event: unknown) => {
+  //       console.log(event);
+  //     })
+  //     .listen('DeleteRoom', (event: unknown) => {
+  //       console.log(event);
+  //     });
+  // }, []);
 
-  const isRoomOwner = () => user?.id === currentRoom?.user_id;
+  const isRoomOwner = (): boolean => user?.id === currentRoom?.user_id;
 
   return (
     <>

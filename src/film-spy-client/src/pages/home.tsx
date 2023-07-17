@@ -15,19 +15,18 @@ import {
 } from 'features/room';
 import { strings } from 'localization';
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
-
-  const handleCreateRoomClick = () => setIsCreateRoomModalOpen(true);
-
   const loadRooms = useLoadRooms();
 
-  const handleRefreshClick = async () => {
+  const handleCreateRoomClick = (): void => setIsCreateRoomModalOpen(true);
+
+  const handleRefreshClick = async (): Promise<void> => {
     await loadRooms();
   };
 
-  const closeCreateRoomModal = () => {
+  const closeCreateRoomModal = (): void => {
     setIsCreateRoomModalOpen(false);
   };
 

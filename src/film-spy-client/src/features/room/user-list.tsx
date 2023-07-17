@@ -6,10 +6,11 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { useAppSelector } from 'hooks';
-import { selectIsUsersLoading, selectUsers } from 'features/room';
 
-const UserList = () => {
+import { selectIsUsersLoading, selectUsers } from 'features/room';
+import { useAppSelector } from 'hooks';
+
+const UserList = (): JSX.Element => {
   const isUsersLoading = useAppSelector(selectIsUsersLoading);
   const users = useAppSelector(selectUsers);
 

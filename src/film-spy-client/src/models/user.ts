@@ -1,4 +1,4 @@
-import { Model, Room } from 'models';
+import type { Model, Room } from 'models';
 
 type User = Model & {
   email: string,

@@ -1,5 +1,6 @@
 import * as yup from 'yup';
-import { StringSchema } from 'yup';
+import type { StringSchema } from 'yup';
+
 import { isBlank } from 'utils';
 
 yup.addMethod<StringSchema>(

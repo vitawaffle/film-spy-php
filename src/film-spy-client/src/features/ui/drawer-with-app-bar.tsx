@@ -18,37 +18,35 @@ import {
   SportsEsports as SportsEsportsIcon,
 } from '@mui/icons-material';
 
-import { ChildrenProps } from 'props';
-import { useAppSelector, useLogout } from 'hooks';
-import {
-  selectIsAuthenticated,
-  selectUser,
-  selectIsCheckingAuthentication,
-  selectIsLoggingOut,
-} from 'app-slice';
-import { strings } from 'localization';
-import { selectCurrentRoom } from 'features/room';
 import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
 import DrawerLink from './drawer-link';
+import { selectCurrentRoom } from 'features/room';
+import { useAppSelector, useLogout } from 'hooks';
+import {
+  selectIsAuthenticated,
+  selectIsCheckingAuthentication,
+  selectIsLoggingOut,
+} from 'app-slice';
+import type { ChildrenProps } from 'props';
+import { strings } from 'localization';
 
-const DrawerWithAppBar = ({ children }: ChildrenProps) => {
+const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const logout = useLogout();
   const navigate = useNavigate();
 
-  const handleDrawerOpen = () => setIsOpen(true);
-  const handleDrawerClose = () => setIsOpen(false);
+  const handleDrawerOpen = (): void => setIsOpen(true);
+  const handleDrawerClose = (): void => setIsOpen(false);
 
-  const handleLogoutClick = async () => {
+  const handleLogoutClick = async (): Promise<void> => {
     await logout();
 
     navigate('/home');
   };
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const user = useAppSelector(selectUser);
   const currentRoom = useAppSelector(selectCurrentRoom);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
   const isLoggingOut = useAppSelector(selectIsLoggingOut);

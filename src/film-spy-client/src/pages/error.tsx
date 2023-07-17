@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-const Error = () => (
+const Error = (): JSX.Element => (
   <Outlet />
 );
 

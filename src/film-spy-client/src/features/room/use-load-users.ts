@@ -1,13 +1,13 @@
 import client from 'client';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectCurrentRoom, usersLoadingStarted, usersLoaded } from 'features/room';
-import { User, Room } from 'models';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import type { User, Room } from 'models';
 
-const useLoadUsers = () => {
+const useLoadUsers = (): () => Promise<void> => {
   const dispatch = useAppDispatch();
   const currentRoom = useAppSelector(selectCurrentRoom) as Room;
 
-  const loadUsers = async () => {
+  const loadUsers = async (): Promise<void> => {
     dispatch(usersLoadingStarted());
 
     let users: User[] = [];

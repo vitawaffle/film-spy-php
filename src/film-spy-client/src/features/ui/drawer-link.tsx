@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ListItem,
@@ -14,10 +15,10 @@ type DrawerLinkProps = {
   icon: ReactNode,
 };
 
-const DrawerLink = ({ isDrawerOpen, to, text, icon }: DrawerLinkProps) => {
+const DrawerLink = ({ isDrawerOpen, to, text, icon }: DrawerLinkProps): JSX.Element => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     navigate(to);
   };
 

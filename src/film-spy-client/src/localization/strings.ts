@@ -1,4 +1,5 @@
 import LocalizedStrings from 'react-localization';
+
 import stringsEn from './strings-en';
 import stringsRu from './strings-ru';
 
