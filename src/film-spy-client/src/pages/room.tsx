@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   Card,
@@ -10,6 +10,7 @@ import {
 import { selectUser } from 'app-slice';
 import {
   selectCurrentRoom,
+  useLoadUsers,
   UserList,
   DeleteRoomButton,
   LeaveRoomButton,
@@ -20,9 +21,11 @@ import { strings } from 'localization';
 const Room = (): JSX.Element => {
   const user = useAppSelector(selectUser);
   const currentRoom = useAppSelector(selectCurrentRoom);
+  const loadUsers = useLoadUsers();
 
-  // useEffect(() => {
-  //   loadUsers();
+  useEffect(() => {
+    loadUsers();
+  });
 
   //   window.Echo.private(`rooms.${currentRoom?.id ?? 0}`)
   //     .listen('JoinRoom', (event: unknown) => {
