@@ -1,7 +1,7 @@
 import type { User } from 'models';
 
-type LeaveRoom = {
+type UserLeftRoom = {
   user: User;
 };
 
-export default LeaveRoom;
+export default UserLeftRoom;

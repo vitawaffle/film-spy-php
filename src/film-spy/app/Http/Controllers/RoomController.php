@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\{DeleteRoom, JoinRoom, LeaveRoom};
+use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserLeftRoom};
 use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest};
 use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
@@ -11,10 +11,12 @@ class RoomController extends Controller
 {
     public function create(CreateRoomRequest $request): void
     {
-        Room::create(array_merge(
+        $room = Room::create(array_merge(
             $request->validated(),
             ['user_id' => Auth::id()],
         ));
+
+        RoomCreated::dispatch($room);
     }
 
     /** @return Room[] */
@@ -38,12 +40,12 @@ class RoomController extends Controller
         $user = User::find(Auth::id());
 
         if (null !== $user->room_id)
-            LeaveRoom::dispatch($user);
+            UserLeftRoom::dispatch($user);
 
         $user->room_id = $room->id;
         $user->save();
 
-        JoinRoom::dispatch($user);
+        UserJoinedRoom::dispatch($user);
     }
 
     public function delete(DeleteRoomRequest $request): void
@@ -56,7 +58,7 @@ class RoomController extends Controller
         User::where('room_id', $room->id)
             ->update(['room_id' => null]);
 
-        DeleteRoom::dispatch($room);
+        RoomDeleted::dispatch($room);
 
         $room->delete();
     }
@@ -68,7 +70,7 @@ class RoomController extends Controller
         if (null === $user->room_id)
             return;
 
-        LeaveRoom::dispatch($user);
+        UserLeftRoom::dispatch($user);
 
         $user->room_id = null;
         $user->save();

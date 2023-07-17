@@ -2,20 +2,23 @@
 
 namespace App\Events;
 
-use App\Models\User;
-use Illuminate\Broadcasting\{InteractsWithSockets, PrivateChannel};
+use App\Models\Room;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LeaveRoom implements ShouldBroadcast
+class RoomCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public readonly User $user)
+    public function __construct(private readonly Room $room)
     {
         //
     }
@@ -28,7 +31,7 @@ class LeaveRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms.'.$this->user->roomId),
+            new PrivateChannel('rooms'),
         ];
     }
 
@@ -40,7 +43,7 @@ class LeaveRoom implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'user' => $this->user,
+            'room' => $this->room,
         ];
     }
 }

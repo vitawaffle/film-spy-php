@@ -1,7 +1,7 @@
 import type { User } from 'models';
 
-type JoinRoom = {
+type UserJoinedRoom = {
   user: User,
 };
 
-export default JoinRoom;
+export default UserJoinedRoom;

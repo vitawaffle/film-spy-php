@@ -1,7 +1,7 @@
 import type { Room } from 'models';
 
-type DeleteRoom = {
+type RoomCreated = {
   room: Room,
 };
 
-export default DeleteRoom;
+export default RoomCreated;
