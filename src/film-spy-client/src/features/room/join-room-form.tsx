@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import yup from 'schema';
 import client from 'client';
+import { selectSelectedRoom, roomJoined } from 'features/room';
+import { useAppSelector, useAppDispatch } from 'hooks';
+import type { Room } from 'models';
+import yup from 'schema';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
-import { useAppSelector, useAppDispatch } from 'hooks';
-import { selectSelectedRoom, roomJoined } from 'features/room';
-import { Room } from 'models';
 
-const JoinRoomForm = () => {
+const JoinRoomForm = (): JSX.Element => {
   const joinRoomSchema = yup.object({
     password: yup.string(),
   });
@@ -27,7 +28,7 @@ const JoinRoomForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const joinRoom = async ({ password }: FieldValues) => {
+  const joinRoom = async ({ password }: FieldValues): Promise<void> => {
     setIsLoading(true);
     setIsInvalidPassword(false);
 
@@ -52,13 +53,13 @@ const JoinRoomForm = () => {
     }
   };
 
-  const passwordHelperText = () => {
+  const passwordHelperText = (): string => {
     return isInvalidPassword
       ? strings.validation.invalidPassword
       : strings.features.rooms.joinRoomForm.keepEmpty;
   };
 
-  const onChange = () => setIsInvalidPassword(false);
+  const onChange = (): void => setIsInvalidPassword(false);
 
   return (
     <form onSubmit={handleSubmit(joinRoom)}>

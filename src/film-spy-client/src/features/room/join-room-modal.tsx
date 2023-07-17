@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { strings } from 'localization';
 import {
   selectIsJoinRoomModalOpen,
   roomUnselected,
   JoinRoomForm,
 } from 'features/room';
-import { useAppSelector, useAppDispatch } from 'hooks';
 import { Modal } from 'features/ui';
+import { useAppSelector, useAppDispatch } from 'hooks';
+import { strings } from 'localization';
 
-const JoinRoomModal = () => {
+const JoinRoomModal = (): JSX.Element => {
   const isOpen = useAppSelector(selectIsJoinRoomModalOpen);
   const dispatch = useAppDispatch();
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     dispatch(roomUnselected());
   };
 

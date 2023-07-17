@@ -3,23 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Box, LinearProgress } from '@mui/material';
 
 import client from 'client';
-import { strings } from 'localization';
-import { useAppDispatch } from 'hooks';
-import { Dialog } from 'features/ui';
 import { roomLeft } from 'features/room';
+import { Dialog } from 'features/ui';
+import { useAppDispatch } from 'hooks';
+import { strings } from 'localization';
 
-const LeaveRoomButton = () => {
+const LeaveRoomButton = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     setIsModalOpen(true);
   };
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleOk = async () => {
+  const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
@@ -31,7 +31,7 @@ const LeaveRoomButton = () => {
     }
   };
 
-  const closeDialog = () => {
+  const closeDialog = (): void => {
     setIsModalOpen(false);
   };
 

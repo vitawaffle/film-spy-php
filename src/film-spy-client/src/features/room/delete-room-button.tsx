@@ -2,24 +2,24 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
-import { Dialog } from 'features/ui';
-import { strings } from 'localization';
-import client from 'client';
-import { useAppSelector } from 'hooks';
 import { selectUser } from 'app-slice';
+import client from 'client';
+import { Dialog } from 'features/ui';
+import { useAppSelector } from 'hooks';
+import { strings } from 'localization';
 
-const DeleteRoomButton = () => {
+const DeleteRoomButton = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     setIsModalOpen(true);
   };
 
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
 
-  const handleOk = async () => {
+  const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
@@ -33,7 +33,7 @@ const DeleteRoomButton = () => {
     }
   };
 
-  const closeDialog = () => {
+  const closeDialog = (): void => {
     setIsModalOpen(false);
   };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { strings } from 'localization';
 import { CreateRoomForm } from 'features/room';
 import { Modal } from 'features/ui';
+import { strings } from 'localization';
 
 type CreateRoomModalProps = {
   isOpen: boolean,
@@ -10,12 +10,8 @@ type CreateRoomModalProps = {
   onClose?: () => void,
 };
 
-const CreateRoomModal = ({
-  isOpen,
-  onSuccess,
-  onClose,
-}: CreateRoomModalProps) => {
-  const handleSuccess = () => {
+const CreateRoomModal = ({ isOpen, onSuccess, onClose}: CreateRoomModalProps): JSX.Element => {
+  const handleSuccess = (): void => {
     if (onSuccess)
       onSuccess();
   };

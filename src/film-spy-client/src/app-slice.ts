@@ -1,6 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'store';
-import { User } from 'models';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+
+import type { RootState } from 'store';
+import type { User } from 'models';
 
 export type AppState = {
   isAuthenticated: boolean,
@@ -19,20 +21,20 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    startedAuthenticating: state => {
+    startedAuthenticating: (state): void => {
       state.isCheckingAuthentication = true;
     },
-    authenticated: (state, { payload }: PayloadAction<User>) => {
+    authenticated: (state, { payload }: PayloadAction<User>): void => {
       state.user = payload;
       state.isAuthenticated = true;
     },
-    endedAuthenticating: state => {
+    endedAuthenticating: (state): void => {
       state.isCheckingAuthentication = false;
     },
-    startedLoggingOut: state => {
+    startedLoggingOut: (state): void => {
       state.isLoggingOut = true;
     },
-    loggedOut: state => {
+    loggedOut: (state): void => {
       state.isAuthenticated = false;
       state.user = undefined;
       state.isLoggingOut = false;
@@ -50,10 +52,7 @@ export const {
   loggedOut,
 } = appSlice.actions;
 
-export const selectIsAuthenticated = ({ app }: RootState) =>
-  app.isAuthenticated;
-export const selectUser = ({ app }: RootState) => app.user;
-export const selectIsCheckingAuthentication = ({ app }: RootState) =>
-  app.isCheckingAuthentication;
-export const selectIsLoggingOut = ({ app }: RootState) =>
-  app.isLoggingOut;
+export const selectIsAuthenticated = ({ app }: RootState): boolean => app.isAuthenticated;
+export const selectUser = ({ app }: RootState): User | undefined => app.user;
+export const selectIsCheckingAuthentication = ({ app }: RootState): boolean => app.isCheckingAuthentication;
+export const selectIsLoggingOut = ({ app }: RootState): boolean => app.isLoggingOut;

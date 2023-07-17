@@ -1,4 +1,5 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
+import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -14,8 +15,6 @@ import {
 } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
-import { strings } from 'localization';
-import { useAppSelector, useAppDispatch } from 'hooks';
 import {
   selectRooms,
   selectIsRoomsLoading,
@@ -23,9 +22,11 @@ import {
   useLoadRooms,
   roomSelected,
 } from 'features/room';
-import { Room } from 'models';
+import { useAppSelector, useAppDispatch } from 'hooks';
+import type { Room } from 'models';
+import { strings } from 'localization';
 
-const RoomList = () => {
+const RoomList = (): JSX.Element => {
   const isRoomsLoading = useAppSelector(selectIsRoomsLoading);
   const rooms = useAppSelector(selectRooms);
   const loadRooms = useLoadRooms();
@@ -36,29 +37,31 @@ const RoomList = () => {
 
   const [searchName, setSearchName] = useState('');
 
-  const handleSearchNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchName(event.currentTarget.value);
   };
 
-  const filterBySearchName = (room: Room) => room.name.match(searchName);
+  const filterBySearchName = (room: Room): RegExpMatchArray | null => room.name.match(searchName);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const currentRoom = useAppSelector(selectCurrentRoom);
 
-  const isCurrentRoom = (room: Room) => currentRoom?.id === room.id;
+  const isCurrentRoom = (room: Room): boolean => currentRoom?.id === room.id;
 
-  const handleJoinRoomClick = (room: Room) => () => {
-    if (isCurrentRoom(room)) {
-      navigate('/room');
-      return;
-    }
+  const handleJoinRoomClick = (room: Room): () => void => {
+    return (): void => {
+      if (isCurrentRoom(room)) {
+        navigate('/room');
+        return;
+      }
 
-    dispatch(roomSelected(room));
+      dispatch(roomSelected(room));
+    };
   };
 
-  const text = (room: Room) =>
-    room.name + (isCurrentRoom(room) ? ` (${strings.common.current})` : '');
+  const text = (room: Room): string => room.name
+    + (isCurrentRoom(room) ? ` (${strings.common.current})` : '');
 
   return (
     isRoomsLoading ? (
@@ -82,7 +85,7 @@ const RoomList = () => {
                 <InputAdornment position="start">
                   <SearchIcon />
                 </InputAdornment>
-              )
+              ),
             }}
           />
           <List>

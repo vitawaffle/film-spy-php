@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {
   Stack,
@@ -12,13 +13,13 @@ import {
 } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import yup from 'schema';
 import client from 'client';
 import { useCheckAuthentication, useInitCsrf } from 'hooks';
-import { strings } from 'localization';
 import { isUnprocessableContentError } from 'utils';
+import yup from 'schema';
+import { strings } from 'localization';
 
-const LoginForm = () => {
+const LoginForm = (): JSX.Element => {
   const loginSchema = yup.object({
     email: yup.string().required(),
     password: yup.string().required(),
@@ -35,7 +36,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const initCsrf = useInitCsrf();
 
-  const login = async ({ email, password, isRemember }: FieldValues) => {
+  const login = async ({ email, password, isRemember }: FieldValues): Promise<void> => {
     setIsLoading(true);
     setIsInvalidCredentials(false);
 
@@ -60,9 +61,9 @@ const LoginForm = () => {
     }
   };
 
-  const onChange = () => setIsInvalidCredentials(false);
+  const onChange = (): void => setIsInvalidCredentials(false);
 
-  const passwordHelperText = () => {
+  const passwordHelperText = (): string | undefined => {
     if (errors?.password?.type === 'required')
       return strings.validation.required;
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import yup from 'schema';
 import client from 'client';
+import yup from 'schema';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
 
@@ -12,7 +13,7 @@ type CreateRoomFormProps = {
   onSuccess?: () => void,
 };
 
-const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps) => {
+const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): JSX.Element => {
   const createRoomSchema = yup.object({
     name: yup.string().required().max(32),
     password: yup.string(),
@@ -25,7 +26,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isNameNotUnique, setIsNameNotUnique] = useState(false);
 
-  const createRoom = async ({ name, password }: FieldValues) => {
+  const createRoom = async ({ name, password }: FieldValues): Promise<void> => {
     setIsLoading(true);
     setIsNameNotUnique(false);
 
@@ -49,7 +50,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps) => {
     }
   };
 
-  const nameHelperText = () => {
+  const nameHelperText = (): string | undefined => {
     if (errors?.name?.type === 'required')
       return strings.validation.required;
 
