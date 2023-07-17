@@ -5,6 +5,7 @@ namespace App\Rules;
 use App\Models\Room;
 use Closure;
 use Illuminate\Contracts\Validation\{DataAwareRule, ValidationRule};
+use Illuminate\Support\Facades\Auth;
 
 class RoomPassword implements DataAwareRule, ValidationRule
 {
@@ -33,8 +34,13 @@ class RoomPassword implements DataAwareRule, ValidationRule
         Closure $fail,
     ): void {
         $room = Room::find($this->roomId);
+        $userId = Auth::id();
 
-        if (null !== $room->password && $value !== $room->password)
+        if (null !== $room->password
+            && $userId !== $room->user_id
+            && $value !== $room->password
+        ) {
             $fail('Invalid room password');
+        }
     }
 }
