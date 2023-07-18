@@ -2,7 +2,10 @@ import type { RoomCreated, RoomDeleted } from 'broadcast-events';
 import { roomCreated, roomDeleted } from 'features/room';
 import { useAppDispatch } from 'hooks';
 
-const useListenRoomsChannel = (): () => void => {
+const useListenRoomsChannel = (): {
+  listenRoomsChannel: () => void,
+  stopListeningRoomsChannel: () => void,
+} => {
   const dispatch = useAppDispatch();
 
   const handleRoomCreated = ({ room }: RoomCreated): void => {
@@ -17,7 +20,7 @@ const useListenRoomsChannel = (): () => void => {
     dispatch(roomDeleted(room));
   };
 
-  const listemRoomsChannel = (): void => {
+  const listenRoomsChannel = (): void => {
     window.Echo.private('rooms')
       .stopListening('RoomCreated')
       .listen('RoomCreated', handleRoomCreated)
@@ -25,7 +28,13 @@ const useListenRoomsChannel = (): () => void => {
       .listen('RoomDeleted', handleRoomDeleted);
   };
 
-  return listemRoomsChannel;
+  const stopListeningRoomsChannel = (): void => {
+    window.Echo.private('rooms')
+      .stopListening('RoomCreated')
+      .stopListening('RoomDeleted');
+  };
+
+  return { listenRoomsChannel, stopListeningRoomsChannel };
 };
 
 export default useListenRoomsChannel;

@@ -14,6 +14,7 @@ import {
   UserList,
   DeleteRoomButton,
   LeaveRoomButton,
+  RoomChannelListener,
 } from 'features/room';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
@@ -31,6 +32,7 @@ const Room = (): JSX.Element => {
 
   return (
     <>
+      {currentRoom && <RoomChannelListener />}
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Card>

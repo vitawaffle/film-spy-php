@@ -28,7 +28,7 @@ class UserLeftRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms.'.$this->user->roomId),
+            new PrivateChannel('rooms.'.$this->user->room_id),
         ];
     }
 

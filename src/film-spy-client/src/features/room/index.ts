@@ -10,6 +10,8 @@ export {
   roomLeft,
   usersLoadingStarted,
   usersLoaded,
+  userJoinedRoom,
+  userLeftRoom,
   selectRooms,
   selectIsRoomsLoading,
   selectSelectedRoom,
@@ -25,6 +27,7 @@ export { default as DeleteRoomButton } from './delete-room-button';
 export { default as JoinRoomForm } from './join-room-form';
 export { default as JoinRoomModal } from './join-room-modal';
 export { default as LeaveRoomButton } from './leave-room-button';
+export { default as RoomChannelListener } from './room-channel-listener';
 export { default as RoomList } from './room-list';
 export { default as RoomsChannelListener } from './rooms-channel-listener';
 export { default as UserList } from './user-list';

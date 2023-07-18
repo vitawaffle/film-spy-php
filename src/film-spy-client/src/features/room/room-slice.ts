@@ -65,6 +65,17 @@ export const roomSlice = createSlice({
       state.users = payload;
       state.isUsersLoading = false;
     },
+    userJoinedRoom: (state, { payload }: PayloadAction<User>): void => {
+      const index = state.users.findIndex(user => user.id === payload.id);
+
+      if (index === -1)
+        state.users.push(payload);
+      else
+        state.users[index] = payload;
+    },
+    userLeftRoom: (state, { payload }: PayloadAction<User>): void => {
+      state.users = state.users.filter(user => user.id !== payload.id);
+    },
   },
 });
 
@@ -81,6 +92,8 @@ export const {
   roomLeft,
   usersLoadingStarted,
   usersLoaded,
+  userJoinedRoom,
+  userLeftRoom,
 } = roomSlice.actions;
 
 export const selectRooms = ({ room }: RootState): Room[] => room.rooms;
