@@ -41,6 +41,8 @@ export const roomSlice = createSlice({
         state.rooms[index] = payload;
     },
     roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
+      if (state.currentRoom?.id === payload.id)
+        state.currentRoom = undefined;
       state.rooms = state.rooms.filter(room => room.id !== payload.id);
     },
     roomSelected: (state, { payload }: PayloadAction<Room>): void => {

@@ -1,12 +1,17 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import type { RoomCreated, RoomDeleted } from 'broadcast-events';
-import { roomCreated, roomDeleted } from 'features/room';
-import { useAppDispatch } from 'hooks';
+import { selectCurrentRoom, roomCreated, roomDeleted } from 'features/room';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 const useListenRoomsChannel = (): {
   listenRoomsChannel: () => void,
   stopListeningRoomsChannel: () => void,
 } => {
+  const currentRoom = useAppSelector(selectCurrentRoom);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleRoomCreated = ({ room }: RoomCreated): void => {
     console.log('RoomCreated');
@@ -18,13 +23,14 @@ const useListenRoomsChannel = (): {
     console.log('RoomDeleted');
 
     dispatch(roomDeleted(room));
+
+    if (currentRoom?.id === room.id)
+      navigate('/home');
   };
 
   const listenRoomsChannel = (): void => {
     window.Echo.private('rooms')
-      .stopListening('RoomCreated')
       .listen('RoomCreated', handleRoomCreated)
-      .stopListening('RoomDeleted')
       .listen('RoomDeleted', handleRoomDeleted);
   };
 

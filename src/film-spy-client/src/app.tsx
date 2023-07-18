@@ -16,14 +16,12 @@ const App = (): JSX.Element => {
   }, []);
 
   return (
-    <>
+    <BrowserRouter>
       {isAuthenticated && <RoomsChannelListener />}
-      <BrowserRouter>
-        <Layout>
-          <Router />
-        </Layout>
-      </BrowserRouter>
-    </>
+      <Layout>
+        <Router />
+      </Layout>
+    </BrowserRouter>
   );
 };
 
