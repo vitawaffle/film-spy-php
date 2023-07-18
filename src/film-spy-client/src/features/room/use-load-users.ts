@@ -1,11 +1,11 @@
 import client from 'client';
 import { selectCurrentRoom, usersLoadingStarted, usersLoaded } from 'features/room';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import type { User, Room } from 'models';
+import type { User } from 'models';
 
 const useLoadUsers = (): () => Promise<void> => {
   const dispatch = useAppDispatch();
-  const currentRoom = useAppSelector(selectCurrentRoom) as Room;
+  const currentRoom = useAppSelector(selectCurrentRoom);
 
   const loadUsers = async (): Promise<void> => {
     dispatch(usersLoadingStarted());
@@ -13,9 +13,8 @@ const useLoadUsers = (): () => Promise<void> => {
     let users: User[] = [];
 
     try {
-      users = (await client.get<User[]>(
-        `/api/rooms/${currentRoom.id}/users`,
-      )).data;
+      if (currentRoom)
+        users = (await client.get<User[]>(`/api/rooms/${currentRoom.id}/users`)).data;
     } finally {
       dispatch(usersLoaded(users));
     }

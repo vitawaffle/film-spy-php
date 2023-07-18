@@ -27,18 +27,6 @@ const Room = (): JSX.Element => {
     loadUsers();
   });
 
-  //   window.Echo.private(`rooms.${currentRoom?.id ?? 0}`)
-  //     .listen('JoinRoom', (event: unknown) => {
-  //       console.log(event);
-  //     })
-  //     .listen('LeaveRoom', (event: unknown) => {
-  //       console.log(event);
-  //     })
-  //     .listen('DeleteRoom', (event: unknown) => {
-  //       console.log(event);
-  //     });
-  // }, []);
-
   const isRoomOwner = (): boolean => user?.id === currentRoom?.user_id;
 
   return (

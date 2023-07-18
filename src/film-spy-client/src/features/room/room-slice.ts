@@ -32,6 +32,17 @@ export const roomSlice = createSlice({
       state.rooms = payload;
       state.isRoomsLoading = false;
     },
+    roomCreated: (state, { payload }: PayloadAction<Room>): void => {
+      const index = state.rooms.findIndex(room => room.id === payload.id);
+
+      if (index === -1)
+        state.rooms.push(payload);
+      else
+        state.rooms[index] = payload;
+    },
+    roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
+      state.rooms = state.rooms.filter(room => room.id !== payload.id);
+    },
     roomSelected: (state, { payload }: PayloadAction<Room>): void => {
       state.selectedRoom = payload;
       state.isJoinRoomModalOpen = true;
@@ -62,6 +73,8 @@ export default roomSlice.reducer;
 export const {
   roomsLoadingStarted,
   roomsLoaded,
+  roomCreated,
+  roomDeleted,
   roomSelected,
   roomUnselected,
   roomJoined,

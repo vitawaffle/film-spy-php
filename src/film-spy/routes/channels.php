@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\{Room, User};
-use Illuminate\Support\Facades\{Broadcast, Log};
+use Illuminate\Support\Facades\{Auth, Broadcast};
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +22,5 @@ Broadcast::channel(
     'rooms.{room}',
     fn (User $user, Room $room) => $room->id === $user->room_id,
 );
+
+Broadcast::channel('rooms', fn () => Auth::check());
