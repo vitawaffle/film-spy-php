@@ -10,13 +10,19 @@ const useListenRoomChannel = (): {
   const dispatch = useAppDispatch();
 
   const handleUserJoinedRoom = ({ user }: UserJoinedRoom): void => {
-    console.log('UserJoinedRoom');
+    /* Debug */
+    console.log('UserJoinedRoom:');
+    console.log(user);
+    /* ***** */
 
     dispatch(userJoinedRoom(user));
   };
 
   const handleUserLeftRoom = ({ user }: UserLeftRoom): void => {
-    console.log('UserLeftRoom');
+    /* Debug */
+    console.log('UserLeftRoom:');
+    console.log(user);
+    /* ***** */
 
     dispatch(userLeftRoom(user));
   };

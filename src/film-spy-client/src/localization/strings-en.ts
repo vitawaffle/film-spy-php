@@ -14,7 +14,6 @@ const stringsEn: LocaleTemplate = {
     create: 'Create',
     rooms: 'Rooms',
     join: 'Join',
-    current: 'Current',
     refresh: 'Refresh',
     players: 'Players',
     deleteRoom: 'Delete room',
@@ -53,6 +52,10 @@ const stringsEn: LocaleTemplate = {
       roomList: {
         searchName: 'Search by name',
         noContent: 'No content',
+      },
+      roomListItem: {
+        owner: 'Owner',
+        players: 'Players',
       },
       joinRoomForm: {
         keepEmpty: 'Keep this field empty if the room does not have a password',

@@ -25,7 +25,7 @@ class Room extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belonsgTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function users(): HasMany

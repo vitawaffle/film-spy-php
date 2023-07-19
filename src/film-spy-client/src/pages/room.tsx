@@ -28,7 +28,7 @@ const Room = (): JSX.Element => {
     loadUsers();
   });
 
-  const isRoomOwner = (): boolean => user?.id === currentRoom?.user_id;
+  const isRoomOwner = (): boolean => user?.id === currentRoom?.user.id;
 
   return (
     <>

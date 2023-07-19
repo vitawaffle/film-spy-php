@@ -16,13 +16,19 @@ class RoomController extends Controller
             ['user_id' => Auth::id()],
         ));
 
-        RoomCreated::dispatch($room);
+        $room->load('user:id,name,email');
+        $room->loadCount('users');
+
+        RoomCreated::dispatch($room->toArray());
     }
 
     /** @return Room[] */
     public function getAll(): array
     {
-        return Room::all()->toArray();
+        return Room::with('user:id,name,email')
+            ->withCount('users')
+            ->get()
+            ->toArray();
     }
 
     /** @return User[] */

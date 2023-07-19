@@ -24,7 +24,6 @@ export type LocaleTemplate = {
     create: string,
     rooms: string,
     join: string,
-    current: string,
     refresh: string,
     players: string,
     deleteRoom: string,
@@ -63,6 +62,10 @@ export type LocaleTemplate = {
       roomList: {
         searchName: string,
         noContent: string,
+      },
+      roomListItem: {
+        owner: string,
+        players: string,
       },
       joinRoomForm: {
         keepEmpty: string,

@@ -9,13 +9,19 @@ const useListenRoomsChannel = (): {
   const dispatch = useAppDispatch();
 
   const handleRoomCreated = ({ room }: RoomCreated): void => {
-    console.log('RoomCreated');
+    /* Debug */
+    console.log('RoomCreated:');
+    console.log(room);
+    /* ***** */
 
     dispatch(roomCreated(room));
   };
 
   const handleRoomDeleted = ({ room }: RoomDeleted): void => {
-    console.log('RoomDeleted');
+    /* Debug */
+    console.log('RoomDeleted:');
+    console.log(room);
+    /* ***** */
 
     dispatch(roomDeleted(room));
   };

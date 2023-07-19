@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Box,
   CircularProgress,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Typography,
   Stack,
   TextField,
@@ -15,14 +11,9 @@ import {
 } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
-import {
-  selectRooms,
-  selectIsRoomsLoading,
-  selectCurrentRoom,
-  useLoadRooms,
-  roomSelected,
-} from 'features/room';
-import { useAppSelector, useAppDispatch } from 'hooks';
+import RoomListItem from './room-list-item';
+import { selectRooms, selectIsRoomsLoading, useLoadRooms } from 'features/room';
+import { useAppSelector } from 'hooks';
 import type { Room } from 'models';
 import { strings } from 'localization';
 
@@ -42,26 +33,6 @@ const RoomList = (): JSX.Element => {
   };
 
   const filterBySearchName = (room: Room): RegExpMatchArray | null => room.name.match(searchName);
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const currentRoom = useAppSelector(selectCurrentRoom);
-
-  const isCurrentRoom = (room: Room): boolean => currentRoom?.id === room.id;
-
-  const handleJoinRoomClick = (room: Room): () => void => {
-    return (): void => {
-      if (isCurrentRoom(room)) {
-        navigate('/room');
-        return;
-      }
-
-      dispatch(roomSelected(room));
-    };
-  };
-
-  const text = (room: Room): string => room.name
-    + (isCurrentRoom(room) ? ` (${strings.common.current})` : '');
 
   return (
     isRoomsLoading ? (
@@ -89,14 +60,8 @@ const RoomList = (): JSX.Element => {
             }}
           />
           <List>
-            {rooms.filter(filterBySearchName).map(room => (
-              <ListItem key={room.id} disablePadding>
-                <ListItemButton onClick={handleJoinRoomClick(room)}>
-                  <ListItemText>
-                    {text(room)}
-                  </ListItemText>
-                </ListItemButton>
-              </ListItem>
+            {rooms.filter(filterBySearchName).map((room, i) => (
+              <RoomListItem key={i} room={room} />
             ))}
           </List>
         </Stack>

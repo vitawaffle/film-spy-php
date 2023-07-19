@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 
 import { ErrorLayout } from 'features/ui';
 import { strings } from 'localization';

@@ -9,6 +9,6 @@ class UserController extends Controller
 {
     public function user(): User
     {
-        return User::with('room')->find(Auth::id());
+        return User::with('room', 'room.user:id')->find(Auth::id());
     }
 }

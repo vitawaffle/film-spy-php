@@ -1,8 +1,9 @@
-import type { Model } from 'models';
+import type { Model, User } from 'models';
 
 type Room = Model & {
   name: string,
-  user_id: number,
+  user: User,
+  users_count: number,
 };
 
 export default Room;

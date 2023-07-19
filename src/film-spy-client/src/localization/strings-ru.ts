@@ -14,7 +14,6 @@ const stringsRu: LocaleTemplate = {
     create: 'Создать',
     rooms: 'Комнаты',
     join: 'Присоедениться',
-    current: 'Вы здесь',
     refresh: 'Обновить',
     players: 'Игроки',
     deleteRoom: 'Удалить комнату',
@@ -53,6 +52,10 @@ const stringsRu: LocaleTemplate = {
       roomList: {
         searchName: 'Найти по имени',
         noContent: 'Ничего не найдено',
+      },
+      roomListItem: {
+        owner: 'Владелец',
+        players: 'Игроки',
       },
       joinRoomForm: {
         keepEmpty: 'Оставьте это поле пустым, если в комнате нет пароля',
