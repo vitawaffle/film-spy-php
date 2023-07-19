@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  CircularProgress,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material';
+import { Box, CircularProgress, List } from '@mui/material';
 
+import UserListItem from './user-list-item';
 import { selectIsUsersLoading, selectUsers } from 'features/room';
 import { useAppSelector } from 'hooks';
 
@@ -21,13 +16,7 @@ const UserList = (): JSX.Element => {
       </Box>
     ) : (
       <List>
-        {users.map((user, i) => (
-          <ListItem key={user.id} disablePadding>
-            <ListItemText>
-              {i + 1}. {user.name}
-            </ListItemText>
-          </ListItem>
-        ))}
+        {users.map((user, i) => <UserListItem key={i} user={user} />)}
       </List>
     )
   );

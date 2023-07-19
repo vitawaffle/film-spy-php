@@ -63,6 +63,10 @@ const stringsRu: LocaleTemplate = {
       joinRoomModal: {
         joinRoom: 'Присоедениться',
       },
+      kickPlayerButton: {
+        kickPlayer: 'Выгнать игрока',
+        kickPlayerQuestion: 'Вы действитель хотите выгнать игрока',
+      },
     },
   },
 };

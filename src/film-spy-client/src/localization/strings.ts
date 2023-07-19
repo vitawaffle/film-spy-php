@@ -73,6 +73,10 @@ export type LocaleTemplate = {
       joinRoomModal: {
         joinRoom: string,
       },
+      kickPlayerButton: {
+        kickPlayer: string,
+        kickPlayerQuestion: string,
+      },
     },
   },
 };

@@ -4,15 +4,14 @@ import { ListItem, ListItemButton, ListItemText, Typography } from '@mui/materia
 
 import { roomSelected, selectCurrentRoom } from 'features/room';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import type { ChildrenProps } from 'props';
 import type { Room } from 'models';
 import { strings } from 'localization';
 
-export type RoomListItemProps = ChildrenProps & {
+export type RoomListItemProps = {
   room: Room,
 };
 
-const RoomListItem = ({ children, room }: RoomListItemProps): JSX.Element => {
+const RoomListItem = ({ room }: RoomListItemProps): JSX.Element => {
   const currentRoom = useAppSelector(selectCurrentRoom);
 
   const isCurrentRoom = (room: Room): boolean => currentRoom?.id === room.id;

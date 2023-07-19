@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserLeftRoom};
-use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest};
+use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest, KickPlayerRequest};
 use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
 
@@ -80,5 +80,13 @@ class RoomController extends Controller
 
         $user->room_id = null;
         $user->save();
+    }
+
+    public function kick(Room $room, KickPlayerRequest $request): void
+    {
+        if (!Gate::allows('room-owner', $room))
+            abort(403);
+
+        // TODO Logic of player kicking
     }
 }

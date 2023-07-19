@@ -63,6 +63,10 @@ const stringsEn: LocaleTemplate = {
       joinRoomModal: {
         joinRoom: 'Join',
       },
+      kickPlayerButton: {
+        kickPlayer: 'Kick player',
+        kickPlayerQuestion: 'Do you really want to kick player',
+      },
     },
   },
 };
