@@ -46,6 +46,7 @@ export type LocaleTemplate = {
   pages: {
     errors: {
       notFound: string,
+      unauthorized: string,
     },
     home: {
       currentRoom: string,

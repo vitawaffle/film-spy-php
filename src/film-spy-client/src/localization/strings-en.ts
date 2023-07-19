@@ -36,6 +36,7 @@ const stringsEn: LocaleTemplate = {
   pages: {
     errors: {
       notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
+      unauthorized: 'You can\'t come here. Log in to the site to access this page.',
     },
     home: {
       currentRoom: 'Current room',
