@@ -67,6 +67,9 @@ const stringsEn: LocaleTemplate = {
         kickPlayer: 'Kick player',
         kickPlayerQuestion: 'Do you really want to kick player',
       },
+      startGameButton: {
+        startGame: 'Start game',
+      },
     },
   },
 };

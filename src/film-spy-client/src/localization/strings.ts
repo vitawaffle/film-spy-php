@@ -77,6 +77,9 @@ export type LocaleTemplate = {
         kickPlayer: string,
         kickPlayerQuestion: string,
       },
+      startGameButton: {
+        startGame: string,
+      },
     },
   },
 };

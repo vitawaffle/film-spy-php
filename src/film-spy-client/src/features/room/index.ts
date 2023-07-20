@@ -32,6 +32,7 @@ export { default as LeaveRoomButton } from './leave-room-button';
 export { default as RoomChannelListener } from './room-channel-listener';
 export { default as RoomList } from './room-list';
 export { default as RoomsChannelListener } from './rooms-channel-listener';
+export { default as StartGameButton } from './start-game-button';
 export { default as UserList } from './user-list';
 
 export { default as useLoadRooms } from './use-load-rooms';

@@ -15,6 +15,7 @@ import {
   DeleteRoomButton,
   LeaveRoomButton,
   RoomChannelListener,
+  StartGameButton,
 } from 'features/room';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
@@ -50,6 +51,7 @@ const Room = (): JSX.Element => {
           <Card>
             <CardContent>
               <Stack spacing={3}>
+                {isRoomOwner() && <StartGameButton />}
                 <LeaveRoomButton />
                 {isRoomOwner() && <DeleteRoomButton />}
               </Stack>

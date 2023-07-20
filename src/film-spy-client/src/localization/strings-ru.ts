@@ -67,6 +67,9 @@ const stringsRu: LocaleTemplate = {
         kickPlayer: 'Выгнать игрока',
         kickPlayerQuestion: 'Вы действитель хотите выгнать игрока',
       },
+      startGameButton: {
+        startGame: 'Начать игру',
+      },
     },
   },
 };
