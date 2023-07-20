@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserLeftRoom};
+use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserKicked, UserLeftRoom};
 use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest, KickPlayerRequest};
 use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
@@ -87,6 +87,13 @@ class RoomController extends Controller
         if (!Gate::allows('room-owner', $room))
             abort(403);
 
-        // TODO Logic of player kicking
+        $user = User::find($request->validated()['user_id']);
+
+        if (null !== $user->room_id) {
+            $user->room_id = null;
+            $user->save();
+
+            UserKicked::dispatch($user, $room);
+        }
     }
 }

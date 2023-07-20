@@ -78,6 +78,12 @@ export const roomSlice = createSlice({
     userLeftRoom: (state, { payload }: PayloadAction<User>): void => {
       state.users = state.users.filter(user => user.id !== payload.id);
     },
+    userKicked: (state, { payload }: PayloadAction<{ kickedUser: User, currentUser: User }>): void => {
+      state.users = state.users.filter(user => user.id !== payload.kickedUser.id);
+
+      if (payload.kickedUser.id === payload.currentUser.id)
+        state.currentRoom = undefined;
+    },
   },
 });
 
@@ -96,6 +102,7 @@ export const {
   usersLoaded,
   userJoinedRoom,
   userLeftRoom,
+  userKicked,
 } = roomSlice.actions;
 
 export const selectRooms = ({ room }: RootState): Room[] => room.rooms;
