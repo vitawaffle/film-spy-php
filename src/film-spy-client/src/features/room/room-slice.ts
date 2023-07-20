@@ -84,6 +84,11 @@ export const roomSlice = createSlice({
       if (payload.kickedUser.id === payload.currentUser.id)
         state.currentRoom = undefined;
     },
+    loggedOut: (state): void => {
+      state.currentRoom = undefined;
+      state.selectedRoom = undefined;
+      state.users = [];
+    },
   },
 });
 
@@ -103,6 +108,7 @@ export const {
   userJoinedRoom,
   userLeftRoom,
   userKicked,
+  loggedOut,
 } = roomSlice.actions;
 
 export const selectRooms = ({ room }: RootState): Room[] => room.rooms;

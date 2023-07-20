@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { startedLoggingOut, loggedOut } from 'app-slice';
 import client from 'client';
+import { loggedOut as roomLoggedOut } from 'features/room';
 import { useAppDispatch, useCheckAuthentication } from 'hooks';
 
 const useLogout = (): () => Promise<void> => {
@@ -18,6 +19,7 @@ const useLogout = (): () => Promise<void> => {
       navigate('/home');
     } finally {
       dispatch(loggedOut());
+      dispatch(roomLoggedOut());
     }
   };
 

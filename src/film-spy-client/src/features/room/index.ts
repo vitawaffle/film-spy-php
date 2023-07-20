@@ -13,6 +13,7 @@ export {
   userJoinedRoom,
   userLeftRoom,
   userKicked,
+  loggedOut,
   selectRooms,
   selectIsRoomsLoading,
   selectSelectedRoom,
