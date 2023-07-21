@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class);
+    }
 }

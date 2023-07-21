@@ -34,7 +34,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define(
             'in-own-room',
-            fn (User $user) => null !== $user->room && $user->room->user_id === $user->id,
+            fn (User $user) => null !== $user->room_id && $user->room->user_id === $user->id,
         );
+
+        Gate::defind('has-game', fn (User $user) => null !== $user->game_id);
     }
 }

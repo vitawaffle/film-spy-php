@@ -26,4 +26,15 @@ class GameController extends Controller
 
         GameStarted::dispatch($room->id);
     }
+
+    public function current(): Game
+    {
+        if (!Gate::allows('has-game'))
+            abort(403);
+
+        $game = Auth::user()->game;
+        $game->load('users');
+
+        return $game;
+    }
 }

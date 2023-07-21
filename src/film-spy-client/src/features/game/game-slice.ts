@@ -20,7 +20,7 @@ export const gameSlice = createSlice({
     gameStartedLoading: (state): void => {
       state.isGameLoading = true;
     },
-    gameLoaded: (state, { payload }: PayloadAction<Game>): void => {
+    gameLoaded: (state, { payload }: PayloadAction<Game | undefined>): void => {
       state.game = payload;
       state.isGameLoading = false;
     },

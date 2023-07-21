@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')
     ->controller(GameController::class)
     ->group(function () {
         Route::post('/start', 'start');
+        Route::get('/current', 'current');
     });
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);

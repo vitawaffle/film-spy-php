@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { selectUser } from 'app-slice';
 import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
 import { selectCurrentRoom, userJoinedRoom, userLeftRoom, userKicked } from 'features/room';
@@ -39,17 +41,30 @@ const useListenRoomChannel = (): {
     dispatch(userKicked({ kickedUser: user, currentUser: currentUser as User }));
   };
 
+  const navigate = useNavigate();
+
+  const handleGameStarted = (): void => {
+    /* Debug */
+    console.log('GameStarted');
+    /* ***** */
+
+    navigate('/game');
+  };
+
   const listenRoomChannel = (): void => {
     window.Echo.private('rooms.' + currentRoom?.id ?? 0)
       .listen('UserJoinedRoom', handleUserJoinedRoom)
       .listen('UserLeftRoom', handleUserLeftRoom)
-      .listen('UserKicked', handleUserKicked);
+      .listen('UserKicked', handleUserKicked)
+      .listen('GameStarted', handleGameStarted);
   };
 
   const stopListeningRoomChannel = (): void => {
     window.Echo.private('rooms.' + currentRoom?.id ?? 0)
       .stopListening('UserJoinedRoom')
-      .stopListening('UserLeftRoom');
+      .stopListening('UserLeftRoom')
+      .stopListening('UserKicked')
+      .stopListening('GameStarted');
   };
 
   return { listenRoomChannel, stopListeningRoomChannel };
