@@ -71,6 +71,11 @@ const stringsRu: LocaleTemplate = {
         startGame: 'Начать игру',
       },
     },
+    ui: {
+      appBar: {
+        game: 'Игра',
+      },
+    },
   },
 };
 

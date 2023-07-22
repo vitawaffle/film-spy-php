@@ -71,6 +71,11 @@ const stringsEn: LocaleTemplate = {
         startGame: 'Start game',
       },
     },
+    ui: {
+      appBar: {
+        game: 'Game',
+      },
+    },
   },
 };
 

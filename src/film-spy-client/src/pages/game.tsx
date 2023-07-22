@@ -12,6 +12,11 @@ const Game = (): JSX.Element => {
   const isGameLoading = useAppSelector(selectIsGameLoading);
 
   useEffect(() => {
+    /* Debud */
+    console.log(isGameLoading);
+    console.log(game);
+    /* ***** */
+
     loadGame();
   }, []);
 

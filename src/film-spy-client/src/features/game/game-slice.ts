@@ -10,7 +10,7 @@ export type GameState = {
 };
 
 const initialState: GameState = {
-  isGameLoading: false,
+  isGameLoading: true,
 };
 
 export const gameSlice = createSlice({

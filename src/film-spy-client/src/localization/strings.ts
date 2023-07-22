@@ -81,5 +81,10 @@ export type LocaleTemplate = {
         startGame: string,
       },
     },
+    ui: {
+      appBar: {
+        game: string,
+      },
+    },
   },
 };

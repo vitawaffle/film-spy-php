@@ -13,7 +13,7 @@ export type AppState = {
 
 const initialState: AppState = {
   isAuthenticated: false,
-  isCheckingAuthentication: false,
+  isCheckingAuthentication: true,
   isLoggingOut: false,
 };
 

@@ -16,12 +16,14 @@ import {
   ChevronLeft as ChevronLeftIcon,
   Home as HomeIcon,
   SportsEsports as SportsEsportsIcon,
+  PlayCircleOutline as PlayCircleOutlineIcon,
 } from '@mui/icons-material';
 
 import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
 import DrawerLink from './drawer-link';
+import { selectGame } from 'features/game';
 import { selectCurrentRoom } from 'features/room';
 import { useAppSelector, useLogout } from 'hooks';
 import {
@@ -48,6 +50,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const currentRoom = useAppSelector(selectCurrentRoom);
+  const game = useAppSelector(selectGame);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
   const isLoggingOut = useAppSelector(selectIsLoggingOut);
 
@@ -114,6 +117,14 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
               to="/room"
               text={strings.pages.home.currentRoom}
               icon={<SportsEsportsIcon />}
+              isDrawerOpen={isOpen}
+            />
+          )}
+          {isAuthenticated && game && (
+            <DrawerLink
+              to="/game"
+              text={strings.features.ui.appBar.game}
+              icon={<PlayCircleOutlineIcon />}
               isDrawerOpen={isOpen}
             />
           )}

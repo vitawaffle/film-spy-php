@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
 import client from 'client';
+import { selectUsers } from 'features/room';
 import { Dialog } from 'features/ui';
+import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
 const StartGameButton = (): JSX.Element => {
@@ -31,6 +33,10 @@ const StartGameButton = (): JSX.Element => {
     setIsModalOpen(false);
   };
 
+  const users = useAppSelector(selectUsers);
+
+  const isDisabled = (users?.length ?? 0) < 3;
+
   return (
     <>
       <Dialog
@@ -48,7 +54,7 @@ const StartGameButton = (): JSX.Element => {
           </Box>
         )}
       </Dialog>
-      <Button variant="contained" onClick={handleClick}>
+      <Button variant="contained" onClick={handleClick} disabled={isDisabled}>
         {strings.features.rooms.startGameButton.startGame}
       </Button>
     </>

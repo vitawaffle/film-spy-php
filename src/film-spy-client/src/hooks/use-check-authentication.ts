@@ -5,6 +5,7 @@ import {
   loggedOut,
 } from 'app-slice';
 import client from 'client';
+import { gameLoaded } from 'features/game';
 import { roomJoined } from 'features/room';
 import { useAppDispatch } from 'hooks';
 import { isUnauthenticatedError } from 'utils';
@@ -21,6 +22,9 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
 
       if (user.room)
         dispatch(roomJoined(user.room));
+
+      if (user.game)
+        dispatch(gameLoaded(user.game));
 
       dispatch(authenticated(user));
 
