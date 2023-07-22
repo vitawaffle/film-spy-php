@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { AuthenticatedGuard, HasRoomGuard } from 'components/routing';
-import { Home, Error, Login, Signin, Room } from 'pages';
+import { AuthenticatedGuard, HasGameGuard, HasRoomGuard } from 'components/routing';
+import { Home, Error, Login, Signin, Room, Game } from 'pages';
 import { NotFoundError, UnauthorizedError } from 'pages/errors';
 
 const Router = (): JSX.Element => (
@@ -16,6 +16,13 @@ const Router = (): JSX.Element => (
         <HasRoomGuard>
           <Room />
         </HasRoomGuard>
+      </AuthenticatedGuard>
+    )} />
+    <Route path="game" element={(
+      <AuthenticatedGuard>
+        <HasGameGuard>
+          <Game />
+        </HasGameGuard>
       </AuthenticatedGuard>
     )} />
     <Route path="signin" element={<Signin />} />

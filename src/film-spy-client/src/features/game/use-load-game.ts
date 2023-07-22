@@ -13,7 +13,7 @@ const useLoadGame = (): () => Promise<void> => {
     let game: Game | undefined;
 
     try {
-      game = (await client.get('/api/games/current')).data
+      game = (await client.get('/api/games/current')).data;
     } catch (error) {
       if (isForbiddenError(error))
         game = undefined;
