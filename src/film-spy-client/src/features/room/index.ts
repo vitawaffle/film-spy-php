@@ -18,7 +18,6 @@ export {
   selectIsRoomsLoading,
   selectSelectedRoom,
   selectIsJoinRoomModalOpen,
-  selectCurrentRoom,
   selectUsers,
   selectIsUsersLoading,
 } from './room-slice';

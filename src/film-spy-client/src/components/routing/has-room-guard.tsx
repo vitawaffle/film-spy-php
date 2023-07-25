@@ -1,17 +1,16 @@
 import React from 'react';
 
 import Protected from './protected-guard';
-import { selectIsCheckingAuthentication } from 'app-slice';
-import { selectCurrentRoom } from 'features/room';
+import { selectRoom, selectIsCheckingAuthentication } from 'app-slice';
 import { useAppSelector } from 'hooks';
 import type { ChildrenProps } from 'props';
 
 const HasRoomGuard = ({ children }: ChildrenProps): JSX.Element => {
-  const currentRoom = useAppSelector(selectCurrentRoom);
+  const room = useAppSelector(selectRoom);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
 
   return (
-    <Protected isEnabled={isCheckingAuthentication || !!currentRoom} navigateOnForbidden="/home">
+    <Protected isEnabled={isCheckingAuthentication || !!room} navigateOnForbidden="/home">
       {children}
     </Protected>
   );

@@ -7,9 +7,8 @@ import {
   Typography,
 } from '@mui/material';
 
-import { selectUser } from 'app-slice';
+import { selectRoom, selectUser } from 'app-slice';
 import {
-  selectCurrentRoom,
   useLoadUsers,
   UserList,
   DeleteRoomButton,
@@ -22,18 +21,18 @@ import { strings } from 'localization';
 
 const Room = (): JSX.Element => {
   const user = useAppSelector(selectUser);
-  const currentRoom = useAppSelector(selectCurrentRoom);
+  const room = useAppSelector(selectRoom);
   const loadUsers = useLoadUsers();
 
   useEffect(() => {
     loadUsers();
   });
 
-  const isRoomOwner = (): boolean => user?.id === currentRoom?.user.id;
+  const isRoomOwner = (): boolean => !!user && !!room && user.id === room.user.id;
 
   return (
     <>
-      {currentRoom && <RoomChannelListener />}
+      {room && <RoomChannelListener />}
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Card>

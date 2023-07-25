@@ -1,12 +1,8 @@
 import {
   startedAuthenticating,
-  authenticated,
   endedAuthenticating,
-  loggedOut,
 } from 'app-slice';
 import client from 'client';
-import { gameLoaded } from 'features/game';
-import { roomJoined } from 'features/room';
 import { useAppDispatch } from 'hooks';
 import { isUnauthenticatedError } from 'utils';
 import type { User } from 'models';
@@ -20,25 +16,17 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
     try {
       const user = (await client.get<User>('/api/users/me')).data;
 
-      if (user.room)
-        dispatch(roomJoined(user.room));
-
-      if (user.game)
-        dispatch(gameLoaded(user.game));
-
-      dispatch(authenticated(user));
+      dispatch(endedAuthenticating(user));
 
       return true;
     } catch (error: unknown) {
       if (isUnauthenticatedError(error)) {
-        dispatch(loggedOut());
+        endedAuthenticating(undefined);
 
         return false;
       }
 
       throw error;
-    } finally {
-      dispatch(endedAuthenticating());
     }
   };
 

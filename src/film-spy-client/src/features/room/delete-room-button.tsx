@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
+import { selectRoom } from 'app-slice';
 import client from 'client';
-import { selectCurrentRoom } from 'features/room';
 import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
@@ -16,20 +16,20 @@ const DeleteRoomButton = (): JSX.Element => {
     setIsModalOpen(true);
   };
 
-  const currentRoom = useAppSelector(selectCurrentRoom);
+  const room = useAppSelector(selectRoom);
   const navigate = useNavigate();
 
   const handleOk = async (): Promise<void> => {
-    setIsLoading(true);
+    if (room) {
+      setIsLoading(true);
 
-    try {
-      await client.post('/api/rooms/delete', {
-        room_id: currentRoom?.id ?? 0,
-      });
+      try {
+        await client.post('/api/rooms/delete', { room_id: room.id });
 
-      navigate('/home');
-    } finally {
-      setIsLoading(false);
+        navigate('/home');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 

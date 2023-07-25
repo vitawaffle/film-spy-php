@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import { selectUser } from 'app-slice';
+import { selectRoom, selectUser } from 'app-slice';
 import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
-import { selectCurrentRoom, userJoinedRoom, userLeftRoom, userKicked } from 'features/room';
+import { userJoinedRoom, userLeftRoom, userKicked } from 'features/room';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import type { User } from 'models';
 
@@ -10,7 +10,7 @@ const useListenRoomChannel = (): {
   listenRoomChannel: () => void,
   stopListeningRoomChannel: () => void,
 } => {
-  const currentRoom = useAppSelector(selectCurrentRoom);
+  const room = useAppSelector(selectRoom);
   const currentUser = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
@@ -52,19 +52,23 @@ const useListenRoomChannel = (): {
   };
 
   const listenRoomChannel = (): void => {
-    window.Echo.private('rooms.' + currentRoom?.id ?? 0)
-      .listen('UserJoinedRoom', handleUserJoinedRoom)
-      .listen('UserLeftRoom', handleUserLeftRoom)
-      .listen('UserKicked', handleUserKicked)
-      .listen('GameStarted', handleGameStarted);
+    if (room) {
+      window.Echo.private('rooms.' + room.id ?? 0)
+        .listen('UserJoinedRoom', handleUserJoinedRoom)
+        .listen('UserLeftRoom', handleUserLeftRoom)
+        .listen('UserKicked', handleUserKicked)
+        .listen('GameStarted', handleGameStarted);
+    }
   };
 
   const stopListeningRoomChannel = (): void => {
-    window.Echo.private('rooms.' + currentRoom?.id ?? 0)
-      .stopListening('UserJoinedRoom')
-      .stopListening('UserLeftRoom')
-      .stopListening('UserKicked')
-      .stopListening('GameStarted');
+    if (room) {
+      window.Echo.private('rooms.' + room.id ?? 0)
+        .stopListening('UserJoinedRoom')
+        .stopListening('UserLeftRoom')
+        .stopListening('UserKicked')
+        .stopListening('GameStarted');
+    }
   };
 
   return { listenRoomChannel, stopListeningRoomChannel };

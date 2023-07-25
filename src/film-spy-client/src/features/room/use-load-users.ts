@@ -1,11 +1,12 @@
+import { selectRoom } from 'app-slice';
 import client from 'client';
-import { selectCurrentRoom, usersLoadingStarted, usersLoaded } from 'features/room';
+import { usersLoadingStarted, usersLoaded } from 'features/room';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import type { User } from 'models';
 
 const useLoadUsers = (): () => Promise<void> => {
   const dispatch = useAppDispatch();
-  const currentRoom = useAppSelector(selectCurrentRoom);
+  const room = useAppSelector(selectRoom);
 
   const loadUsers = async (): Promise<void> => {
     dispatch(usersLoadingStarted());
@@ -13,8 +14,8 @@ const useLoadUsers = (): () => Promise<void> => {
     let users: User[] = [];
 
     try {
-      if (currentRoom)
-        users = (await client.get<User[]>(`/api/rooms/${currentRoom.id}/users`)).data;
+      if (room)
+        users = (await client.get<User[]>(`/api/rooms/${room.id}/users`)).data;
     } finally {
       dispatch(usersLoaded(users));
     }

@@ -2,13 +2,14 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Card, CardContent, CircularProgress, Grid } from '@mui/material';
 
-import { useLoadGame, selectGame, selectIsGameLoading, PlayerCard } from 'features/game';
+import { selectGame } from 'app-slice';
+import { useLoadGame, selectIsGameLoading, PlayerCard } from 'features/game';
 import { useAppSelector } from 'hooks';
 import type { Game as GameModel } from 'models';
 
 const Game = (): JSX.Element => {
   const loadGame = useLoadGame();
-  const game = useAppSelector(selectGame) as GameModel;
+  const game = useAppSelector(selectGame);
   const isGameLoading = useAppSelector(selectIsGameLoading);
 
   useEffect(() => {
@@ -22,6 +23,8 @@ const Game = (): JSX.Element => {
 
   return isGameLoading ? (
     <CircularProgress />
+  ) : !game ? (
+    <>No Game</>
   ) : (
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>

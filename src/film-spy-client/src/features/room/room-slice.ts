@@ -115,6 +115,5 @@ export const selectRooms = ({ room }: RootState): Room[] => room.rooms;
 export const selectIsRoomsLoading = ({ room }: RootState): boolean => room.isRoomsLoading;
 export const selectSelectedRoom = ({ room }: RootState): Room | undefined => room.selectedRoom;
 export const selectIsJoinRoomModalOpen = ({ room }: RootState): boolean => room.isJoinRoomModalOpen;
-export const selectCurrentRoom = ({ room }: RootState): Room | undefined => room.currentRoom;
 export const selectUsers = ({ room }: RootState): User[] => room.users;
 export const selectIsUsersLoading = ({ room }: RootState): boolean => room.isUsersLoading;

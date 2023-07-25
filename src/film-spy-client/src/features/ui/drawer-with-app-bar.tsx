@@ -23,8 +23,7 @@ import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
 import DrawerLink from './drawer-link';
-import { selectGame } from 'features/game';
-import { selectCurrentRoom } from 'features/room';
+import { selectGame, selectRoom } from 'app-slice';
 import { useAppSelector, useLogout } from 'hooks';
 import {
   selectIsAuthenticated,
@@ -49,8 +48,8 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
   };
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const currentRoom = useAppSelector(selectCurrentRoom);
   const game = useAppSelector(selectGame);
+  const room = useAppSelector(selectRoom);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
   const isLoggingOut = useAppSelector(selectIsLoggingOut);
 
@@ -112,7 +111,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
             icon={<HomeIcon />}
             isDrawerOpen={isOpen}
           />
-          {isAuthenticated && currentRoom && (
+          {isAuthenticated && room && (
             <DrawerLink
               to="/room"
               text={strings.pages.home.currentRoom}

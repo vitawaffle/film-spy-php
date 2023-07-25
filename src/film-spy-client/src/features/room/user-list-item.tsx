@@ -2,8 +2,7 @@ import React from 'react';
 import { ListItem, ListItemText } from '@mui/material';
 
 import KickPlayerButton from './kick-player-button';
-import { selectUser } from 'app-slice';
-import { selectCurrentRoom } from 'features/room';
+import { selectRoom, selectUser } from 'app-slice';
 import { useAppSelector } from 'hooks';
 import type { User } from 'models';
 
@@ -13,9 +12,9 @@ export type UserListItemProps = {
 
 const UserListItem = ({ user }: UserListItemProps): JSX.Element => {
   const currentUser = useAppSelector(selectUser);
-  const currentRoom = useAppSelector(selectCurrentRoom);
+  const room = useAppSelector(selectRoom);
 
-  const isOwner = currentRoom?.user.id === currentUser?.id;
+  const isOwner = currentUser && room && room.user.id === currentUser.id;
 
   const secondaryAction: JSX.Element | undefined = isOwner ? <KickPlayerButton user={user} /> : undefined;
 

@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Protected from './protected-guard';
-import { selectGame, selectIsGameLoading } from 'features/game';
+import { selectGame } from 'app-slice';
+import { selectIsGameLoading } from 'features/game';
 import { useAppSelector } from 'hooks';
 import type { ChildrenProps } from 'props';
 
