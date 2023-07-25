@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { selectSelectedRoom, roomJoined } from 'app-slice';
 import client from 'client';
-import { selectSelectedRoom, roomJoined } from 'features/room';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import type { Room } from 'models';
 import yup from 'schema';

@@ -1,5 +1,5 @@
+import { roomCreated, roomDeleted } from 'app-slice';
 import type { RoomCreated, RoomDeleted } from 'broadcast-events';
-import { roomCreated, roomDeleted } from 'features/room';
 import { useAppDispatch } from 'hooks';
 
 const useListenRoomsChannel = (): {

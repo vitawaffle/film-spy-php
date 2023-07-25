@@ -1,6 +1,5 @@
-import { selectRoom } from 'app-slice';
+import { selectRoom, usersLoadingStarted, usersLoaded } from 'app-slice';
 import client from 'client';
-import { usersLoadingStarted, usersLoaded } from 'features/room';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import type { User } from 'models';
 
@@ -8,7 +7,7 @@ const useLoadUsers = (): () => Promise<void> => {
   const dispatch = useAppDispatch();
   const room = useAppSelector(selectRoom);
 
-  const loadUsers = async (): Promise<void> => {
+  return async (): Promise<void> => {
     dispatch(usersLoadingStarted());
 
     let users: User[] = [];
@@ -20,8 +19,6 @@ const useLoadUsers = (): () => Promise<void> => {
       dispatch(usersLoaded(users));
     }
   };
-
-  return loadUsers;
 };
 
 export default useLoadUsers;

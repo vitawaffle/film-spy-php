@@ -1,17 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
-import { selectRoom, selectUser } from 'app-slice';
+import { selectRoom, userJoined, userLeft, userKicked } from 'app-slice';
 import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
-import { userJoinedRoom, userLeftRoom, userKicked } from 'features/room';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import type { User } from 'models';
 
 const useListenRoomChannel = (): {
   listenRoomChannel: () => void,
   stopListeningRoomChannel: () => void,
 } => {
   const room = useAppSelector(selectRoom);
-  const currentUser = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
   const handleUserJoinedRoom = ({ user }: UserJoinedRoom): void => {
@@ -20,7 +17,7 @@ const useListenRoomChannel = (): {
     console.log(user);
     /* ***** */
 
-    dispatch(userJoinedRoom(user));
+    dispatch(userJoined(user));
   };
 
   const handleUserLeftRoom = ({ user }: UserLeftRoom): void => {
@@ -29,7 +26,7 @@ const useListenRoomChannel = (): {
     console.log(user);
     /* ***** */
 
-    dispatch(userLeftRoom(user));
+    dispatch(userLeft(user));
   };
 
   const handleUserKicked = ({ user }: UserKicked): void => {
@@ -38,7 +35,7 @@ const useListenRoomChannel = (): {
     console.log(user);
     /* ***** */
 
-    dispatch(userKicked({ kickedUser: user, currentUser: currentUser as User }));
+    dispatch(userKicked(user));
   };
 
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ import type { User } from 'models';
 const useCheckAuthentication = (): () => Promise<boolean> => {
   const dispatch = useAppDispatch();
 
-  const checkAuthentication = async (): Promise<boolean> => {
+  return async (): Promise<boolean> => {
     dispatch(startedAuthenticating());
 
     try {
@@ -20,17 +20,14 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
 
       return true;
     } catch (error: unknown) {
-      if (isUnauthenticatedError(error)) {
-        endedAuthenticating(undefined);
+      dispatch(endedAuthenticating(undefined));
 
+      if (isUnauthenticatedError(error))
         return false;
-      }
 
       throw error;
     }
   };
-
-  return checkAuthentication;
 };
 
 export default useCheckAuthentication;

@@ -8,11 +8,22 @@ export type AppState = {
   user?: User,
   isCheckingAuthentication: boolean,
   isLoggingOut: boolean,
+  rooms: Room[],
+  isRoomsLoading: boolean,
+  selectedRoom?: Room,
+  users: User[],
+  isUsersLoading: boolean,
+  isJoinRoomModalOpen: boolean,
 };
 
 const initialState: AppState = {
   isCheckingAuthentication: true,
   isLoggingOut: false,
+  rooms: [],
+  isRoomsLoading: true,
+  users: [],
+  isUsersLoading: true,
+  isJoinRoomModalOpen: false,
 };
 
 export const appSlice = createSlice({
@@ -31,7 +42,71 @@ export const appSlice = createSlice({
     },
     loggedOut: (state): void => {
       state.user = undefined;
+      state.users = [];
+      state.rooms = [];
+      state.selectedRoom = undefined;
       state.isLoggingOut = false;
+    },
+    roomJoined: (state, { payload }: PayloadAction<Room>): void => {
+      if (state.user)
+        state.user.room = payload;
+      state.isJoinRoomModalOpen = false;
+    },
+    roomLeft: (state): void => {
+      if (state.user)
+        state.user.room = undefined;
+    },
+    roomsLoadingStarted: (state): void => {
+      state.isRoomsLoading = true;
+    },
+    roomsLoaded: (state, { payload }: PayloadAction<Room[]>): void => {
+      state.rooms = payload;
+      state.isRoomsLoading = false;
+    },
+    roomCreated: (state, { payload }: PayloadAction<Room>): void => {
+      const index = state.rooms.findIndex(room => room.id === payload.id);
+
+      if (index === -1)
+        state.rooms.push(payload);
+      else
+        state.rooms[index] = payload;
+    },
+    roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
+      if (state.user && state.user.room && state.user.room.id === payload.id)
+        state.user.room = undefined;
+      state.rooms = state.rooms.filter(room => room.id !== payload.id);
+    },
+    roomSelected: (state, { payload }: PayloadAction<Room>): void => {
+      state.selectedRoom = payload;
+      state.isJoinRoomModalOpen = true;
+    },
+    roomUnselected: (state): void => {
+      state.isJoinRoomModalOpen = false;
+      state.selectedRoom = undefined;
+    },
+    usersLoadingStarted: (state): void => {
+      state.isUsersLoading = true;
+    },
+    usersLoaded: (state, { payload }: PayloadAction<User[]>): void => {
+      state.users = payload;
+      state.isUsersLoading = false;
+    },
+    userJoined: (state, { payload }: PayloadAction<User>): void => {
+      const index = state.users.findIndex(user => user.id === payload.id);
+
+      if (index === -1)
+        state.users.push(payload);
+      else
+        state.users[index] = payload;
+    },
+    userLeft: (state, { payload }: PayloadAction<User>): void => {
+      state.users = state.users.filter(user => user.id !== payload.id);
+    },
+    userKicked: (state, { payload }: PayloadAction<User>): void => {
+      if (state.user && state.user.room && state.user.id === payload.id)
+        state.user.room = undefined;
+
+      state.users = state.users.filter(user => user.id !== payload.id);
     },
   },
 });
@@ -43,6 +118,19 @@ export const {
   endedAuthenticating,
   startedLoggingOut,
   loggedOut,
+  roomJoined,
+  roomLeft,
+  roomsLoadingStarted,
+  roomsLoaded,
+  roomCreated,
+  roomDeleted,
+  roomSelected,
+  roomUnselected,
+  usersLoadingStarted,
+  usersLoaded,
+  userJoined,
+  userLeft,
+  userKicked,
 } = appSlice.actions;
 
 export const selectIsAuthenticated = ({ app }: RootState): boolean => !!app.user;
@@ -51,3 +139,9 @@ export const selectIsCheckingAuthentication = ({ app }: RootState): boolean => a
 export const selectIsLoggingOut = ({ app }: RootState): boolean => app.isLoggingOut;
 export const selectRoom = ({ app }: RootState): Room | undefined => app.user?.room;
 export const selectGame = ({ app }: RootState): Game | undefined => app.user?.game;
+export const selectRooms = ({ app }: RootState): Room[] => app.rooms;
+export const selectIsRoomsLoading = ({ app }: RootState): boolean => app.isRoomsLoading;
+export const selectSelectedRoom = ({ app }: RootState): Room | undefined => app.selectedRoom;
+export const selectIsJoinRoomModalOpen = ({ app }: RootState): boolean => app.isJoinRoomModalOpen;
+export const selectUsers = ({ app }: RootState): User[] => app.users;
+export const selectIsUsersLoading = ({ app }: RootState): boolean => app.isUsersLoading;

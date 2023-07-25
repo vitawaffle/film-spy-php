@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, CircularProgress, List } from '@mui/material';
 
 import UserListItem from './user-list-item';
-import { selectIsUsersLoading, selectUsers } from 'features/room';
+import { selectIsUsersLoading, selectUsers } from 'app-slice';
 import { useAppSelector } from 'hooks';
 
 const UserList = (): JSX.Element => {

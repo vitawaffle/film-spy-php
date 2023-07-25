@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
+import { selectUsers } from 'app-slice';
 import client from 'client';
-import { selectUsers } from 'features/room';
 import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';

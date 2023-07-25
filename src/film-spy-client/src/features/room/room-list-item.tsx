@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
 
-import { selectRoom } from 'app-slice';
-import { roomSelected } from 'features/room';
+import { selectRoom, roomSelected } from 'app-slice';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import type { Room } from 'models';
 import { strings } from 'localization';

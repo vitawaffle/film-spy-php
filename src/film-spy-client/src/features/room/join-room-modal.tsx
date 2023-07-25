@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {
-  selectIsJoinRoomModalOpen,
-  roomUnselected,
-  JoinRoomForm,
-} from 'features/room';
+import JoinRoomForm from './join-room-form';
+import { selectIsJoinRoomModalOpen, roomUnselected } from 'app-slice';
 import { Modal } from 'features/ui';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { strings } from 'localization';

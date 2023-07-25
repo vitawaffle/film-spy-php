@@ -12,7 +12,8 @@ import {
 import { Search as SearchIcon } from '@mui/icons-material';
 
 import RoomListItem from './room-list-item';
-import { selectRooms, selectIsRoomsLoading, useLoadRooms } from 'features/room';
+import useLoadRooms from './use-load-rooms';
+import { selectRooms, selectIsRoomsLoading } from 'app-slice';
 import { useAppSelector } from 'hooks';
 import type { Room } from 'models';
 import { strings } from 'localization';
@@ -22,9 +23,7 @@ const RoomList = (): JSX.Element => {
   const rooms = useAppSelector(selectRooms);
   const loadRooms = useLoadRooms();
 
-  useEffect(() => {
-    loadRooms();
-  }, []);
+  useEffect(() => void loadRooms(), []);
 
   const [searchName, setSearchName] = useState('');
 

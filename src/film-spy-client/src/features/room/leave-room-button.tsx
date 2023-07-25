@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, LinearProgress } from '@mui/material';
 
+import { roomLeft } from 'app-slice';
 import client from 'client';
-import { roomLeft } from 'features/room';
 import { Dialog } from 'features/ui';
 import { useAppDispatch } from 'hooks';
 import { strings } from 'localization';

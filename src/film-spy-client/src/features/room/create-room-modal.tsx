@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CreateRoomForm } from 'features/room';
+import CreateRoomForm from './create-room-form';
 import { Modal } from 'features/ui';
 import { strings } from 'localization';
 
