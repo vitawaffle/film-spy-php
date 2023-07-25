@@ -5,7 +5,6 @@ import { Card, CardContent, CircularProgress, Grid } from '@mui/material';
 import { selectGame } from 'app-slice';
 import { useLoadGame, selectIsGameLoading, PlayerCard } from 'features/game';
 import { useAppSelector } from 'hooks';
-import type { Game as GameModel } from 'models';
 
 const Game = (): JSX.Element => {
   const loadGame = useLoadGame();
@@ -18,7 +17,7 @@ const Game = (): JSX.Element => {
     console.log(game);
     /* ***** */
 
-    loadGame();
+    void loadGame();
   }, []);
 
   return isGameLoading ? (

@@ -7,7 +7,7 @@ import { isForbiddenError } from 'utils';
 const useLoadGame = (): () => Promise<void> => {
   const dispatch = useAppDispatch();
 
-  const loadGame = async (): Promise<void> => {
+  return async (): Promise<void> => {
     dispatch(gameStartedLoading());
 
     let game: Game | undefined;
@@ -23,8 +23,6 @@ const useLoadGame = (): () => Promise<void> => {
       dispatch(gameLoaded(game));
     }
   };
-
-  return loadGame;
 };
 
 export default useLoadGame;
