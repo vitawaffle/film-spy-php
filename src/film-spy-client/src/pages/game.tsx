@@ -23,7 +23,7 @@ const Game = (): JSX.Element => {
   return isGameLoading ? (
     <CircularProgress />
   ) : !game ? (
-    <>No Game</>
+    <>No Game</> // FIX ME
   ) : (
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
