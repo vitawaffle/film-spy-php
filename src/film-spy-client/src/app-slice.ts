@@ -14,6 +14,7 @@ export type AppState = {
   users: User[],
   isUsersLoading: boolean,
   isJoinRoomModalOpen: boolean,
+  isGameLoading: boolean,
 };
 
 const initialState: AppState = {
@@ -24,6 +25,7 @@ const initialState: AppState = {
   users: [],
   isUsersLoading: true,
   isJoinRoomModalOpen: false,
+  isGameLoading: true,
 };
 
 export const appSlice = createSlice({
@@ -108,6 +110,14 @@ export const appSlice = createSlice({
 
       state.users = state.users.filter(user => user.id !== payload.id);
     },
+    gameLoadingStarted: (state): void => {
+      state.isGameLoading = true;
+    },
+    gameLoaded: (state, { payload }: PayloadAction<Game | undefined>): void => {
+      if (state.user)
+        state.user.game = payload;
+      state.isGameLoading = false;
+    },
   },
 });
 
@@ -131,6 +141,8 @@ export const {
   userJoined,
   userLeft,
   userKicked,
+  gameLoadingStarted,
+  gameLoaded,
 } = appSlice.actions;
 
 export const selectIsAuthenticated = ({ app }: RootState): boolean => !!app.user;
@@ -145,3 +157,4 @@ export const selectSelectedRoom = ({ app }: RootState): Room | undefined => app.
 export const selectIsJoinRoomModalOpen = ({ app }: RootState): boolean => app.isJoinRoomModalOpen;
 export const selectUsers = ({ app }: RootState): User[] => app.users;
 export const selectIsUsersLoading = ({ app }: RootState): boolean => app.isUsersLoading;
+export const selectIsGameLoading = ({ app }: RootState): boolean => app.isGameLoading;

@@ -2,8 +2,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Card, CardContent, CircularProgress, Grid } from '@mui/material';
 
-import { selectGame } from 'app-slice';
-import { useLoadGame, selectIsGameLoading, PlayerCard } from 'features/game';
+import { selectGame, selectIsGameLoading } from 'app-slice';
+import { useLoadGame, PlayerCard } from 'features/game';
 import { useAppSelector } from 'hooks';
 
 const Game = (): JSX.Element => {

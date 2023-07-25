@@ -1,4 +1,4 @@
-import { gameStartedLoading, gameLoaded } from './game-slice';
+import { gameLoadingStarted, gameLoaded } from 'app-slice';
 import client from 'client';
 import { useAppDispatch } from 'hooks';
 import type { Game } from 'models';
@@ -8,7 +8,7 @@ const useLoadGame = (): () => Promise<void> => {
   const dispatch = useAppDispatch();
 
   return async (): Promise<void> => {
-    dispatch(gameStartedLoading());
+    dispatch(gameLoadingStarted());
 
     let game: Game | undefined;
 

@@ -1,13 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import app from 'app-slice';
-import { gameReducer as game } from 'features/game';
 
 const store = configureStore({
-  reducer: {
-    app,
-    game,
-  },
+  reducer: { app },
 });
 
 export default store;
