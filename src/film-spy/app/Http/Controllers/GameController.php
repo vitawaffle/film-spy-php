@@ -18,14 +18,14 @@ class GameController extends Controller
         $room->loadCount('users');
 
         if (self::MIN_PLAYERS > $room->users_count)
-            abort(400, 'You cannot start the game with less than 3 players');
+            abort(400, 'You cannot start the game with less than '.self::MIN_PLAYERS.' players');
 
         $users = User::where('room_id', $room->id)->get();
         $spyNumber = rand(0, $users->count() - 1);
 
         $game = Game::create([
             'room_id' => $room->id,
-            'spy_id' => $users->get($spyNumber),
+            'spy_id' => $users->get($spyNumber)->id,
         ]);
 
         User::where('room_id', $room->id)
@@ -39,8 +39,12 @@ class GameController extends Controller
         if (!Gate::allows('has-game'))
             abort(403);
 
-        $game = Auth::user()->game;
+        $user = Auth::user();
+
+        $game = $user->game;
         $game->load('users');
+
+        $game->is_spy = $game->spy_id === $user->id;
 
         return $game;
     }

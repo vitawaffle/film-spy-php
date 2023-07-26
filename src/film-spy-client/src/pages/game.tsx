@@ -12,25 +12,18 @@ const Game = (): JSX.Element => {
   const isGameLoading = useAppSelector(selectIsGameLoading);
 
   useEffect(() => {
-    /* Debud */
-    console.log(isGameLoading);
-    console.log(game);
-    /* ***** */
-
     void loadGame();
   }, []);
 
-  return isGameLoading ? (
+  return (isGameLoading || !game) ? (
     <CircularProgress />
-  ) : !game ? (
-    <>No Game</> // FIX ME
   ) : (
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <Card>
           <CardContent>
             <Grid container spacing={1}>
-              {game.users.map((user, i) => <PlayerCard key={i} user={user} />)}
+              {game?.users?.map((user, i) => <PlayerCard key={i} user={user} />)}
             </Grid>
           </CardContent>
         </Card>

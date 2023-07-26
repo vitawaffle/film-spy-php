@@ -43,7 +43,7 @@ class RoomController extends Controller
     public function join(JoinRoomRequest $request): void
     {
         $room = Room::find($request->validated()['room_id']);
-        $user = User::find(Auth::id());
+        $user = Auth::user();
 
         if (null !== $user->room_id)
             UserLeftRoom::dispatch($user);
@@ -71,7 +71,7 @@ class RoomController extends Controller
 
     public function leave(): void
     {
-        $user = User::find(Auth::id());
+        $user = Auth::user();
 
         if (null === $user->room_id)
             return;

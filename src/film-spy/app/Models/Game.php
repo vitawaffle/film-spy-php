@@ -15,6 +15,15 @@ class Game extends Model
         'spy_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'spy_id',
+    ];
+
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
