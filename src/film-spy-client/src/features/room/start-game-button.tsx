@@ -8,6 +8,8 @@ import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
+export const MIN_PLAYERS = 1;
+
 const StartGameButton = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +37,7 @@ const StartGameButton = (): JSX.Element => {
 
   const users = useAppSelector(selectUsers);
 
-  const isDisabled = (users?.length ?? 0) < 3;
+  const isDisabled = (users?.length ?? 0) < MIN_PLAYERS;
 
   return (
     <>
