@@ -20,6 +20,8 @@ services:
             args:
                 GIT_USER_NAME: $DOCKER_COMPOSE_GIT_USER_NAME
                 GIT_USER_EMAIL: $DOCKER_COMPOSE_GIT_USER_EMAIL
+                HOST_GID: ${DOCKER_COMPOSE_HOST_GID-1000}
+                HOST_UID: ${DOCKER_COMPOSE_HOST_UID-1000}
         container_name: film-spy_php
         networks:
             - film-spy
