@@ -33,39 +33,42 @@ const RoomList = (): JSX.Element => {
 
   const filterBySearchName = (room: Room): RegExpMatchArray | null => room.name.match(searchName);
 
+  const filteredRooms = rooms.filter(filterBySearchName);
+
+  const isEmpty = filteredRooms.length === 0;
+
   return (
-    isRoomsLoading ? (
-      <Box sx={{ dispay: 'flex' }}>
+    <Stack spacing={2}>
+      <TextField
+        id="searchName"
+        label={strings.features.rooms.roomList.searchName}
+        value={searchName}
+        onChange={handleSearchNameChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        disabled={isRoomsLoading}
+      />
+      {isRoomsLoading ? (
         <CircularProgress />
-      </Box>
-    ) : (
-      rooms.length === 0 ? (
-        <Typography>
-          {strings.features.rooms.roomList.noContent}
-        </Typography>
       ) : (
-        <Stack>
-          <TextField
-            id="searchName"
-            label={strings.features.rooms.roomList.searchName}
-            value={searchName}
-            onChange={handleSearchNameChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+        isEmpty ? (
+          <Typography>
+            {strings.features.rooms.roomList.noContent}
+          </Typography>
+        ) : (
           <List>
             {rooms.filter(filterBySearchName).map((room, i) => (
               <RoomListItem key={i} room={room} />
             ))}
           </List>
-        </Stack>
-      )
-    )
+        )
+      )}
+    </Stack>
   );
 };
 
