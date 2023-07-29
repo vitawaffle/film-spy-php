@@ -105,7 +105,7 @@ const LoginForm = (): JSX.Element => {
         <FormGroup>
           <FormControlLabel
             label={strings.common.rememberMe}
-            control={<Checkbox {...register('isRemember')} />}
+            control={<Checkbox {...register('isRemember')} disabled={isLoading} />}
           />
         </FormGroup>
         <Button type="submit" variant="contained" disabled={isLoading}>

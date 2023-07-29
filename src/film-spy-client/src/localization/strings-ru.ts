@@ -4,7 +4,7 @@ const stringsRu: LocaleTemplate = {
   common: {
     logIn: 'Войти',
     logOut: 'Выйти',
-    signIn: 'Зарегистрироваться',
+    signUp: 'Зарегистрироваться',
     home: 'Домой',
     email: 'Электронная почта',
     password: 'Пароль',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { AuthenticatedGuard, HasGameGuard, HasRoomGuard } from 'components/routing';
-import { Home, Error, Login, Signin, Room, Game } from 'pages';
+import { Home, Error, Login, Signup, Room, Game } from 'pages';
 import { NotFoundError, UnauthorizedError } from 'pages/errors';
 
 const Router = (): JSX.Element => (
@@ -25,7 +25,7 @@ const Router = (): JSX.Element => (
         </HasGameGuard>
       </AuthenticatedGuard>
     )} />
-    <Route path="signin" element={<Signin />} />
+    <Route path="signin" element={<Signup />} />
     <Route path="login" element={<Login />} />
     <Route path="home" element={<Home />} />
     <Route path="/" element={<Navigate to="/home" />} />

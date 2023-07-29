@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Stack, Typography, Button } from '@mui/material';
-import {
-  Create as CreateIcon,
-  Refresh as RefreshIcon,
-} from '@mui/icons-material';
+import { Create as CreateIcon, Refresh as RefreshIcon } from '@mui/icons-material';
 
+import { selectIsAuthenticated, selectIsRoomsLoading } from 'app-slice';
 import { useAppSelector } from 'hooks';
-import { selectIsAuthenticated } from 'app-slice';
 import {
   RoomList,
   CreateRoomModal,
@@ -17,6 +14,7 @@ import { strings } from 'localization';
 
 const Home = (): JSX.Element => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isRoomsLoading = useAppSelector(selectIsRoomsLoading);
   const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
   const loadRooms = useLoadRooms();
 
@@ -57,6 +55,7 @@ const Home = (): JSX.Element => {
                   onClick={handleRefreshClick}
                   variant="outlined"
                   startIcon={<RefreshIcon />}
+                  disabled={isRoomsLoading}
                 >
                   {strings.common.refresh}
                 </Button>

@@ -4,7 +4,7 @@ const stringsEn: LocaleTemplate = {
   common: {
     logIn: 'Log in',
     logOut: 'Log out',
-    signIn: 'Sign in',
+    signUp: 'Sign up',
     home: 'Home',
     email: 'Email',
     password: 'Password',

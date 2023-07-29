@@ -88,7 +88,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
           ) : (
             <>
               <Button component={Link} to="/signin" color="inherit">
-                {strings.common.signIn}
+                {strings.common.signUp}
               </Button>
               <Button component={Link} to="/login" color="inherit">
                 {strings.common.logIn}

@@ -14,7 +14,7 @@ export type LocaleTemplate = {
   common: {
     logIn: string,
     logOut: string,
-    signIn: string,
+    signUp: string,
     home: string,
     email: string,
     password: string,

@@ -11,7 +11,7 @@ import yup from 'schema';
 import { isUnprocessableContentError } from 'utils';
 import { strings } from 'localization';
 
-const SigninForm = (): JSX.Element => {
+const SignupForm = (): JSX.Element => {
   const signinSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().required().email(),
@@ -148,11 +148,11 @@ const SigninForm = (): JSX.Element => {
           helperText={passwordConfirmationHelperText()}
         />
         <Button type="submit" variant="contained" disabled={isLoading}>
-          {strings.common.signIn}
+          {strings.common.signUp}
         </Button>
       </Stack>
     </form>
   );
 };
 
-export default SigninForm;
+export default SignupForm;
