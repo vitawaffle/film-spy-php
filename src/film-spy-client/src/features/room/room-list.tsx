@@ -32,9 +32,7 @@ const RoomList = (): JSX.Element => {
   };
 
   const filterBySearchName = (room: Room): RegExpMatchArray | null => room.name.match(searchName);
-
   const filteredRooms = rooms.filter(filterBySearchName);
-
   const isEmpty = filteredRooms.length === 0;
 
   return (
