@@ -9,6 +9,8 @@ type DialogProps = ModalProps & {
   onOk?: () => Promise<void> | void,
   onCancel?: () => Promise<void> | void,
   isOkDisabled?: boolean,
+  isCancelDisabled?: boolean,
+  isControlDisabled?: boolean,
 };
 
 const Dialog = ({
@@ -20,6 +22,8 @@ const Dialog = ({
   onCancel,
   onClose,
   isOkDisabled,
+  isCancelDisabled,
+  isControlDisabled,
 }: DialogProps): JSX.Element => {
   const handleOkClick = async (): Promise<void> => {
     if (onOk)
@@ -47,12 +51,16 @@ const Dialog = ({
           <Button
             variant="contained"
             color="error"
-            disabled={isOkDisabled}
+            disabled={isOkDisabled || isControlDisabled}
             onClick={handleOkClick}
           >
             {strings.common.ok}
           </Button>
-          <Button variant="outlined" onClick={handleCancelClick}>
+          <Button
+            variant="outlined"
+            onClick={handleCancelClick}
+            disabled={isCancelDisabled || isControlDisabled}
+          >
             {strings.common.cancel}
           </Button>
         </Stack>

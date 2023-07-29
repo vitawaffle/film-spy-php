@@ -47,7 +47,7 @@ const KickPlayerButton = ({ user }: KickPlayerButtonProps): JSX.Element => {
         onOk={handleOk}
         onCancel={closeConfirmDialog}
         onClose={closeConfirmDialog}
-        isOkDisabled={isKicking}
+        isControlDisabled={isKicking}
       >
         {isKicking && (
           <Box sx={{ width: '100%' }}>

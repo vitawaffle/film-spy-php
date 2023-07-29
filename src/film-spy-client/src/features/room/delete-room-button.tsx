@@ -46,7 +46,7 @@ const DeleteRoomButton = (): JSX.Element => {
         onOk={handleOk}
         onCancel={closeDialog}
         onClose={closeDialog}
-        isOkDisabled={isLoading}
+        isControlDisabled={isLoading}
       >
         {isLoading && (
           <Box sx={{ width: '100%' }}>
