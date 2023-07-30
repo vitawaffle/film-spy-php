@@ -35,8 +35,7 @@ class GameController extends Controller
             'spy_id' => $users->get($spyNumber)->id,
         ]);
 
-        User::where('room_id', $room->id)
-            ->update(['game_id' => $game->id]);
+        User::where('room_id', $room->id)->update(['game_id' => $game->id]);
 
         GameStarted::dispatch($room->id);
     }
