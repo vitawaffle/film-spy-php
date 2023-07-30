@@ -64,6 +64,8 @@ services:
         command:
             - npm
             - start
+        environment:
+            WATCHPACK_POLLING: true
 networks:
     film-spy:
 volumes:
