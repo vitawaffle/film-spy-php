@@ -25,8 +25,8 @@ Route::middleware('auth:sanctum')
     ->prefix('/rooms')
     ->controller(RoomController::class)
     ->group(function () {
-        Route::get('/', 'getAll');
-        Route::get('/{room}/users', 'getUsers');
+        Route::get('/', 'get');
+        Route::get('/{room}/users', 'users');
         Route::post('/{room}/kick', 'kick');
         Route::post('/create', 'create');
         Route::post('/join', 'join');

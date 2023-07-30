@@ -32,10 +32,7 @@ class AuthServiceProvider extends ServiceProvider
             fn (User $user, Room $room) => $user->id === $room->user_id,
         );
 
-        Gate::define(
-            'in-own-room',
-            fn (User $user) => null !== $user->room_id && $user->room->user_id === $user->id,
-        );
+        Gate::define('has-room', fn(User $user) => null !== $user->room_id);
 
         Gate::define('has-game', fn (User $user) => null !== $user->game_id);
     }

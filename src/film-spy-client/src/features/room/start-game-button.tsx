@@ -36,7 +36,6 @@ const StartGameButton = (): JSX.Element => {
   };
 
   const users = useAppSelector(selectUsers);
-
   const isDisabled = (users?.length ?? 0) < MIN_PLAYERS;
 
   return (

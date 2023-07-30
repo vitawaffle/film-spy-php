@@ -9,14 +9,21 @@ use Illuminate\Support\Facades\{Auth, Gate};
 class GameController extends Controller
 {
     private const MIN_PLAYERS = 1;
+
     public function start(): void
     {
-        if (!Gate::allows('in-own-room'))
-            abort(403);
+        if (!Gate::allows('has-room'))
+            abort(403, 'You must be in the room to start the game');
 
         $room = Auth::user()->room;
-        $room->loadCount('users');
+        if (!Gate::allows('room-owner', $room))
+            abort(403);
 
+        $room->loadCount('games');
+        if (0 !== $room->games_count)
+            abort(400, 'There can only be one active game in the room');
+
+        $room->loadCount('users');
         if (self::MIN_PLAYERS > $room->users_count)
             abort(400, 'You cannot start the game with less than '.self::MIN_PLAYERS.' players');
 
