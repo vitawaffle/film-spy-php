@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
-import { selectRoom } from 'app-slice';
+import { selectRoom, selectIsGameStarted } from 'app-slice';
 import client from 'client';
 import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
@@ -37,6 +37,8 @@ const DeleteRoomButton = (): JSX.Element => {
     setIsModalOpen(false);
   };
 
+  const isGameStarted = useAppSelector(selectIsGameStarted);
+
   return (
     <>
       <Dialog
@@ -58,6 +60,7 @@ const DeleteRoomButton = (): JSX.Element => {
         variant="outlined"
         color="error"
         onClick={handleClick}
+        disabled={isGameStarted}
       >
         {strings.common.deleteRoom}
       </Button>

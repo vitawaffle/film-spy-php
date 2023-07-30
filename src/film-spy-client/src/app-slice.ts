@@ -158,3 +158,5 @@ export const selectIsJoinRoomModalOpen = ({ app }: RootState): boolean => app.is
 export const selectUsers = ({ app }: RootState): User[] => app.users;
 export const selectIsUsersLoading = ({ app }: RootState): boolean => app.isUsersLoading;
 export const selectIsGameLoading = ({ app }: RootState): boolean => app.isGameLoading;
+export const selectIsGameStarted = (state: RootState): boolean => !!selectGame(state);
+export const selectPlayers = (state: RootState): User[] => selectGame(state)?.users ?? [];

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
-import { selectUsers } from 'app-slice';
+import { selectUsers, selectIsGameStarted } from 'app-slice';
 import client from 'client';
 import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
@@ -36,7 +36,8 @@ const StartGameButton = (): JSX.Element => {
   };
 
   const users = useAppSelector(selectUsers);
-  const isDisabled = (users?.length ?? 0) < MIN_PLAYERS;
+  const isGameStarted = useAppSelector(selectIsGameStarted);
+  const isDisabled = (users?.length ?? 0) < MIN_PLAYERS || isGameStarted;
 
   return (
     <>

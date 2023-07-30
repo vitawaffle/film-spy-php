@@ -80,6 +80,9 @@ export type LocaleTemplate = {
       startGameButton: {
         startGame: string,
       },
+      userList: {
+        inGame: string,
+      },
     },
     ui: {
       appBar: {

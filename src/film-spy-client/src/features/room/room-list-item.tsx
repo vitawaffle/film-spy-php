@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
 
-import { selectRoom, roomSelected } from 'app-slice';
+import { selectRoom, selectIsGameStarted, roomSelected } from 'app-slice';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import type { Room } from 'models';
 import { strings } from 'localization';
@@ -14,13 +14,13 @@ export type RoomListItemProps = {
 const RoomListItem = ({ room }: RoomListItemProps): JSX.Element => {
   const currentRoom = useAppSelector(selectRoom);
 
-  const isCurrentRoom = (room: Room): boolean => !!currentRoom && (currentRoom.id === room.id);
+  const isCurrentRoom = !!currentRoom && (currentRoom.id === room.id);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleJoinRoomClick = (): void => {
-    if (isCurrentRoom(room)) {
+    if (isCurrentRoom) {
       navigate('/room');
       return;
     }
@@ -28,9 +28,16 @@ const RoomListItem = ({ room }: RoomListItemProps): JSX.Element => {
     dispatch(roomSelected(room));
   };
 
+  const isGameStarted = useAppSelector(selectIsGameStarted);
+  const isDisabled = isGameStarted && !isCurrentRoom;
+
   return (
     <ListItem alignItems="flex-start" disablePadding>
-      <ListItemButton onClick={handleJoinRoomClick} selected={isCurrentRoom(room)}>
+      <ListItemButton
+        onClick={handleJoinRoomClick}
+        selected={isCurrentRoom}
+        disabled={isDisabled}
+      >
         <ListItemText
           primary={room.name}
           secondary={(

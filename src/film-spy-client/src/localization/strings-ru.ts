@@ -70,6 +70,9 @@ const stringsRu: LocaleTemplate = {
       startGameButton: {
         startGame: 'Начать игру',
       },
+      userList: {
+        inGame: 'В игре',
+      },
     },
     ui: {
       appBar: {

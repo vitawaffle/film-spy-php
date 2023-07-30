@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, LinearProgress } from '@mui/material';
 
-import { roomLeft } from 'app-slice';
+import { selectIsGameStarted, roomLeft } from 'app-slice';
 import client from 'client';
 import { Dialog } from 'features/ui';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
 const LeaveRoomButton = (): JSX.Element => {
@@ -35,6 +35,8 @@ const LeaveRoomButton = (): JSX.Element => {
     setIsModalOpen(false);
   };
 
+  const isGameStarted = useAppSelector(selectIsGameStarted);
+
   return (
     <>
       <Dialog
@@ -52,7 +54,11 @@ const LeaveRoomButton = (): JSX.Element => {
           </Box>
         )}
       </Dialog>
-      <Button variant="outlined" onClick={handleClick}>
+      <Button
+        variant="outlined"
+        onClick={handleClick}
+        disabled={isGameStarted}
+      >
         {strings.common.leave}
       </Button>
     </>
