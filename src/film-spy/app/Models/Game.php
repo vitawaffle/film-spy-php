@@ -34,8 +34,18 @@ class Game extends Model
         return $this->belongsTo(User::class, 'spy_id');
     }
 
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

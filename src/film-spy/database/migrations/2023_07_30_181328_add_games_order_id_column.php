@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Room;
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,12 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->foreignIdFor(Room::class)->constrained();
-            $table->unsignedBigInteger('spy_id');
-            $table->foreign('spy_id')->references('id')->on('users');
+        Schema::table('games', function (Blueprint $table) {
+            $table->foreignIdFor(Order::class)->nullable()->constrained();
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::table('games', function (Blueprint $table) {
+            $table->dropForeignIdFor(Order::class);
+        });
     }
 };
