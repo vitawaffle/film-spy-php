@@ -9,8 +9,10 @@ const UnauthenticatedGuard = ({ children }: ChildrenProps): JSX.Element => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
 
-  return (
-    <Protected isEnabled={isCheckingAuthentication || !isAuthenticated} navigateOnForbidden="/home">
+  return isCheckingAuthentication ? (
+    <></>
+  ) : (
+    <Protected isEnabled={!isAuthenticated} navigateOnForbidden="/home">
       {children}
     </Protected>
   );
