@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\GameStarted;
-use App\Models\{Game, User};
+use App\Models\{Game, Order, User};
 use Illuminate\Support\Facades\{Auth, Gate};
 
 class GameController extends Controller
@@ -28,14 +28,23 @@ class GameController extends Controller
             abort(400, 'You cannot start the game with less than '.self::MIN_PLAYERS.' players');
 
         $users = User::where('room_id', $room->id)->get();
-        $spyNumber = rand(0, $users->count() - 1);
 
+        $spyNumber = rand(0, $users->count() - 1);
         $game = Game::create([
             'room_id' => $room->id,
             'spy_id' => $users->get($spyNumber)->id,
         ]);
 
         User::where('room_id', $room->id)->update(['game_id' => $game->id]);
+
+        $users = $users->shuffle();
+        foreach ($users as $key => $user) {
+            Order::create([
+                'game_id' => $game->id,
+                'user_id' => $user->id,
+                'order' => $key,
+            ]);
+        }
 
         GameStarted::dispatch($room->id);
     }
@@ -49,6 +58,7 @@ class GameController extends Controller
 
         $game = $user->game;
         $game->load('users');
+        $game->load('orders');
 
         $game->is_spy = $game->spy_id === $user->id;
 
