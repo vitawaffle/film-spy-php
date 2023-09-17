@@ -1,10 +1,11 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Grid, Card, CardContent, Stack, Typography } from '@mui/material';
 
 import { SignupForm } from 'features/signup';
 import { strings } from 'localization';
 
-const Signup = (): JSX.Element => (
+const Signup = (): ReactElement => (
   <Grid container spacing={2}>
     <Grid item md={2} lg={4} />
     <Grid item xs={12} md={8} lg={4}>

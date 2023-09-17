@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { Card, CardContent, Stack, Typography, Button } from '@mui/material';
 import { Create as CreateIcon, Refresh as RefreshIcon } from '@mui/icons-material';
 
 import { selectIsAuthenticated, selectIsRoomsLoading } from 'app-slice';
 import { useAppSelector } from 'hooks';
-import {
-  RoomList,
-  CreateRoomModal,
-  JoinRoomModal,
-  useLoadRooms,
-} from 'features/room';
+import { CreateRoomModal, JoinRoomModal, useLoadRooms, RoomList } from 'features/room';
 import { strings } from 'localization';
 
-const Home = (): JSX.Element => {
+const Home = (): ReactElement => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isRoomsLoading = useAppSelector(selectIsRoomsLoading);
   const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
   const loadRooms = useLoadRooms();
 
-  const handleCreateRoomClick = (): void => setIsCreateRoomModalOpen(true);
+  const handleCreateRoomClick = (): void => {
+    setIsCreateRoomModalOpen(true);
+  };
 
   const handleRefreshClick = async (): Promise<void> => {
     await loadRooms();

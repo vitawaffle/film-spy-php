@@ -1,17 +1,18 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
 
 import { selectRoom, selectIsGameStarted, roomSelected } from 'app-slice';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import type { Room } from 'models';
 import { strings } from 'localization';
+import type { Room } from 'models';
 
 export type RoomListItemProps = {
   room: Room,
 };
 
-const RoomListItem = ({ room }: RoomListItemProps): JSX.Element => {
+const RoomListItem = ({ room }: RoomListItemProps): ReactElement => {
   const currentRoom = useAppSelector(selectRoom);
 
   const isCurrentRoom = !!currentRoom && (currentRoom.id === room.id);

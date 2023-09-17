@@ -1,12 +1,7 @@
 import React from 'react';
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material';
+import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 type DrawerLinkProps = {
   isDrawerOpen: boolean,
@@ -15,7 +10,7 @@ type DrawerLinkProps = {
   icon: ReactNode,
 };
 
-const DrawerLink = ({ isDrawerOpen, to, text, icon }: DrawerLinkProps): JSX.Element => {
+const DrawerLink = ({ isDrawerOpen, to, text, icon }: DrawerLinkProps): ReactElement => {
   const navigate = useNavigate();
 
   const handleClick = (): void => {

@@ -1,11 +1,12 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Stack } from '@mui/material';
 
 import { ErrorLayout } from 'features/ui';
 import { strings } from 'localization';
 
-const UnauthorizedError = (): JSX.Element => (
+const UnauthorizedError = (): ReactElement => (
   <ErrorLayout
     code={401}
     name="Unauthozied"

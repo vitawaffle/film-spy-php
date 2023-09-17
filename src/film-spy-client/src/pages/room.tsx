@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react';
-import {
-  Grid,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from '@mui/material';
+import type { ReactElement } from 'react';
+import { Grid, Card, CardContent, Stack, Typography } from '@mui/material';
 
 import { selectRoom, selectUser } from 'app-slice';
 import {
@@ -19,7 +14,7 @@ import {
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
-const Room = (): JSX.Element => {
+const Room = (): ReactElement => {
   const user = useAppSelector(selectUser);
   const room = useAppSelector(selectRoom);
   const loadUsers = useLoadUsers();

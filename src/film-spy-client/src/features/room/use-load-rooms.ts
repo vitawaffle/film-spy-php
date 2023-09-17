@@ -14,10 +14,6 @@ const useLoadRooms = (): () => Promise<void> => {
     try {
       rooms = (await client.get<Room[]>('/api/rooms')).data;
     } finally {
-      /* Debug */
-      console.log(rooms);
-      /* ***** */
-
       dispatch(roomsLoaded(rooms));
     }
   };

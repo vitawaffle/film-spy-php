@@ -1,11 +1,8 @@
-import {
-  startedAuthenticating,
-  endedAuthenticating,
-} from 'app-slice';
+import { startedAuthenticating, endedAuthenticating } from 'app-slice';
 import client from 'client';
 import { useAppDispatch } from 'hooks';
-import { isUnauthenticatedError } from 'utils';
 import type { User } from 'models';
+import { isUnauthenticatedError } from 'utils';
 
 const useCheckAuthentication = (): () => Promise<boolean> => {
   const dispatch = useAppDispatch();

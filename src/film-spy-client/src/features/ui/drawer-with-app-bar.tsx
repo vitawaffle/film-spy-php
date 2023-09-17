@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -23,23 +24,29 @@ import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
 import DrawerLink from './drawer-link';
-import { selectGame, selectRoom } from 'app-slice';
-import { useAppSelector, useLogout } from 'hooks';
 import {
+  selectGame,
   selectIsAuthenticated,
   selectIsCheckingAuthentication,
   selectIsLoggingOut,
+  selectRoom,
 } from 'app-slice';
-import type { ChildrenProps } from 'props';
+import { useAppSelector, useLogout } from 'hooks';
 import { strings } from 'localization';
+import type { ChildrenProps } from 'props';
 
-const DrawerWithAppBar = ({ children }: ChildrenProps): JSX.Element => {
+const DrawerWithAppBar = ({ children }: ChildrenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const logout = useLogout();
   const navigate = useNavigate();
 
-  const handleDrawerOpen = (): void => setIsOpen(true);
-  const handleDrawerClose = (): void => setIsOpen(false);
+  const handleDrawerOpen = (): void => {
+    setIsOpen(true);
+  };
+
+  const handleDrawerClose = (): void => {
+    setIsOpen(false);
+  };
 
   const handleLogoutClick = async (): Promise<void> => {
     await logout();

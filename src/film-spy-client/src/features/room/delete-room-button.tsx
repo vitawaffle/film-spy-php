@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
@@ -8,7 +9,7 @@ import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
-const DeleteRoomButton = (): JSX.Element => {
+const DeleteRoomButton = (): ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 

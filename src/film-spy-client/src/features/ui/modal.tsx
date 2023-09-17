@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import {
   Modal as MuiModal,
   Backdrop,
@@ -28,7 +29,7 @@ const style = {
   p: 4,
 };
 
-const Modal = ({ children, isOpen, onClose, id, title }: ModalProps): JSX.Element => {
+const Modal = ({ children, isOpen, onClose, id, title }: ModalProps): ReactElement => {
   const handleClose = (): void => {
     if (onClose)
       onClose();

@@ -1,11 +1,12 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Box, CircularProgress, List } from '@mui/material';
 
 import UserListItem from './user-list-item';
 import { selectIsUsersLoading, selectUsers } from 'app-slice';
 import { useAppSelector } from 'hooks';
 
-const UserList = (): JSX.Element => {
+const UserList = (): ReactElement => {
   const isUsersLoading = useAppSelector(selectIsUsersLoading);
   const users = useAppSelector(selectUsers);
 

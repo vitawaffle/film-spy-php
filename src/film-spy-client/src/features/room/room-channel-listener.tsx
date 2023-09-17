@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import type { ReactElement } from 'react';
 
 import useListenRoomChannel from './use-listen-room-channel';
 
-const RoomChannelListener = (): JSX.Element => {
+const RoomChannelListener = (): ReactElement => {
   const { listenRoomChannel, stopListeningRoomChannel } = useListenRoomChannel();
 
   useEffect(() => {

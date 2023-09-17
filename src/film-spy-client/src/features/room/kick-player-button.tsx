@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { Box, IconButton, LinearProgress } from '@mui/material';
 import BlockIcon from '@mui/icons-material/Block';
 
@@ -6,14 +7,14 @@ import { selectRoom } from 'app-slice';
 import client from 'client';
 import { Dialog } from 'features/ui';
 import { useAppSelector } from 'hooks';
-import type { User } from 'models';
 import { strings } from 'localization';
+import type { User } from 'models';
 
 export type KickPlayerButtonProps = {
   user: User,
 };
 
-const KickPlayerButton = ({ user }: KickPlayerButtonProps): JSX.Element => {
+const KickPlayerButton = ({ user }: KickPlayerButtonProps): ReactElement => {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [isKicking, setIsKicking] = useState(false);
   const room = useAppSelector(selectRoom);

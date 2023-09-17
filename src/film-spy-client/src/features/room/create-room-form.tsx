@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import type { ReactElement } from 'react';
 import type { FieldValues } from 'react-hook-form';
-import { Stack, TextField, Button, LinearProgress } from '@mui/material';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 
 import client from 'client';
+import { strings } from 'localization';
 import yup from 'schema';
 import { isUnprocessableContentError } from 'utils';
-import { strings } from 'localization';
 
 type CreateRoomFormProps = {
   onSuccess?: () => void,
 };
 
-const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): JSX.Element => {
+const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): ReactElement => {
   const createRoomSchema = yup.object({
     name: yup.string().required().max(32),
     password: yup.string(),
@@ -50,7 +51,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): JSX.Element => {
     }
   };
 
-  const nameHelperText = (): string | undefined => {
+  const nameHelperText = ((): string | undefined => {
     if (errors?.name?.type === 'required')
       return strings.validation.required;
 
@@ -58,7 +59,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): JSX.Element => {
       return strings.validation.notUniqueName;
 
     return undefined;
-  };
+  })();
 
   return (
     <form onSubmit={handleSubmit(createRoom)}>
@@ -72,7 +73,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): JSX.Element => {
           disabled={isLoading}
           autoFocus
           error={!!errors.name || isNameNotUnique}
-          helperText={nameHelperText()}
+          helperText={nameHelperText}
         />
         <TextField
           {...register('password')}

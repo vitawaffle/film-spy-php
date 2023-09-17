@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Stack, Typography } from '@mui/material';
 
 import type { ChildrenProps } from 'props';
@@ -9,7 +10,7 @@ type ErrorLayoutProps = ChildrenProps & {
   description: string,
 };
 
-const ErrorLayout = ({ children, code, name, description }: ErrorLayoutProps): JSX.Element => (
+const ErrorLayout = ({ children, code, name, description }: ErrorLayoutProps): ReactElement => (
   <Stack spacing={2}>
     <Typography variant="h2" component="h2" align="center">
       {code}

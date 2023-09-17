@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, LinearProgress } from '@mui/material';
 
@@ -8,7 +9,7 @@ import { Dialog } from 'features/ui';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
-const LeaveRoomButton = (): JSX.Element => {
+const LeaveRoomButton = (): ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 

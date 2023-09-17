@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { Card, CardContent, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 
@@ -7,7 +8,7 @@ import { useLoadGame, PlayerCard } from 'features/game';
 import { useAppSelector } from 'hooks';
 import { strings } from 'localization';
 
-const Game = (): JSX.Element => {
+const Game = (): ReactElement => {
   const loadGame = useLoadGame();
   const game = useAppSelector(selectGame);
   const isGameLoading = useAppSelector(selectIsGameLoading);

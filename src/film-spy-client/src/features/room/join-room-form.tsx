@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import type { FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 
 import { selectSelectedRoom, roomJoined } from 'app-slice';
 import client from 'client';
 import { useAppSelector, useAppDispatch } from 'hooks';
+import { strings } from 'localization';
 import type { Room } from 'models';
 import yup from 'schema';
 import { isUnprocessableContentError } from 'utils';
-import { strings } from 'localization';
 
-const JoinRoomForm = (): JSX.Element => {
+const JoinRoomForm = (): ReactElement => {
   const joinRoomSchema = yup.object({
     password: yup.string(),
   });
@@ -53,13 +54,12 @@ const JoinRoomForm = (): JSX.Element => {
     }
   };
 
-  const passwordHelperText = (): string => {
-    return isInvalidPassword
-      ? strings.validation.invalidPassword
-      : strings.features.rooms.joinRoomForm.keepEmpty;
-  };
+  const passwordHelperText = isInvalidPassword ? strings.validation.invalidPassword
+    : strings.features.rooms.joinRoomForm.keepEmpty;
 
-  const onChange = (): void => setIsInvalidPassword(false);
+  const onChange = (): void => {
+    setIsInvalidPassword(false);
+  };
 
   return (
     <form onSubmit={handleSubmit(joinRoom)}>
@@ -73,7 +73,7 @@ const JoinRoomForm = (): JSX.Element => {
           disabled={isLoading}
           autoFocus
           error={isInvalidPassword}
-          helperText={passwordHelperText()}
+          helperText={passwordHelperText}
         />
         <Button type="submit" variant="contained" disabled={isLoading}>
           {strings.common.join}

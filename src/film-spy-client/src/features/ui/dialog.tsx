@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Stack, Button } from '@mui/material';
 
 import { Modal } from 'features/ui';
@@ -24,7 +25,7 @@ const Dialog = ({
   isOkDisabled,
   isCancelDisabled,
   isControlDisabled,
-}: DialogProps): JSX.Element => {
+}: DialogProps): ReactElement => {
   const handleOkClick = async (): Promise<void> => {
     if (onOk)
       await onOk();

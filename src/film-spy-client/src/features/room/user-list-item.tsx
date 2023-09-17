@@ -1,24 +1,25 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Chip, ListItem, ListItemText } from '@mui/material';
 
 import KickPlayerButton from './kick-player-button';
 import { selectRoom, selectUser, selectIsGameStarted, selectPlayers } from 'app-slice';
 import { useAppSelector } from 'hooks';
-import type { User } from 'models';
 import { strings } from 'localization';
+import type { User } from 'models';
 
 export type UserListItemProps = {
   user: User,
 };
 
-const UserListItem = ({ user }: UserListItemProps): JSX.Element => {
+const UserListItem = ({ user }: UserListItemProps): ReactElement => {
   const currentUser = useAppSelector(selectUser);
   const room = useAppSelector(selectRoom);
 
   const isOwner = currentUser && room && room.user.id === currentUser.id;
   const isGameStarted = useAppSelector(selectIsGameStarted);
 
-  const secondaryAction: JSX.Element | undefined = isOwner && !isGameStarted
+  const secondaryAction: ReactElement | undefined = isOwner && !isGameStarted
     ? <KickPlayerButton user={user} />
     : undefined;
 

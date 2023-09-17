@@ -12,39 +12,20 @@ const useListenRoomChannel = (): {
   const dispatch = useAppDispatch();
 
   const handleUserJoinedRoom = ({ user }: UserJoinedRoom): void => {
-    /* Debug */
-    console.log('UserJoinedRoom:');
-    console.log(user);
-    /* ***** */
-
     dispatch(userJoined(user));
   };
 
   const handleUserLeftRoom = ({ user }: UserLeftRoom): void => {
-    /* Debug */
-    console.log('UserLeftRoom:');
-    console.log(user);
-    /* ***** */
-
     dispatch(userLeft(user));
   };
 
   const handleUserKicked = ({ user }: UserKicked): void => {
-    /* Debug */
-    console.log('UserKicked:');
-    console.log(user);
-    /* ***** */
-
     dispatch(userKicked(user));
   };
 
   const navigate = useNavigate();
 
   const handleGameStarted = (): void => {
-    /* Debug */
-    console.log('GameStarted');
-    /* ***** */
-
     navigate('/game');
   };
 

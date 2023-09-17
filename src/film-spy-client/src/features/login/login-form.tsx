@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
+import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import type { FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import {
-  Stack,
-  TextField,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  LinearProgress,
-} from '@mui/material';
+import { Stack, TextField, FormGroup, FormControlLabel, Checkbox, Button, LinearProgress } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import client from 'client';
 import { useCheckAuthentication, useInitCsrf } from 'hooks';
-import { isUnprocessableContentError } from 'utils';
-import yup from 'schema';
 import { strings } from 'localization';
+import yup from 'schema';
+import { isUnprocessableContentError } from 'utils';
 
-const LoginForm = (): JSX.Element => {
+const LoginForm = (): ReactElement => {
   const loginSchema = yup.object({
     email: yup.string().required(),
     password: yup.string().required(),
@@ -61,9 +54,11 @@ const LoginForm = (): JSX.Element => {
     }
   };
 
-  const onChange = (): void => setIsInvalidCredentials(false);
+  const onChange = (): void => {
+    setIsInvalidCredentials(false);
+  };
 
-  const passwordHelperText = (): string | undefined => {
+  const passwordHelperText = ((): string | undefined => {
     if (errors?.password?.type === 'required')
       return strings.validation.required;
 
@@ -71,7 +66,7 @@ const LoginForm = (): JSX.Element => {
       return strings.validation.invalidCredentials;
 
     return undefined;
-  };
+  })();
 
   return (
     <form onSubmit={handleSubmit(login)}>
@@ -100,7 +95,7 @@ const LoginForm = (): JSX.Element => {
           required
           disabled={isLoading}
           error={!!errors.password || isInvalidCredentials}
-          helperText={passwordHelperText()}
+          helperText={passwordHelperText}
         />
         <FormGroup>
           <FormControlLabel

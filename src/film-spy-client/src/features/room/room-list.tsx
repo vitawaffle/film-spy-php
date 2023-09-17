@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import type { ReactElement } from 'react';
 import type { ChangeEvent } from 'react';
-import {
-  Box,
-  CircularProgress,
-  List,
-  Typography,
-  Stack,
-  TextField,
-  InputAdornment,
-} from '@mui/material';
+import { Box, CircularProgress, List, Typography, Stack, TextField, InputAdornment } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
 import RoomListItem from './room-list-item';
 import useLoadRooms from './use-load-rooms';
 import { selectRooms, selectIsRoomsLoading } from 'app-slice';
 import { useAppSelector } from 'hooks';
-import type { Room } from 'models';
 import { strings } from 'localization';
+import type { Room } from 'models';
 
-const RoomList = (): JSX.Element => {
+const RoomList = (): ReactElement => {
   const isRoomsLoading = useAppSelector(selectIsRoomsLoading);
   const rooms = useAppSelector(selectRooms);
   const loadRooms = useLoadRooms();
 
-  useEffect(() => void loadRooms(), []);
+  useEffect(() => {
+    void loadRooms();
+  }, []);
 
   const [searchName, setSearchName] = useState('');
 

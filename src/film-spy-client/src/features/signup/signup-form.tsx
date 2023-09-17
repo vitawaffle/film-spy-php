@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import type { ReactElement } from 'react';
 import type { FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, TextField, Button, LinearProgress } from '@mui/material';
 
 import client from 'client';
 import { useCheckAuthentication, useInitCsrf } from 'hooks';
+import { strings } from 'localization';
 import yup from 'schema';
 import { isUnprocessableContentError } from 'utils';
-import { strings } from 'localization';
 
-const SignupForm = (): JSX.Element => {
-  const signinSchema = yup.object({
+const SignupForm = (): ReactElement => {
+  const signupSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().required().email(),
     password: yup.string().required().password(),
@@ -20,7 +21,7 @@ const SignupForm = (): JSX.Element => {
   });
 
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(signinSchema),
+    resolver: yupResolver(signupSchema),
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,7 @@ const SignupForm = (): JSX.Element => {
   const navigate = useNavigate();
   const initCsrf = useInitCsrf();
 
-  const signin = async({
+  const signup = async({
     name,
     email,
     password,
@@ -64,7 +65,7 @@ const SignupForm = (): JSX.Element => {
     }
   };
 
-  const emailHelperText = (): string | undefined => {
+  const emailHelperText = ((): string | undefined => {
     if (errors?.email?.type === 'required')
       return strings.validation.required;
 
@@ -75,30 +76,20 @@ const SignupForm = (): JSX.Element => {
       return strings.validation.notUniqueEmail;
 
     return undefined;
-  };
+  })();
 
-  const passwordHelperText = (): string | undefined => {
-    if (errors?.password?.type === 'required')
-      return strings.validation.required;
+  const passwordHelperText = {
+    required: strings.validation.required,
+    password: strings.validation.password,
+  }[errors?.password?.type?.toString() ?? ''];
 
-    if (errors?.password?.type === 'password')
-      return strings.validation.password;
-
-    return undefined;
-  };
-
-  const passwordConfirmationHelperText = (): string | undefined => {
-    if (errors?.passwordConfirmation?.type === 'required')
-      return strings.validation.required;
-
-    if (errors?.passwordConfirmation?.type === 'oneOf')
-      return strings.validation.passwordMismatch;
-
-    return undefined;
-  };
+  const passwordConfirmationHelperText = {
+    required: strings.validation.required,
+    oneOf: strings.validation.passwordMismatch,
+  }[errors?.passwordConfirmation?.type?.toString() ?? ''];
 
   return (
-    <form onSubmit={handleSubmit(signin)}>
+    <form onSubmit={handleSubmit(signup)}>
       <Stack spacing={2}>
         {isLoading && <LinearProgress />}
         <TextField
@@ -125,7 +116,7 @@ const SignupForm = (): JSX.Element => {
           required
           disabled={isLoading}
           error={!!errors.email || isEmailNotUnique}
-          helperText={emailHelperText()}
+          helperText={emailHelperText}
         />
         <TextField
           {...register('password')}
@@ -135,7 +126,7 @@ const SignupForm = (): JSX.Element => {
           required
           disabled={isLoading}
           error={!!errors.password}
-          helperText={passwordHelperText()}
+          helperText={passwordHelperText}
         />
         <TextField
           {...register('passwordConfirmation')}
@@ -145,7 +136,7 @@ const SignupForm = (): JSX.Element => {
           required
           disabled={isLoading}
           error={!!errors.passwordConfirmation}
-          helperText={passwordConfirmationHelperText()}
+          helperText={passwordConfirmationHelperText}
         />
         <Button type="submit" variant="contained" disabled={isLoading}>
           {strings.common.signUp}
