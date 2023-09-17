@@ -1,4 +1,4 @@
-FROM postgres:15.2-alpine
+FROM postgres:16-alpine
 
 RUN apk update && apk upgrade
 
