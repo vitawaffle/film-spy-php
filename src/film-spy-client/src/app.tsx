@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { selectIsAuthenticated } from 'app-slice';
@@ -7,7 +8,7 @@ import { Layout } from 'features/ui';
 import { useCheckAuthentication, useAppSelector } from 'hooks';
 import Router from 'router';
 
-const App = (): JSX.Element => {
+const App = (): ReactElement => {
   const checkAuthentication = useCheckAuthentication();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 

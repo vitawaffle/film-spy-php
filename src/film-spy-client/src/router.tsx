@@ -1,11 +1,27 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { AuthenticatedGuard, HasGameGuard, HasRoomGuard, UnauthenticatedGuard } from 'components/routing';
-import { Home, Error, Login, Signup, Room, Game } from 'pages';
-import { NotFoundError, UnauthorizedError } from 'pages/errors';
+import {
+  AuthenticatedGuard,
+  HasGameGuard,
+  HasRoomGuard,
+  UnauthenticatedGuard,
+} from 'components/routing';
+import {
+  Home,
+  Error,
+  Login,
+  Signup,
+  Room,
+  Game,
+} from 'pages';
+import {
+  NotFoundError,
+  UnauthorizedError,
+} from 'pages/errors';
 
-const Router = (): JSX.Element => (
+const Router = (): ReactElement => (
   <Routes>
     <Route path="error" element={<Error />}>
       <Route path="not-found" element={<NotFoundError />} />
