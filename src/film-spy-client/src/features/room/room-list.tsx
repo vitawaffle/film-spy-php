@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { ReactElement } from 'react';
 import type { ChangeEvent } from 'react';
-import { Box, CircularProgress, List, Typography, Stack, TextField, InputAdornment } from '@mui/material';
+import { CircularProgress, List, Typography, Stack, TextField, InputAdornment } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
 import RoomListItem from './room-list-item';
