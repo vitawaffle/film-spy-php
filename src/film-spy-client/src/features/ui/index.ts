@@ -1,3 +1,4 @@
+export { default as Centered } from './centered';
 export { default as Dialog } from './dialog';
 export { default as DrawerWithAppBar } from './drawer-with-app-bar';
 export { default as ErrorLayout } from './error-layout';
