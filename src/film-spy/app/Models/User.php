@@ -5,17 +5,14 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany};
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property int $room_id
- * @property Room $room
- * @property int $game_id
- * @property Game $game
  * @property Room[] $rooms
+ * @property Room[] $ownerRooms
  */
 class User extends Authenticatable
 {
@@ -30,7 +27,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'room_id',
     ];
 
     /**
@@ -52,18 +48,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function rooms(): HasMany
+    public function rooms(): BelongsToMany
     {
-        return $this->hasMany(Room::class);
+        return $this->belongsToMany(Room::class, 'users_rooms');
     }
 
-    public function room(): BelongsTo
+    public function ownedRooms(): HasMany
     {
-        return $this->belongsTo(Room::class);
-    }
-
-    public function game(): BelongsTo
-    {
-        return $this->belongsTo(Game::class);
+        return $this->hasMany(Room::class, 'owner_id');
     }
 }

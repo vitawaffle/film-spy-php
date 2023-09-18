@@ -4,8 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
 
+/**
+ * @property int $user_id
+ * @property User $user
+ * @property User[] $users
+ */
 class Room extends Model
 {
     use HasFactory;
@@ -13,7 +18,7 @@ class Room extends Model
     protected $fillable = [
         'name',
         'password',
-        'user_id',
+        'owner_id',
     ];
 
     /**
@@ -23,18 +28,13 @@ class Room extends Model
      */
     protected $hidden = ['password'];
 
-    public function user(): BelongsTo
+    public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function users(): HasMany
+    public function users(): BelongsToMany
     {
-        return $this->hasMany(User::class);
-    }
-
-    public function games(): HasMany
-    {
-        return $this->hasMany(Game::class);
+        return $this->belongsToMany(User::class, 'users_roles');
     }
 }

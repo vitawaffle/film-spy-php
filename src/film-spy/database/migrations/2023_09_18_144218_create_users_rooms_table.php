@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\{Game, User};
+use App\Models\{Room, User};
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('users_rooms', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignIdFor(Game::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();
-            $table->unsignedInteger('order');
-            $table->unique(['game_id', 'user_id', 'order']);
+            $table->foreignIdFor(Room::class)->constrained();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('users_rooms');
     }
 };
