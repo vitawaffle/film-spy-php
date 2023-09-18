@@ -3,34 +3,27 @@ import type { ReactElement } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
-  Button, 
+  Button,
+  CircularProgress,
   Container,
   Divider,
   IconButton,
   Toolbar,
   Typography,
   List,
-  CircularProgress,
 } from '@mui/material';
 import {
-  Menu as MenuIcon,
+  Casino as CasinoIcon,
   ChevronLeft as ChevronLeftIcon,
   Home as HomeIcon,
-  SportsEsports as SportsEsportsIcon,
-  PlayCircleOutline as PlayCircleOutlineIcon,
+  Menu as MenuIcon,
 } from '@mui/icons-material';
 
 import AppBar from './app-bar';
 import Drawer from './drawer';
 import DrawerHeader from './drawer-header';
 import DrawerLink from './drawer-link';
-import {
-  selectGame,
-  selectIsAuthenticated,
-  selectIsCheckingAuthentication,
-  selectIsLoggingOut,
-  selectRoom,
-} from 'app-slice';
+import { selectIsAuthenticated, selectIsCheckingAuthentication, selectIsLoggingOut } from 'app-slice';
 import { useAppSelector, useLogout } from 'hooks';
 import { strings } from 'localization';
 import type { ChildrenProps } from 'props';
@@ -55,8 +48,6 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): ReactElement => {
   };
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const game = useAppSelector(selectGame);
-  const room = useAppSelector(selectRoom);
   const isCheckingAuthentication = useAppSelector(selectIsCheckingAuthentication);
   const isLoggingOut = useAppSelector(selectIsLoggingOut);
 
@@ -118,19 +109,11 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): ReactElement => {
             icon={<HomeIcon />}
             isDrawerOpen={isOpen}
           />
-          {isAuthenticated && room && (
+          {isAuthenticated && (
             <DrawerLink
-              to="/room"
-              text={strings.pages.home.currentRoom}
-              icon={<SportsEsportsIcon />}
-              isDrawerOpen={isOpen}
-            />
-          )}
-          {isAuthenticated && game && (
-            <DrawerLink
-              to="/game"
-              text={strings.features.ui.appBar.game}
-              icon={<PlayCircleOutlineIcon />}
+              to="/rooms"
+              text={strings.common.rooms}
+              icon={<CasinoIcon />}
               isDrawerOpen={isOpen}
             />
           )}

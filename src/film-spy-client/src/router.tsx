@@ -9,12 +9,13 @@ import {
   UnauthenticatedGuard,
 } from 'components/routing';
 import {
-  Home,
   Error,
-  Login,
-  Signup,
-  Room,
   Game,
+  Home,
+  Login,
+  Room,
+  Rooms,
+  Signup,
 } from 'pages';
 import {
   NotFoundError,
@@ -27,6 +28,11 @@ const Router = (): ReactElement => (
       <Route path="not-found" element={<NotFoundError />} />
       <Route path="unauthorized" element={<UnauthorizedError />} />
     </Route>
+    <Route path="rooms" element={(
+      <AuthenticatedGuard>
+        <Rooms />
+      </AuthenticatedGuard>
+    )} />
     <Route path="room" element={(
       <AuthenticatedGuard>
         <HasRoomGuard>
