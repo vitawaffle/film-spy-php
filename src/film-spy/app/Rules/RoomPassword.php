@@ -37,7 +37,7 @@ class RoomPassword implements DataAwareRule, ValidationRule
         $userId = Auth::id();
 
         if (null !== $room->password
-            && $userId !== $room->user_id
+            && $userId !== $room->owner_id
             && $value !== $room->password
         ) {
             $fail('Invalid room password');

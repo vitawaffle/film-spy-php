@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function user(): User
+    public function getMe(): User
     {
-        return User::with('room', 'room.user:id', 'game')->find(Auth::id());
+        return User::with('rooms')->find(Auth::id());
     }
 }

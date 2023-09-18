@@ -24,12 +24,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define(
             'get-users-of-room',
-            fn (User $user, int $roomId) => $user->room_id === $roomId,
+            fn (User $user, int $roomId) => $user->rooms->contains(fn ($room) => $room->id === $roomId),
         );
 
         Gate::define(
             'room-owner',
-            fn (User $user, Room $room) => $user->id === $room->user_id,
+            fn (User $user, Room $room) => $user->id === $room->owner_id,
         );
 
         Gate::define('has-room', fn(User $user) => null !== $user->room_id);

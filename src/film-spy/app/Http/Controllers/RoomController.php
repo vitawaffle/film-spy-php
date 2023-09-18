@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserKicked, UserLeftRoom};
-use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest, KickPlayerRequest};
-use App\Models\{Game, Room, User};
+use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest, KickPlayerRequest, LeaveRoomRequest};
+use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
 
 class RoomController extends Controller
@@ -19,7 +19,7 @@ class RoomController extends Controller
     }
 
     /** @return User[] */
-    public function users(Room $room): array
+    public function getUsers(Room $room): array
     {
         if (!Gate::allows('get-users-of-room', $room->id))
             abort(403);
@@ -43,15 +43,9 @@ class RoomController extends Controller
     public function join(JoinRoomRequest $request): void
     {
         $room = Room::find($request->validated()['room_id']);
-        $user = Auth::user();
+        $user = User::find(Auth::id());
 
-        if (null !== $user->game_id)
-            abort(400, 'You cannot change room during the game');
-
-        if (null !== $user->room_id)
-            UserLeftRoom::dispatch($user);
-
-        $user->room_id = $room->id;
+        $user->rooms()->attach($room);
         $user->save();
 
         UserJoinedRoom::dispatch($user);
@@ -64,28 +58,20 @@ class RoomController extends Controller
         if (!Gate::allows('room-owner', $room))
             abort(403);
 
-        User::where('room_id', $room->id)
-            ->update(['room_id' => null]);
-
         RoomDeleted::dispatch($room);
 
         $room->delete();
     }
 
-    public function leave(): void
+    public function leave(LeaveRoomRequest $request): void
     {
-        $user = Auth::user();
+        $roomId = $request->validated()['room_id'];
+        $user = User::find(Auth::id());
 
-        if (null === $user->room_id)
-            return;
-
-        if (null !== $user->game_id)
-            abort(400, 'You cannot leave room during the game');
-
-        UserLeftRoom::dispatch($user);
-
-        $user->room_id = null;
+        $user->rooms()->detach($roomId);
         $user->save();
+
+        UserLeftRoom::dispatch($roomId, $user);
     }
 
     public function kick(Room $room, KickPlayerRequest $request): void
@@ -95,14 +81,16 @@ class RoomController extends Controller
 
         $user = User::find($request->validated()['user_id']);
 
-        if (null !== $user->game_id && $room->id === $user->game->room_id)
-            abort(400, 'You cannot kick a user who is in the game');
-
         if (null !== $user->room_id) {
             $user->room_id = null;
             $user->save();
 
             UserKicked::dispatch($user, $room);
         }
+
+        $user->rooms()->detach($room->id);
+        $user->save();
+
+        UserKicked::dispatch($user, $room);
     }
 }
