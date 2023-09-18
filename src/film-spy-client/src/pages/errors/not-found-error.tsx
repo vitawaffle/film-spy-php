@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
+import { Box, Button } from '@mui/material';
 
 import { ErrorLayout } from 'features/ui';
 import { strings } from 'localization';
@@ -12,9 +12,11 @@ const NotFoundError = (): ReactElement => (
     name="Not Found"
     description={strings.pages.errors.notFound}
   >
-    <Button component={Link} to="/home" variant="contained">
-      {strings.common.home}
-    </Button>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Button component={Link} to="/home" variant="contained">
+        {strings.common.home}
+      </Button>
+    </Box>
   </ErrorLayout>
 );
 

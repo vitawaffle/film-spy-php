@@ -1,7 +1,9 @@
 import React from 'react';
 import type { ReactElement } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
+import PestControlOutlinedIcon from '@mui/icons-material/PestControlOutlined';
 
+import { Centered } from 'features/ui';
 import type { ChildrenProps } from 'props';
 
 type ErrorLayoutProps = ChildrenProps & {
@@ -11,18 +13,35 @@ type ErrorLayoutProps = ChildrenProps & {
 };
 
 const ErrorLayout = ({ children, code, name, description }: ErrorLayoutProps): ReactElement => (
-  <Stack spacing={2}>
-    <Typography variant="h2" component="h2" align="center">
-      {code}
-    </Typography>
-    <Typography variant="h3" component="h3" align="center">
-      {name}
-    </Typography>
-    <Typography align="center">
-      {description}
-    </Typography>
-    {children}
-  </Stack>
+  <Centered>
+    <Stack>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }} mb={3}>
+        <PestControlOutlinedIcon sx={{ fontSize: 225, color: 'text.secondary' }} />
+      </Box>
+      <Typography
+        variant="h2"
+        component="h2"
+        align="center"
+        sx={{ fontSize: 75, color: 'text.secondary', fontWeight: 450 }}
+        mb={1}
+      >
+        {code}
+      </Typography>
+      <Typography
+        variant="h3"
+        component="h3"
+        align="center"
+        sx={{ fontSize: 40, color: 'text.secondary', fontWeight: 400 }}
+        mb={3}
+      >
+        {name}
+      </Typography>
+      <Typography align="center" mb={4}>
+        {description}
+      </Typography>
+      {children}
+    </Stack>
+  </Centered>
 );
 
 export default ErrorLayout;
