@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ReactElement } from 'react';
-import { Grid, Card, CardContent, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, Stack, Typography } from '@mui/material';
 
 import { LoginForm } from 'features/login';
 import { Centered } from 'features/ui';
@@ -8,13 +9,19 @@ import { strings } from 'localization';
 
 const Login = (): ReactElement => (
   <Centered>
-    <Card>
+    <Card sx={{ width: '300px' }}>
       <CardContent>
         <Stack spacing={3}>
-          <Typography variant="h3" component="h3">
-            {strings.common.logIn}
+          <Typography variant="h4" component="h4" mb={4}>
+            {strings.pages.logIn.title}
           </Typography>
           <LoginForm />
+          <Typography variant="body1" component="p" mt={3} sx={{ color: 'text.secondary' }}>
+            {strings.pages.logIn.noAccount + ' '}
+            <Link to="/signup">
+              {strings.common.signUp}
+            </Link>
+          </Typography>
         </Stack>
       </CardContent>
     </Card>

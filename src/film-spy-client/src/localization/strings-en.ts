@@ -40,6 +40,14 @@ const stringsEn: LocaleTemplate = {
     home: {
       currentRoom: 'Current room',
     },
+    logIn: {
+      title: 'Please, log in',
+      noAccount: 'Don\'t have an account?',
+    },
+    signUp: {
+      title: 'Please, sign up',
+      haveAccount: 'Alredy have an account?',
+    },
   },
   features: {
     rooms: {

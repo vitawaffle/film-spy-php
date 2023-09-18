@@ -40,6 +40,14 @@ const stringsRu: LocaleTemplate = {
     home: {
       currentRoom: 'Текущая комната',
     },
+    logIn: {
+      title: 'Пожалуйста, войдите',
+      noAccount: 'Нет аккаунта?',
+    },
+    signUp: {
+      title: 'Пожалуйста, зарегистрируйтесь',
+      haveAccount: 'Уже есть аккаунт?',
+    },
   },
   features: {
     rooms: {

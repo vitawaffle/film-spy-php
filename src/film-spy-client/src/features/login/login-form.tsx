@@ -35,12 +35,15 @@ const LoginForm = (): ReactElement => {
 
     try {
       await initCsrf();
+
       await client.post('/login', {
         email,
         password,
         remember: isRemember,
       });
+
       await checkAuthentication();
+
       navigate('/home');
     } catch (error: unknown) {
       if (isUnprocessableContentError(error)) {

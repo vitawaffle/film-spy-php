@@ -94,7 +94,7 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): ReactElement => {
             </Button>
           ) : (
             <>
-              <Button component={Link} to="/signin" color="inherit">
+              <Button component={Link} to="/signup" color="inherit">
                 {strings.common.signUp}
               </Button>
               <Button component={Link} to="/login" color="inherit">

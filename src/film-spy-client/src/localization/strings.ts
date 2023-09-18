@@ -50,6 +50,14 @@ export type LocaleTemplate = {
     home: {
       currentRoom: string,
     },
+    logIn: {
+      title: string,
+      noAccount: string,
+    },
+    signUp: {
+      title: string,
+      haveAccount: string,
+    },
   },
   features: {
     rooms: {

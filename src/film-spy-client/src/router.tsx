@@ -41,7 +41,7 @@ const Router = (): ReactElement => (
         </HasGameGuard>
       </AuthenticatedGuard>
     )} />
-    <Route path="signin" element={(
+    <Route path="signup" element={(
       <UnauthenticatedGuard>
         <Signup />
       </UnauthenticatedGuard>
