@@ -12,7 +12,7 @@ class RoomController extends Controller
     /** @return Room[] */
     public function get(): array
     {
-        return Room::with('user:id,name,email')
+        return Room::with('owner:id,name,email')
             ->withCount('users')
             ->get()
             ->toArray();
@@ -31,10 +31,10 @@ class RoomController extends Controller
     {
         $room = Room::create(array_merge(
             $request->validated(),
-            ['user_id' => Auth::id()],
+            ['owner_id' => Auth::id()],
         ));
 
-        $room->load('user:id,name,email');
+        $room->load('owner:id,name,email');
         $room->loadCount('users');
 
         RoomCreated::dispatch($room->toArray());
@@ -63,10 +63,6 @@ class RoomController extends Controller
 
         if (!Gate::allows('room-owner', $room))
             abort(403);
-
-        $room->loadCount('games');
-        if (0 !== $room->games_count)
-            abort(400, 'You cannot delete a room for which the game is started');
 
         User::where('room_id', $room->id)
             ->update(['room_id' => null]);
