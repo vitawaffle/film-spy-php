@@ -8,6 +8,11 @@ const stringsRu: StringsTemplate = {
     register: 'Зарегистрироваться',
     rooms: 'Комнаты',
   },
+  pages: {
+    errors: {
+      notFound: 'Упс! Кажется, вы заблудились. Такой страницы не существует. Попробуйте вернуться на главную.',
+    },
+  },
 };
 
 export default stringsRu;

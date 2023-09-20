@@ -8,6 +8,11 @@ const stringsEn: StringsTemplate = {
     register: 'Register',
     rooms: 'Rooms',
   },
+  pages: {
+    errors: {
+      notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
+    },
+  },
 };
 
 export default stringsEn;

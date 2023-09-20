@@ -11,6 +11,11 @@ export type StringsTemplate = {
     register: string,
     rooms: string,
   },
+  pages: {
+    errors: {
+      notFound: string,
+    },
+  },
 };
 
 const strings = new LocalizedStrings({
