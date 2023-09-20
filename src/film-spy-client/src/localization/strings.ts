@@ -5,9 +5,11 @@ import stringsRu from './strings-ru';
 
 export type StringsTemplate = {
   common: {
+    home: string,
     logIn: string,
     logOut: string,
     register: string,
+    rooms: string,
   },
 };
 
