@@ -24,9 +24,9 @@ const LoginForm = (): React.ReactElement => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isInvalidCredentials, setIsInvalidCredentials] = useState(false);
+  const initCsrf = useInitCsrf();
   const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
-  const initCsrf = useInitCsrf();
 
   const login = async ({ email, password, isRemember }: FieldValues): Promise<void> => {
     setIsLoading(true);

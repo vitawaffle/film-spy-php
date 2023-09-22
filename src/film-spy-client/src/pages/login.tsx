@@ -12,13 +12,13 @@ const Login = (): React.ReactElement => (
       <CardContent>
         <Stack spacing={3}>
           <Typography variant="h4" component="h4" mb={4}>
-            {strings.pages.logIn.title}
+            {strings.pages.login.title}
           </Typography>
           <LoginForm />
           <Typography variant="body1" component="p" mt={3} sx={{ color: 'text.secondary' }}>
-            {strings.pages.logIn.noAccount + ' '}
-            <Link to="/signup">
-              {strings.common.signUp}
+            {strings.pages.login.noAccount + ' '}
+            <Link to="/register">
+              {strings.common.register}
             </Link>
           </Typography>
         </Stack>
