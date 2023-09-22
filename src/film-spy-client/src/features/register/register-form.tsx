@@ -39,7 +39,7 @@ const RegisterForm = (): React.ReactElement => {
         name,
         email,
         password,
-        passwordConfirmation,
+        password_confirmation: passwordConfirmation,
       });
       await checkAuthentication();
 
