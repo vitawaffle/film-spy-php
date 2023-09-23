@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Error, Home, Login, Register } from 'pages';
+import { Authenticated } from 'components/guards';
+import { Error, Home, Login, Register, Rooms } from 'pages';
 import { NotFoundError } from 'pages/errors';
 
 const Router = (): React.ReactElement => (
@@ -12,6 +13,11 @@ const Router = (): React.ReactElement => (
     <Route path="home" element={<Home />} />
     <Route path="login" element={<Login />} />
     <Route path="register" element={<Register />} />
+    <Route path="rooms" element={(
+      <Authenticated>
+        <Rooms />
+      </Authenticated>
+    )} />
     <Route path="/" element={<Navigate to="/home" />} />
     <Route path="*" element={<Navigate to="/errors/not-found" />} />
   </Routes>

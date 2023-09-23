@@ -5,7 +5,9 @@ import stringsRu from './strings-ru';
 
 export type StringsTemplate = {
   common: {
+    cancel: string,
     confirmPassword: string,
+    create: string,
     email: string,
     home: string,
     isRemember: string,
@@ -13,8 +15,23 @@ export type StringsTemplate = {
     logOut: string,
     register: string,
     name: string,
+    ok: string,
     password: string,
     rooms: string,
+  },
+  features: {
+    rooms: {
+      createRoomModal: {
+        title: string,
+      },
+      roomList: {
+        empty: string,
+      },
+      roomListItem: {
+        owner: string,
+        players: string,
+      },
+    },
   },
   pages: {
     errors: {

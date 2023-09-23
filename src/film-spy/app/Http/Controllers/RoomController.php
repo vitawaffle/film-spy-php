@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\{Auth, Gate};
 
 class RoomController extends Controller
 {
-    /** @return Room[] */
+    /** @return array<int, Room> */
     public function get(): array
     {
-        return Room::with('owner:id,name,email')
+        return Room::with('owner:id,name')
             ->withCount('users')
             ->get()
             ->toArray();
     }
 
-    /** @return User[] */
+    /** @return array<int, User> */
     public function getUsers(Room $room): array
     {
         if (!Gate::allows('get-users-of-room', $room->id))

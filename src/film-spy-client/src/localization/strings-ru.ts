@@ -2,7 +2,9 @@ import type { StringsTemplate } from './strings';
 
 const stringsRu: StringsTemplate = {
   common: {
+    cancel: 'Отмена',
     confirmPassword: 'Подтвердите пароль',
+    create: 'Создать',
     email: 'Электронная почта',
     home: 'Главная',
     isRemember: 'Запомни меня',
@@ -10,8 +12,23 @@ const stringsRu: StringsTemplate = {
     logOut: 'Выйти',
     register: 'Зарегистрироваться',
     name: 'Name',
+    ok: 'Хорошо',
     password: 'Пароль',
     rooms: 'Комнаты',
+  },
+  features: {
+    rooms: {
+      createRoomModal: {
+        title: 'Создание комнаты',
+      },
+      roomList: {
+        empty: 'Не найдено ни одной комнаты',
+      },
+      roomListItem: {
+        owner: 'Владелец',
+        players: 'Игроков',
+      },
+    },
   },
   pages: {
     errors: {
