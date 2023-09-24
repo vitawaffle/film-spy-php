@@ -18,6 +18,9 @@ const stringsEn: StringsTemplate = {
   },
   features: {
     rooms: {
+      createRoomForm: {
+        keepEmpty: 'Keep this field empty if the room does not have a password',
+      },
       createRoomModal: {
         title: 'Create room',
       },
@@ -46,6 +49,7 @@ const stringsEn: StringsTemplate = {
   validation: {
     emailNotUnique: 'This email already exists',
     invalidCredentials: 'Invalid credentials',
+    nameNotUnique: 'This name already exists',
     password: 'The password must be at least 8 characters long',
     passwordMismatch: 'Password mismatch',
     required: 'This field is required',

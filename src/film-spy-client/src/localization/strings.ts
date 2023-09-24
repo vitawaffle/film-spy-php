@@ -21,6 +21,9 @@ export type StringsTemplate = {
   },
   features: {
     rooms: {
+      createRoomForm: {
+        keepEmpty: string,
+      },
       createRoomModal: {
         title: string,
       },
@@ -49,6 +52,7 @@ export type StringsTemplate = {
   validation: {
     emailNotUnique: string,
     invalidCredentials: string,
+    nameNotUnique: string,
     password: string,
     passwordMismatch: string,
     required: string,

@@ -24,7 +24,7 @@ const RoomListItem = ({ room }: RoomListItemProps): React.ReactElement => {
               >
                 {strings.features.rooms.roomListItem.owner}:
               </Typography>
-              {' ' + room.owner.name}
+              {' ' + room.owner.name + ', '}
               <Typography
                 sx={{ display: 'inline' }}
                 component="span"
