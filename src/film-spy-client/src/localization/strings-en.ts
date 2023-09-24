@@ -24,6 +24,9 @@ const stringsEn: StringsTemplate = {
       createRoomModal: {
         title: 'Create room',
       },
+      joinRoomModal: {
+        title: 'Join room',
+      },
       roomList: {
         empty: 'No rooms found',
       },

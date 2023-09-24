@@ -22,7 +22,10 @@ const stringsRu: StringsTemplate = {
         keepEmpty: 'Оставьте это поле пустым, если пароль к команте не нужен',
       },
       createRoomModal: {
-        title: 'Создание комнаты',
+        title: 'Создать комнату',
+      },
+      joinRoomModal: {
+        title: 'Присоединиться к комнате',
       },
       roomList: {
         empty: 'Не найдено ни одной комнаты',

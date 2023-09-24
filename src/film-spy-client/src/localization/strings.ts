@@ -27,6 +27,9 @@ export type StringsTemplate = {
       createRoomModal: {
         title: string,
       },
+      joinRoomModal: {
+        title: string,
+      },
       roomList: {
         empty: string,
       },
