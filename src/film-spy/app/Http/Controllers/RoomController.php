@@ -34,7 +34,7 @@ class RoomController extends Controller
             ['owner_id' => Auth::id()],
         ));
 
-        $room->load('owner:id,name,email');
+        $room->load('owner:id,name');
         $room->loadCount('users');
 
         RoomCreated::dispatch($room->toArray());

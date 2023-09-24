@@ -25,12 +25,15 @@ const roomsSlice = createSlice({
       state.isRoomsLoading = false;
       state.rooms = payload;
     },
+    roomCreated: (state, { payload }: PayloadAction<Room>): void => {
+      state.rooms.push(payload);
+    },
   },
 });
 
 export default roomsSlice.reducer;
 
-export const { roomsLoadingStarted, roomsLoaded } = roomsSlice.actions;
+export const { roomsLoadingStarted, roomsLoaded, roomCreated } = roomsSlice.actions;
 
 export const selectIsRoomsLoading = ({ rooms }: RootState): boolean => rooms.isRoomsLoading;
 export const selectRooms = ({ rooms }: RootState): Room[] => rooms.rooms;
