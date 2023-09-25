@@ -9,6 +9,7 @@ const stringsEn: StringsTemplate = {
     home: 'Home',
     isRemember: 'Remember me',
     join: 'Join',
+    joined: 'Joined',
     keepPasswordEmpty: 'Keep this field empty if the room does not have a password',
     logIn: 'Log in',
     logOut: 'Log out',

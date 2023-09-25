@@ -9,6 +9,7 @@ const stringsRu: StringsTemplate = {
     home: 'Главная',
     isRemember: 'Запомни меня',
     join: 'Присоединиться',
+    joined: 'Присоединено',
     keepPasswordEmpty: 'Оставьте это поле пустым, если пароль к команте не нужен',
     logIn: 'Войти',
     logOut: 'Выйти',

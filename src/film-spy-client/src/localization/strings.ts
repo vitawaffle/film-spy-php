@@ -12,6 +12,7 @@ export type StringsTemplate = {
     home: string,
     isRemember: string,
     join: string,
+    joined: string,
     keepPasswordEmpty: string,
     logIn: string,
     logOut: string,

@@ -28,7 +28,7 @@ const RoomListItem = ({ room }: RoomListItemProps): React.ReactElement => {
   };
 
   return (
-    <ListItem>
+    <ListItem alignItems="flex-start" disablePadding>
       <ListItemButton onClick={handleClick} selected={isJoined}>
         <ListItemText
           primary={room.name}
@@ -52,6 +52,7 @@ const RoomListItem = ({ room }: RoomListItemProps): React.ReactElement => {
                 {strings.features.rooms.roomListItem.players}:
               </Typography>
               {' ' + room.users_count}
+              {isJoined && `, ${strings.common.joined}`}
             </>
           )}
         />
