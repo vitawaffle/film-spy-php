@@ -1,5 +1,6 @@
 import { authenticationCheckStarted, authenticated, unauthenticated } from './auth-slice';
 import client from 'client';
+import { joinedRoomsLoaded } from 'features/rooms/rooms-slice';
 import type { User } from 'models';
 import { useDispatch } from 'store';
 import { isUnauthenticatedError } from 'utils';
@@ -11,7 +12,11 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
     dispatch(authenticationCheckStarted());
 
     try {
-      dispatch(authenticated((await client.get<User>('/api/users/me')).data));
+      const user = (await client.get<User>('/api/users/me')).data;
+
+      dispatch(authenticated(user));
+      dispatch(joinedRoomsLoaded(user.rooms));
+
       return true;
     } catch (error: unknown) {
       dispatch(unauthenticated());

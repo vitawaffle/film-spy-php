@@ -18,12 +18,6 @@ class RoomController extends Controller
             ->toArray();
     }
 
-    /** @return array<int, Room> */
-    public function getJoined(): array
-    {
-        return User::find(Auth::id())->rooms->toArray();
-    }
-
     /** @return array<int, User> */
     public function getUsers(Room $room): array
     {

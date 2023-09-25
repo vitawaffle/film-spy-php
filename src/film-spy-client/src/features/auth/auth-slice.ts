@@ -15,7 +15,7 @@ export type AuthState = {
 const initialState: AuthState = {
   isAuthenticated: false,
   isAuthenticationChecked: false,
-  isAuthenticationChecking: false,
+  isAuthenticationChecking: true,
   isLoggingOut: false,
 };
 

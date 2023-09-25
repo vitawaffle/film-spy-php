@@ -147,7 +147,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const DrawerWithAppBar = ({ children }: ChildrenProps): React.ReactElement => {
+const Header = ({ children }: ChildrenProps): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const logOut = useLogOut();
   const navigate = useNavigate();
@@ -250,4 +250,4 @@ const DrawerWithAppBar = ({ children }: ChildrenProps): React.ReactElement => {
   );
 };
 
-export default DrawerWithAppBar;
+export default Header;
