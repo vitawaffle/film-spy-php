@@ -21,6 +21,7 @@ export type StringsTemplate = {
     ok: string,
     password: string,
     rooms: string,
+    players: string,
   },
   features: {
     rooms: {

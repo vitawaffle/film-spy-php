@@ -20,7 +20,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 
 Broadcast::channel(
     'rooms.{room}',
-    fn (User $user, Room $room) => $room->id === $user->room_id,
+    fn (User $user, Room $room) => $user->rooms->contains(fn ($item) => $item->id === $room->id),
 );
 
 Broadcast::channel('rooms', fn () => Auth::check());

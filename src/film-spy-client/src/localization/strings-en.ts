@@ -18,6 +18,7 @@ const stringsEn: StringsTemplate = {
     ok: 'Ok',
     password: 'Password',
     rooms: 'Rooms',
+    players: 'Players',
   },
   features: {
     rooms: {

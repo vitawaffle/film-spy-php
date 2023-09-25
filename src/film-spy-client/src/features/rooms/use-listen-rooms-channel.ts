@@ -11,12 +11,10 @@ const useListenRoomsChannel = (): { listenRoomsChannel: () => void, stopListenin
 
   return {
     listenRoomsChannel: (): void => {
-      window.Echo.private('rooms')
-        .listen('RoomCreated', handleRoomCreated);
+      window.Echo.private('rooms').listen('RoomCreated', handleRoomCreated);
     },
     stopListeningRoomsChannel: (): void => {
-      window.Echo.private('rooms')
-        .stopListening('RoomCreated');
+      window.Echo.private('rooms').stopListening('RoomCreated');
     },
   };
 };

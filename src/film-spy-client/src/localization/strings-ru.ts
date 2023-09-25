@@ -18,6 +18,7 @@ const stringsRu: StringsTemplate = {
     ok: 'Хорошо',
     password: 'Пароль',
     rooms: 'Комнаты',
+    players: 'Игроки',
   },
   features: {
     rooms: {
