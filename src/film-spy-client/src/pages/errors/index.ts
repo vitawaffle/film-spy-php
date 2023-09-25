@@ -1,1 +1,2 @@
-export { default as NotFoundError } from './not-found-error';
+export { default as Forbidden } from './forbidden';
+export { default as NotFound } from './not-found-error';

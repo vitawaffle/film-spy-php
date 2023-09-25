@@ -38,6 +38,7 @@ const stringsEn: StringsTemplate = {
   },
   pages: {
     errors: {
+      forbidden: 'You can\'t come here! Get the appropriate privileges to access this page.',
       notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
     },
     login: {

@@ -45,10 +45,12 @@ class RoomController extends Controller
         $room = Room::find($request->validated()['room_id']);
         $user = User::find(Auth::id());
 
-        $user->rooms()->attach($room);
-        $user->save();
+        if (!$user->rooms->contains(fn ($item) => $item->id === $room->id)) {
+            $user->rooms()->attach($room);
+            $user->save();
 
-        UserJoinedRoom::dispatch($user);
+            UserJoinedRoom::dispatch($user, $room);
+        }
     }
 
     public function delete(DeleteRoomRequest $request): void

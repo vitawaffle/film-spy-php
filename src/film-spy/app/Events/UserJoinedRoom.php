@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\User;
+use App\Models\{Room, User};
 use Illuminate\Broadcasting\{InteractsWithSockets, PrivateChannel};
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -15,7 +15,7 @@ class UserJoinedRoom implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(public readonly User $user)
+    public function __construct(public readonly User $user, public readonly Room $room)
     {
         //
     }
@@ -28,7 +28,7 @@ class UserJoinedRoom implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms.'.$this->user->room_id),
+            new PrivateChannel('rooms.'.$this->room->id),
         ];
     }
 

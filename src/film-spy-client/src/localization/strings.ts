@@ -41,6 +41,7 @@ export type StringsTemplate = {
   },
   pages: {
     errors: {
+      forbidden: string,
       notFound: string,
     },
     login: {

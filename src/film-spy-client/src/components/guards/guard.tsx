@@ -8,11 +8,7 @@ export type GuardProps = ChildrenProps & {
   navigateOnForbidden?: string,
 };
 
-const Guard = ({
-  children,
-  isEnabled,
-  navigateOnForbidden,
-}: GuardProps): React.ReactElement => isEnabled === false ? (
+const Guard = ({ children, isEnabled, navigateOnForbidden }: GuardProps): React.ReactElement => isEnabled === false ? (
   <Navigate to={navigateOnForbidden ? navigateOnForbidden : '/errors/forbidden'} />
 ) : <>{children}</>;
 

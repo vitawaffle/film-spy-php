@@ -1,20 +1,24 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Authenticated } from 'components/guards';
-import { Error, Home, Login, Register, Rooms } from 'pages';
-import { NotFoundError } from 'pages/errors';
+import { Authenticated, HasRoom } from 'components/guards';
+import { Error, Home, Login, Register, Room, Rooms } from 'pages';
+import { Forbidden, NotFound } from 'pages/errors';
 
 const Router = (): React.ReactElement => (
   <Routes>
     <Route path="errors" element={<Error />}>
-      <Route path="not-found" element={<NotFoundError />} />
+      <Route path="forbidden" element={<Forbidden />} />
+      <Route path="not-found" element={<NotFound />} />
     </Route>
     <Route path="home" element={<Home />} />
     <Route path="login" element={<Login />} />
     <Route path="register" element={<Register />} />
     <Route path="rooms/:id" element={(
       <Authenticated>
+        <HasRoom>
+          <Room />
+        </HasRoom>
       </Authenticated>
     )} />
     <Route path="rooms" element={(
