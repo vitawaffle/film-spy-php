@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('users_rooms', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Room::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Room::class)->constrained()->cascadeOnDelete();
         });
     }
 

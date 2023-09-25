@@ -24,6 +24,11 @@ export type StringsTemplate = {
     players: string,
   },
   features: {
+    room: {
+      deleteRoomButton: {
+        deleteRoom: string,
+      },
+    },
     rooms: {
       createRoomModal: {
         title: string,

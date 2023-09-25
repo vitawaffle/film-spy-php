@@ -21,6 +21,11 @@ const stringsEn: StringsTemplate = {
     players: 'Players',
   },
   features: {
+    room: {
+      deleteRoomButton: {
+        deleteRoom: 'Delete room',
+      },
+    },
     rooms: {
       createRoomModal: {
         title: 'Create room',

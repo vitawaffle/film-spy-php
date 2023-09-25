@@ -44,6 +44,10 @@ const roomsSlice = createSlice({
       state.joinedRooms.push(payload);
       state.selectedRoom = undefined;
     },
+    roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
+      state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload.id);
+      state.rooms = state.rooms.filter(room => room.id !== payload.id);
+    },
   },
 });
 
@@ -57,6 +61,7 @@ export const {
   roomUnselected,
   joinedRoomsLoaded,
   roomJoined,
+  roomDeleted,
 } = roomsSlice.actions;
 
 export const selectIsRoomsLoading = ({ rooms }: RootState): boolean => rooms.isRoomsLoading;
