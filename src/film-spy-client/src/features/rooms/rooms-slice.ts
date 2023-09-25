@@ -48,6 +48,7 @@ const roomsSlice = createSlice({
     },
     roomJoined: (state, { payload }: PayloadAction<Room>): void => {
       state.joinedRooms.push(payload);
+      state.selectedRoom = undefined;
     },
   },
 });
