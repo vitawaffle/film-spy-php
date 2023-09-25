@@ -8,6 +8,8 @@ const stringsEn: StringsTemplate = {
     email: 'Email',
     home: 'Home',
     isRemember: 'Remember me',
+    join: 'Join',
+    keepPasswordEmpty: 'Keep this field empty if the room does not have a password',
     logIn: 'Log in',
     logOut: 'Log out',
     register: 'Register',
@@ -18,9 +20,6 @@ const stringsEn: StringsTemplate = {
   },
   features: {
     rooms: {
-      createRoomForm: {
-        keepEmpty: 'Keep this field empty if the room does not have a password',
-      },
       createRoomModal: {
         title: 'Create room',
       },
@@ -52,6 +51,7 @@ const stringsEn: StringsTemplate = {
   validation: {
     emailNotUnique: 'This email already exists',
     invalidCredentials: 'Invalid credentials',
+    invalidPassword: 'Invalid password',
     nameNotUnique: 'This name already exists',
     password: 'The password must be at least 8 characters long',
     passwordMismatch: 'Password mismatch',

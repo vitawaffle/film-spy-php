@@ -1,5 +1,6 @@
 import React from 'react';
 
+import JoinRoomForm from './join-room-form';
 import { roomUnselected, selectSelectedRoom } from './rooms-slice';
 import { Modal } from 'features/ui';
 import { strings } from 'localization';
@@ -16,6 +17,7 @@ const JoinRoomModal = (): React.ReactElement => {
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} id="joinRoom" title={strings.features.rooms.joinRoomModal.title}>
+      <JoinRoomForm />
     </Modal>
   );
 };

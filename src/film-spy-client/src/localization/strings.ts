@@ -11,6 +11,8 @@ export type StringsTemplate = {
     email: string,
     home: string,
     isRemember: string,
+    join: string,
+    keepPasswordEmpty: string,
     logIn: string,
     logOut: string,
     register: string,
@@ -21,9 +23,6 @@ export type StringsTemplate = {
   },
   features: {
     rooms: {
-      createRoomForm: {
-        keepEmpty: string,
-      },
       createRoomModal: {
         title: string,
       },
@@ -55,6 +54,7 @@ export type StringsTemplate = {
   validation: {
     emailNotUnique: string,
     invalidCredentials: string,
+    invalidPassword: string,
     nameNotUnique: string,
     password: string,
     passwordMismatch: string,

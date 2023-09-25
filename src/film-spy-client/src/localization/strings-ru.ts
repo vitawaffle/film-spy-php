@@ -8,6 +8,8 @@ const stringsRu: StringsTemplate = {
     email: 'Электронная почта',
     home: 'Главная',
     isRemember: 'Запомни меня',
+    join: 'Присоединиться',
+    keepPasswordEmpty: 'Оставьте это поле пустым, если пароль к команте не нужен',
     logIn: 'Войти',
     logOut: 'Выйти',
     register: 'Зарегистрироваться',
@@ -18,9 +20,6 @@ const stringsRu: StringsTemplate = {
   },
   features: {
     rooms: {
-      createRoomForm: {
-        keepEmpty: 'Оставьте это поле пустым, если пароль к команте не нужен',
-      },
       createRoomModal: {
         title: 'Создать комнату',
       },
@@ -52,6 +51,7 @@ const stringsRu: StringsTemplate = {
   validation: {
     emailNotUnique: 'Этот адрес электронной уже существует',
     invalidCredentials: 'Неправильные учётные данные',
+    invalidPassword: 'Неправильный пароль',
     nameNotUnique: 'Это имя уже существует',
     password: 'Пароль должен быть не меньше 8 символов',
     passwordMismatch: 'Пароли не совпадают',

@@ -77,7 +77,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): React.ReactElement 
           type="password"
           label={strings.common.password}
           disabled={isLoading}
-          helperText={strings.features.rooms.createRoomForm.keepEmpty}
+          helperText={strings.common.keepPasswordEmpty}
         />
         <Button type="submit" variant="contained" disabled={isLoading}>
           {strings.common.create}

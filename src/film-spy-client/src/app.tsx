@@ -9,7 +9,7 @@ const App = (): React.ReactElement => {
   const checkAuthentication = useCheckAuthentication();
 
   useEffect(() => {
-    checkAuthentication();
+    void checkAuthentication();
   }, []);
 
   return (

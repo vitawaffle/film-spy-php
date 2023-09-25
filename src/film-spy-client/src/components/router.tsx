@@ -13,6 +13,10 @@ const Router = (): React.ReactElement => (
     <Route path="home" element={<Home />} />
     <Route path="login" element={<Login />} />
     <Route path="register" element={<Register />} />
+    <Route path="rooms/:id" element={(
+      <Authenticated>
+      </Authenticated>
+    )} />
     <Route path="rooms" element={(
       <Authenticated>
         <Rooms />
