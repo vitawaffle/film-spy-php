@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{GameController, RoomController, UserController};
+use App\Http\Controllers\{RoomController, UserController};
 use Illuminate\Support\Facades\{Broadcast, Route};
 
 /*
@@ -26,20 +26,13 @@ Route::middleware('auth:sanctum')
     ->controller(RoomController::class)
     ->group(function () {
         Route::get('/', 'get');
+        Route::get('/joined', 'getJoined');
         Route::get('/{room}/users', 'getUsers');
         Route::delete('/{room}', 'delete');
         Route::post('/{room}/leave', 'leave');
         Route::post('/{room}/kick', 'kick');
         Route::post('/create', 'create');
         Route::post('/join', 'join');
-    });
-
-Route::middleware('auth:sanctum')
-    ->prefix('/games')
-    ->controller(GameController::class)
-    ->group(function () {
-        Route::post('/start', 'start');
-        Route::get('/current', 'current');
     });
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);

@@ -28,6 +28,9 @@ export type StringsTemplate = {
       deleteRoomButton: {
         deleteRoom: string,
       },
+      kickUserButton: {
+        kickUser: string,
+      },
       leaveRoomButton: {
         leaveRoom: string,
       },

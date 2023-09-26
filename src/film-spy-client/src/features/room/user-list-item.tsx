@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemText } from '@mui/material';
 
+import KickUserButton from './kick-user-button';
+import useIsRoomOwner from './use-is-room-owner';
 import type { User } from 'models';
 
 export type UserListItemProps = {
@@ -15,6 +17,8 @@ const UserListItem = ({ user }: UserListItemProps): React.ReactElement => {
     setIsOpen(!isOpen);
   };
 
+  const isRoomOwner = useIsRoomOwner();
+
   return (
     <>
       <ListItemButton onClick={handleClick}>
@@ -23,6 +27,7 @@ const UserListItem = ({ user }: UserListItemProps): React.ReactElement => {
       </ListItemButton>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+          {isRoomOwner && <KickUserButton user={user} />}
         </List>
       </Collapse>
     </>

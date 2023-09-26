@@ -1,12 +1,15 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { userJoined, userLeft } from './room-slice';
-import type { UserJoinedRoom, UserLeftRoom } from 'broadcast-events';
-import { useDispatch } from 'store';
+import { userJoined, userKicked, userLeft } from './room-slice';
+import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
+import { selectUser } from 'features/auth';
+import { roomKicked } from 'features/rooms';
+import { useDispatch, useSelector } from 'store';
 
 const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningRoomChannel: () => void } => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectUser);
 
   const handleRoomDeleted = (): void => {
     // TODO add feedback about room deletion
@@ -22,6 +25,17 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     dispatch(userLeft(user));
   };
 
+  const handleUserKicked = ({ room, user }: UserKicked): void => {
+    dispatch(userKicked(user));
+
+    if (currentUser?.id === user.id) {
+      // TODO add feedback about room kicking
+
+      dispatch(roomKicked(room));
+      navigate('/rooms');
+    }
+  };
+
   const { id } = useParams();
   const url = `rooms.${id}`;
 
@@ -30,13 +44,15 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
       window.Echo.private(url)
         .listen('RoomDeleted', handleRoomDeleted)
         .listen('UserJoinedRoom', handleUserJoinedRoom)
-        .listen('UserLeftRoom', handleUserLeftRoom);
+        .listen('UserLeftRoom', handleUserLeftRoom)
+        .listen('UserKicked', handleUserKicked);
     },
     stopListeningRoomChannel: (): void => {
       window.Echo.private(url)
         .stopListening('RoomDeleted')
         .stopListening('UserJoinedRoom')
-        .stopListening('UserLeftRoom');
+        .stopListening('UserLeftRoom')
+        .stopListening('UserKicked');
     },
   };
 };

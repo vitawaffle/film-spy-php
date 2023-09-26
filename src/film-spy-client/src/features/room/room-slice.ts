@@ -31,6 +31,9 @@ const roomSlice = createSlice({
     userLeft: (state, { payload }: PayloadAction<User>): void => {
       state.users = state.users.filter(user => user.id !== payload.id);
     },
+    userKicked: (state, { payload }: PayloadAction<User>): void => {
+      state.users = state.users.filter(user => user.id !== payload.id);
+    },
   },
 });
 
@@ -41,6 +44,7 @@ export const {
   usersLoaded,
   userJoined,
   userLeft,
+  userKicked,
 } = roomSlice.actions;
 
 export const selectIsUsersLoading = ({ room }: RootState): boolean => room.isUsersLoading;

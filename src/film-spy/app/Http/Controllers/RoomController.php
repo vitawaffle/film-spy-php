@@ -18,6 +18,12 @@ class RoomController extends Controller
             ->toArray();
     }
 
+    /** @return array<int, Room> */
+    public function getJoined(): array
+    {
+        return User::find(Auth::id())->rooms->toArray();
+    }
+
     /** @return array<int, User> */
     public function getUsers(Room $room): array
     {
@@ -79,13 +85,6 @@ class RoomController extends Controller
             abort(403);
 
         $user = User::find($request->validated()['user_id']);
-
-        if (null !== $user->room_id) {
-            $user->room_id = null;
-            $user->save();
-
-            UserKicked::dispatch($user, $room);
-        }
 
         $user->rooms()->detach($room->id);
         $user->save();
