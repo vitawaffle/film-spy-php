@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { userJoined } from './room-slice';
-import type { UserJoinedRoom } from 'broadcast-events';
+import { userJoined, userLeft } from './room-slice';
+import type { UserJoinedRoom, UserLeftRoom } from 'broadcast-events';
 import { useDispatch } from 'store';
 
 const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningRoomChannel: () => void } => {
@@ -18,6 +18,10 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     dispatch(userJoined(user));
   };
 
+  const handleUserLeftRoom = ({ user }: UserLeftRoom): void => {
+    dispatch(userLeft(user));
+  };
+
   const { id } = useParams();
   const url = `rooms.${id}`;
 
@@ -25,12 +29,14 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     listenRoomChannel: (): void => {
       window.Echo.private(url)
         .listen('RoomDeleted', handleRoomDeleted)
-        .listen('UserJoinedRoom', handleUserJoinedRoom);
+        .listen('UserJoinedRoom', handleUserJoinedRoom)
+        .listen('UserLeftRoom', handleUserLeftRoom);
     },
     stopListeningRoomChannel: (): void => {
       window.Echo.private(url)
         .stopListening('RoomDeleted')
-        .stopListening('UserJoinedRoom');
+        .stopListening('UserJoinedRoom')
+        .stopListening('UserLeftRoom');
     },
   };
 };

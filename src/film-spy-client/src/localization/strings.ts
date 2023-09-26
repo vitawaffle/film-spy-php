@@ -28,6 +28,9 @@ export type StringsTemplate = {
       deleteRoomButton: {
         deleteRoom: string,
       },
+      leaveRoomButton: {
+        leaveRoom: string,
+      },
     },
     rooms: {
       createRoomModal: {

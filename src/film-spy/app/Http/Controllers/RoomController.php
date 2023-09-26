@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserKicked, UserLeftRoom};
-use App\Http\Requests\{CreateRoomRequest, DeleteRoomRequest, JoinRoomRequest, KickPlayerRequest, LeaveRoomRequest};
+use App\Http\Requests\{CreateRoomRequest, JoinRoomRequest, KickPlayerRequest};
 use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
 
@@ -53,10 +53,8 @@ class RoomController extends Controller
         }
     }
 
-    public function delete(DeleteRoomRequest $request): void
+    public function delete(Room $room): void
     {
-        $room = Room::find($request->validated()['room_id']);
-
         if (!Gate::allows('room-owner', $room))
             abort(403);
 
@@ -65,15 +63,14 @@ class RoomController extends Controller
         $room->delete();
     }
 
-    public function leave(LeaveRoomRequest $request): void
+    public function leave(Room $room): void
     {
-        $roomId = $request->validated()['room_id'];
         $user = User::find(Auth::id());
 
-        $user->rooms()->detach($roomId);
+        $user->rooms()->detach($room->id);
         $user->save();
 
-        UserLeftRoom::dispatch($roomId, $user);
+        UserLeftRoom::dispatch($room->id, $user);
     }
 
     public function kick(Room $room, KickPlayerRequest $request): void

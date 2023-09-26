@@ -25,6 +25,9 @@ const stringsRu: StringsTemplate = {
       deleteRoomButton: {
         deleteRoom: 'Удалить комнату',
       },
+      leaveRoomButton: {
+        leaveRoom: 'Покинуть комнату',
+      },
     },
     rooms: {
       createRoomModal: {

@@ -4,6 +4,7 @@ export {
   selectIsUnauthenticated,
   selectIsAuthenticationChecking,
   selectIsLoggingOut,
+  selectUser,
 } from './auth-slice';
 export { default as useCheckAuthentication } from './use-check-authentication';
 export { default as useInitCsrf } from './use-init-csrf';

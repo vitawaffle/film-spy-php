@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
 import client from 'client';
+import { roomLeft } from 'features/rooms';
 import { Dialog } from 'features/ui';
 import { strings } from 'localization';
+import { useDispatch } from 'store';
 
-const DeleteRoomButton = (): React.ReactElement => {
+const LeaveRoomButton = (): React.ReactElement => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,12 +17,18 @@ const DeleteRoomButton = (): React.ReactElement => {
   };
 
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
-      await client.delete(`/api/rooms/${id}`);
+      await client.post(`/api/rooms/${id}/leave`);
+
+      dispatch(roomLeft(parseInt(id ?? '0')));
+
+      navigate('/rooms');
     } finally {
       setIsLoading(false);
     }
@@ -34,8 +42,8 @@ const DeleteRoomButton = (): React.ReactElement => {
     <>
       <Dialog
         isOpen={isDialogOpen}
-        id="deleteRoom"
-        title={strings.features.room.deleteRoomButton.deleteRoom + '?'}
+        id="leaveRoom"
+        title={strings.features.room.leaveRoomButton.leaveRoom + '?'}
         onOk={handleOk}
         onCancel={closeDialog}
         onClose={closeDialog}
@@ -47,11 +55,11 @@ const DeleteRoomButton = (): React.ReactElement => {
           </Box>
         )}
       </Dialog>
-      <Button onClick={handleClick} variant="outlined" color="error">
-        {strings.features.room.deleteRoomButton.deleteRoom}
+      <Button onClick={handleClick} variant="outlined" color="secondary">
+        {strings.features.room.leaveRoomButton.leaveRoom}
       </Button>
     </>
   );
 };
 
-export default DeleteRoomButton;
+export default LeaveRoomButton;

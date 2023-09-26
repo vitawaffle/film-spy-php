@@ -28,6 +28,9 @@ const roomSlice = createSlice({
     userJoined: (state, { payload }: PayloadAction<User>): void => {
       state.users.push(payload);
     },
+    userLeft: (state, { payload }: PayloadAction<User>): void => {
+      state.users = state.users.filter(user => user.id !== payload.id);
+    },
   },
 });
 
@@ -37,6 +40,7 @@ export const {
   usersLoadingStarted,
   usersLoaded,
   userJoined,
+  userLeft,
 } = roomSlice.actions;
 
 export const selectIsUsersLoading = ({ room }: RootState): boolean => room.isUsersLoading;

@@ -25,6 +25,9 @@ const stringsEn: StringsTemplate = {
       deleteRoomButton: {
         deleteRoom: 'Delete room',
       },
+      leaveRoomButton: {
+        leaveRoom: 'Leave room',
+      },
     },
     rooms: {
       createRoomModal: {
