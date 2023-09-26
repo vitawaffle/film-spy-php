@@ -58,6 +58,9 @@ const stringsEn: StringsTemplate = {
       title: 'Please, register',
       haveAccount: 'Alredy have an account?',
     },
+    room: {
+      notJoined: 'You are not joined to this room',
+    },
   },
   validation: {
     emailNotUnique: 'This email already exists',

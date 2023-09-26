@@ -61,6 +61,9 @@ export type StringsTemplate = {
       title: string,
       haveAccount: string,
     },
+    room: {
+      notJoined: string,
+    },
   },
   validation: {
     emailNotUnique: string,

@@ -58,6 +58,9 @@ const stringsRu: StringsTemplate = {
       title: 'Пожалуйста, зарегистрируйтесь',
       haveAccount: 'Уже есть акаунт?',
     },
+    room: {
+      notJoined: 'Вы не присоединились к этой комнате',
+    },
   },
   validation: {
     emailNotUnique: 'Этот адрес электронной уже существует',

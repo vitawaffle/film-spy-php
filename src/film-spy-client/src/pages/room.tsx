@@ -1,14 +1,17 @@
 import React from 'react';
-import { Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import {Button, Card, CardContent, Divider, Grid, Stack, Typography} from '@mui/material';
 
-import { useIsRoomOwner } from 'features/room';
+import { useIsHasRoom, useIsRoomOwner } from 'features/room';
 import { DeleteRoomButton, LeaveRoomButton, RoomChannelListener, UserList } from 'features/room';
+import { Centered } from 'features/ui';
 import { strings } from 'localization';
 
 const Room = (): React.ReactElement => {
+  const isHasRoom = useIsHasRoom();
   const isRoomOwner = useIsRoomOwner();
 
-  return (
+  return isHasRoom ? (
     <>
       <RoomChannelListener />
       <Grid container spacing={2}>
@@ -41,6 +44,21 @@ const Room = (): React.ReactElement => {
         </Grid>
       </Grid>
     </>
+  ) : (
+    <Centered>
+      <Card>
+        <CardContent>
+          <Stack>
+            <Typography variant="h4" component="h4" align="center" mb={4}>
+              {strings.pages.room.notJoined}
+            </Typography>
+            <Button component={Link} to="/rooms" variant="contained">
+              {strings.common.rooms}
+            </Button>
+          </Stack>
+        </CardContent>
+      </Card>
+    </Centered>
   );
 };
 

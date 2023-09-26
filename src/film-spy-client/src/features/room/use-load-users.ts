@@ -10,7 +10,7 @@ const useLoadUsers = (): () => Promise<User[]> => {
   const { id } = useParams();
 
   return async (): Promise<User[]> => {
-    dispatch(usersLoadingStarted);
+    dispatch(usersLoadingStarted());
 
     let users: User[] = [];
 
