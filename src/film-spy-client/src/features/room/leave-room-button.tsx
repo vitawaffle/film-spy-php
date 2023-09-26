@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Box, Button, LinearProgress } from '@mui/material';
 
 import client from 'client';
@@ -18,17 +18,13 @@ const LeaveRoomButton = (): React.ReactElement => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
       await client.post(`/api/rooms/${id}/leave`);
-
       dispatch(roomLeft(parseInt(id ?? '0')));
-
-      navigate('/rooms');
     } finally {
       setIsLoading(false);
     }

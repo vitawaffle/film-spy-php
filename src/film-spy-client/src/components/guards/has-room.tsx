@@ -14,7 +14,7 @@ const HasRoom = ({ children }: ChildrenProps): React.ReactElement => {
     && (joinedRooms.find(room => room.id === parseInt(id)) !== undefined);
 
   return (
-    <Guard isEnabled={isHasRoom} navigateOnForbidden="/errors/forbidden">
+    <Guard isEnabled={isHasRoom}>
       {children}
     </Guard>
   );
