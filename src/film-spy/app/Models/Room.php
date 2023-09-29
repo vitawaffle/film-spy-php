@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
  */
 class Room extends Model
 {
-    use HasFactory;
+    use HasFactory, CamelCase;
 
     /**
      * The attributes that are mass assignable.

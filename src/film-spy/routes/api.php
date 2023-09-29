@@ -27,12 +27,15 @@ Route::middleware('auth:sanctum')
     ->group(function () {
         Route::get('/', 'get');
         Route::get('/joined', 'getJoined');
-        Route::get('/{room}/users', 'getUsers');
-        Route::delete('/{room}', 'delete');
-        Route::post('/{room}/leave', 'leave');
-        Route::post('/{room}/kick', 'kick');
-        Route::post('/create', 'create');
-        Route::post('/join', 'join');
+
+        Route::middleware('verified')->group(function () {
+            Route::get('/{room}/users', 'getUsers');
+            Route::delete('/{room}', 'delete');
+            Route::post('/{room}/leave', 'leave');
+            Route::post('/{room}/kick', 'kick');
+            Route::post('/create', 'create');
+            Route::post('/join', 'join');
+        });
     });
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);

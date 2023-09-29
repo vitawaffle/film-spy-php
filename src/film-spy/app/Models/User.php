@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Collection, SoftDeletes};
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany};
@@ -14,9 +14,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Collection<Room> $rooms
  * @property Collection<Room> $ownedRooms
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, CamelCase;
 
     /**
      * The attributes that are mass assignable.

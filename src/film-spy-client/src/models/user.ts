@@ -5,6 +5,7 @@ type User = Model & {
   name: string,
   email: string,
   rooms: Room[],
+  emailVerifiedAt?: Date,
 };
 
 export default User;
