@@ -69,3 +69,5 @@ export const selectIsUnauthenticated = ({ auth }: RootState): boolean =>
 export const selectIsAuthenticationChecking = ({ auth }: RootState): boolean => auth.isAuthenticationChecking;
 export const selectIsLoggingOut = ({ auth }: RootState): boolean => auth.isLoggingOut;
 export const selectUser = ({ auth }: RootState): User | undefined => auth.user;
+export const selectIsEmailVerified = ({ auth }: RootState): boolean =>
+  auth.isAuthenticationChecked && auth.user?.emailVerifiedAt !== undefined && auth.user?.emailVerifiedAt !== null;

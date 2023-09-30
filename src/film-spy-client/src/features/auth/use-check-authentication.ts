@@ -14,6 +14,10 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
     try {
       const user = (await client.get<User>('/api/users/me')).data;
 
+      /* Debug */
+      console.log(user);
+      /* ***** */
+
       dispatch(authenticated(user));
       dispatch(joinedRoomsLoaded(user.rooms));
 

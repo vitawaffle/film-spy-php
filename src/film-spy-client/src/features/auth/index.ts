@@ -4,6 +4,7 @@ export {
   selectIsUnauthenticated,
   selectIsAuthenticationChecking,
   selectIsLoggingOut,
+  selectIsEmailVerified,
   selectUser,
 } from './auth-slice';
 export { default as useCheckAuthentication } from './use-check-authentication';
