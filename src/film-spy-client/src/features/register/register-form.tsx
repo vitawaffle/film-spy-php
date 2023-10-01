@@ -126,7 +126,7 @@ const RegisterForm = (): React.ReactElement => {
           error={!!errors.passwordConfirmation}
           helperText={passwordConfirmationHelperText}
         />
-        <Button type="submit" variant="contained" loading={isLoading} loadingPosition="start">
+        <Button type="submit" variant="contained" loading={isLoading}>
           {strings.common.register}
         </Button>
       </Stack>

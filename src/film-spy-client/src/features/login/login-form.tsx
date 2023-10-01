@@ -99,7 +99,7 @@ const LoginForm = (): React.ReactElement => {
             control={<Checkbox {...register('isRemember')} disabled={isLoading} />}
           />
         </FormGroup>
-        <Button type="submit" variant="contained" loading={isLoading} loadingPosition="start">
+        <Button type="submit" variant="contained" loading={isLoading}>
           {strings.common.logIn}
         </Button>
       </Stack>

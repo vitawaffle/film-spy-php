@@ -21,6 +21,7 @@ return [
         'login',
         'logout',
         'register',
+        'email/verification-notification',
     ],
 
     'allowed_methods' => ['*'],
@@ -31,7 +32,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['Retry-After'],
 
     'max_age' => 0,
 

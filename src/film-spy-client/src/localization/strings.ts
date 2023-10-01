@@ -27,6 +27,8 @@ export type StringsTemplate = {
     email: {
       resendVerificationEmailButton: {
         resend: string,
+        retryAfter: string,
+        s: string,
       },
     },
     room: {

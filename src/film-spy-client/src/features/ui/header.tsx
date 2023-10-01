@@ -208,7 +208,6 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
                   onClick={handleLogoutClick}
                   variant="text"
                   loading={isLoggingOut}
-                  loadingPosition="start"
                   color="inherit"
                 >
                   {strings.common.logOut}

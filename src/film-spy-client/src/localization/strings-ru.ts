@@ -24,6 +24,8 @@ const stringsRu: StringsTemplate = {
     email: {
       resendVerificationEmailButton: {
         resend: 'Выслать письмо с подтверждением снова',
+        retryAfter: 'Попробуйте через',
+        s: 'с',
       },
     },
     room: {

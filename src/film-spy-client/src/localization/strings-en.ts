@@ -24,6 +24,8 @@ const stringsEn: StringsTemplate = {
     email: {
       resendVerificationEmailButton: {
         resend: 'Resend verification email',
+        retryAfter: 'Retry after',
+        s: 's',
       },
     },
     room: {
