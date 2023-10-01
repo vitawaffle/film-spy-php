@@ -3,6 +3,7 @@ import type { StringsTemplate } from './strings';
 const stringsEn: StringsTemplate = {
   common: {
     cancel: 'Cancel',
+    close: 'Close',
     confirmPassword: 'Confirm password',
     create: 'Create',
     email: 'Email',
@@ -22,6 +23,9 @@ const stringsEn: StringsTemplate = {
   },
   features: {
     email: {
+      notVerifiedEmailAlert: {
+        title: 'Email not verified',
+      },
       resendVerificationEmailButton: {
         resend: 'Resend verification email',
         retryAfter: 'Retry after',

@@ -6,6 +6,7 @@ import stringsRu from './strings-ru';
 export type StringsTemplate = {
   common: {
     cancel: string,
+    close: string,
     confirmPassword: string,
     create: string,
     email: string,
@@ -25,6 +26,9 @@ export type StringsTemplate = {
   },
   features: {
     email: {
+      notVerifiedEmailAlert: {
+        title: string,
+      },
       resendVerificationEmailButton: {
         resend: string,
         retryAfter: string,

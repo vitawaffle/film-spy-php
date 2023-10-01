@@ -3,6 +3,7 @@ import type { StringsTemplate } from './strings';
 const stringsRu: StringsTemplate = {
   common: {
     cancel: 'Отмена',
+    close: 'Закрыть',
     confirmPassword: 'Подтвердите пароль',
     create: 'Создать',
     email: 'Электронная почта',
@@ -22,6 +23,9 @@ const stringsRu: StringsTemplate = {
   },
   features: {
     email: {
+      notVerifiedEmailAlert: {
+        title: 'Электронная почта не подтверждена',
+      },
       resendVerificationEmailButton: {
         resend: 'Выслать письмо с подтверждением снова',
         retryAfter: 'Попробуйте через',
