@@ -21,21 +21,20 @@ Route::middleware('auth:sanctum')
         Route::get('/me', 'getMe');
     });
 
-Route::middleware('auth:sanctum')
+Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('/rooms')
     ->controller(RoomController::class)
     ->group(function () {
         Route::get('/', 'get');
         Route::get('/joined', 'getJoined');
+        Route::get('/{room}/users', 'getUsers');
 
-        Route::middleware('verified')->group(function () {
-            Route::get('/{room}/users', 'getUsers');
-            Route::delete('/{room}', 'delete');
-            Route::post('/{room}/leave', 'leave');
-            Route::post('/{room}/kick', 'kick');
-            Route::post('/create', 'create');
-            Route::post('/join', 'join');
-        });
+        Route::delete('/{room}', 'delete');
+
+        Route::post('/create', 'create');
+        Route::post('/join', 'join');
+        Route::post('/{room}/leave', 'leave');
+        Route::post('/{room}/kick', 'kick');
     });
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
