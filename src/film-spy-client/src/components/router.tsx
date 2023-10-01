@@ -1,13 +1,14 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Authenticated } from 'components/guards';
+import { Authenticated, EmailVerified } from 'components/guards';
 import { Error, Home, Login, Register, Room, Rooms } from 'pages';
-import { Forbidden, NotFound } from 'pages/errors';
+import { EmailNotVerified, Forbidden, NotFound } from 'pages/errors';
 
 const Router = (): React.ReactElement => (
   <Routes>
     <Route path="errors" element={<Error />}>
+      <Route path="email-not-verified" element={<EmailNotVerified />} />
       <Route path="forbidden" element={<Forbidden />} />
       <Route path="not-found" element={<NotFound />} />
     </Route>
@@ -16,12 +17,16 @@ const Router = (): React.ReactElement => (
     <Route path="register" element={<Register />} />
     <Route path="rooms/:id" element={(
       <Authenticated>
-        <Room />
+        <EmailVerified>
+          <Room />
+        </EmailVerified>
       </Authenticated>
     )} />
     <Route path="rooms" element={(
       <Authenticated>
-        <Rooms />
+        <EmailVerified>
+          <Rooms />
+        </EmailVerified>
       </Authenticated>
     )} />
     <Route path="/" element={<Navigate to="/home" />} />

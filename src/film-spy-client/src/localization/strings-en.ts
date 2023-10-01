@@ -21,6 +21,11 @@ const stringsEn: StringsTemplate = {
     players: 'Players',
   },
   features: {
+    email: {
+      resendVerificationEmailButton: {
+        resend: 'Resend verification email',
+      },
+    },
     room: {
       deleteRoomButton: {
         deleteRoom: 'Delete room',
@@ -50,6 +55,8 @@ const stringsEn: StringsTemplate = {
   },
   pages: {
     errors: {
+      emailNotVerified: 'Verify your email to complete this action. Didn\'t receive a confirmation email? Use the ' +
+        'button below.',
       forbidden: 'You can\'t come here! Get the appropriate privileges to access this page.',
       notFound: 'Oops! It seems you are lost. This page does not exist. Try to return to the Home.',
     },

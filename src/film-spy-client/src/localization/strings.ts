@@ -24,6 +24,11 @@ export type StringsTemplate = {
     players: string,
   },
   features: {
+    email: {
+      resendVerificationEmailButton: {
+        resend: string,
+      },
+    },
     room: {
       deleteRoomButton: {
         deleteRoom: string,
@@ -53,6 +58,7 @@ export type StringsTemplate = {
   },
   pages: {
     errors: {
+      emailNotVerified: string,
       forbidden: string,
       notFound: string,
     },

@@ -21,6 +21,11 @@ const stringsRu: StringsTemplate = {
     players: 'Игроки',
   },
   features: {
+    email: {
+      resendVerificationEmailButton: {
+        resend: 'Выслать письмо с подтверждением снова',
+      },
+    },
     room: {
       deleteRoomButton: {
         deleteRoom: 'Удалить комнату',
@@ -50,6 +55,8 @@ const stringsRu: StringsTemplate = {
   },
   pages: {
     errors: {
+      emailNotVerified: 'Подтвердите свой адрес электронной почты, чтобы выполнить это действие. Не получили ' +
+        'электронное письмо с подтверждением? Используйте кнопку внизу.',
       forbidden: 'Вам сюда нельзя! Получите соответствующие привилегии, чтобы попасть на эту страничку.',
       notFound: 'Упс! Кажется, вы заблудились. Такой страницы не существует. Попробуйте вернуться на главную.',
     },

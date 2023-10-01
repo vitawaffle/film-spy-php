@@ -3,9 +3,7 @@ import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 
 import CreateRoomModal from './create-room-modal';
-import { selectIsEmailVerified } from 'features/auth';
 import { strings } from 'localization';
-import { useSelector } from 'store';
 
 const CreateRoomButton = (): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,11 +16,9 @@ const CreateRoomButton = (): React.ReactElement => {
     setIsModalOpen(false);
   };
 
-  const isEmailVerified = useSelector(selectIsEmailVerified);
-
   return (
     <>
-      <Button onClick={handleClick} variant="contained" startIcon={<CreateIcon />} disabled={!isEmailVerified}>
+      <Button onClick={handleClick} variant="contained" startIcon={<CreateIcon />}>
         {strings.common.create}
       </Button>
       <CreateRoomModal isOpen={isModalOpen} onSuccess={closeModal} onClose={closeModal} />
