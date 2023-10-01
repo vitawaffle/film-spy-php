@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { Button, Checkbox, FormControlLabel, FormGroup, LinearProgress, Stack, TextField } from '@mui/material';
+import Button from '@mui/lab/LoadingButton';
+import { Checkbox, FormControlLabel, FormGroup, Stack, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import client from 'client';
@@ -67,7 +68,6 @@ const LoginForm = (): React.ReactElement => {
   return (
     <form onSubmit={handleSubmit(login)}>
       <Stack spacing={2}>
-        {isLoading && <LinearProgress />}
         <TextField
           {...register('email', { onChange })}
           id="email"
@@ -99,7 +99,7 @@ const LoginForm = (): React.ReactElement => {
             control={<Checkbox {...register('isRemember')} disabled={isLoading} />}
           />
         </FormGroup>
-        <Button type="submit" variant="contained" disabled={isLoading}>
+        <Button type="submit" variant="contained" loading={isLoading} loadingPosition="start">
           {strings.common.logIn}
         </Button>
       </Stack>

@@ -3,7 +3,8 @@ import type { FieldValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, LinearProgress, Stack, TextField } from '@mui/material';
+import Button from '@mui/lab/LoadingButton';
+import { Stack, TextField } from '@mui/material';
 
 import client from 'client';
 import { useCheckAuthentication, useInitCsrf } from 'features/auth';
@@ -79,7 +80,6 @@ const RegisterForm = (): React.ReactElement => {
   return (
     <form onSubmit={handleSubmit(handleRegister)}>
       <Stack spacing={2}>
-        {isLoading && <LinearProgress />}
         <TextField
           {...register('name')}
           id="name"
@@ -126,7 +126,7 @@ const RegisterForm = (): React.ReactElement => {
           error={!!errors.passwordConfirmation}
           helperText={passwordConfirmationHelperText}
         />
-        <Button type="submit" variant="contained" disabled={isLoading}>
+        <Button type="submit" variant="contained" loading={isLoading} loadingPosition="start">
           {strings.common.register}
         </Button>
       </Stack>

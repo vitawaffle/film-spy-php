@@ -23,6 +23,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import type { AppBarProps as MuiAppBarProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { CSSObject, Theme } from '@mui/material/styles';
@@ -194,24 +195,33 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
           >
             Film Spy
           </Typography>
-          {(isAuthenticationChecking || isLoggingOut) && (
+          {isAuthenticationChecking ? (
             <Box display="flex">
               <CircularProgress color="inherit" />
             </Box>
-          )}
-          {isAuthenticated && (
-            <Button onClick={handleLogoutClick} color="inherit">
-              {strings.common.logOut}
-            </Button>
-          )}
-          {isUnauthenticated && (
+          ) : (
             <>
-              <Button component={Link} to="/register" color="inherit">
-                {strings.common.register}
-              </Button>
-              <Button component={Link} to="/login" color="inherit">
-                {strings.common.logIn}
-              </Button>
+              {isAuthenticated && (
+                <LoadingButton
+                  onClick={handleLogoutClick}
+                  variant="text"
+                  loading={isLoggingOut}
+                  loadingPosition="start"
+                  color="inherit"
+                >
+                  {strings.common.logOut}
+                </LoadingButton>
+              )}
+              {isUnauthenticated && (
+                <>
+                  <Button component={Link} to="/register" color="inherit">
+                    {strings.common.register}
+                  </Button>
+                  <Button component={Link} to="/login" color="inherit">
+                    {strings.common.logIn}
+                  </Button>
+                </>
+              )}
             </>
           )}
         </Toolbar>
