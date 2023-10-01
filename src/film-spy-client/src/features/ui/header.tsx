@@ -31,6 +31,7 @@ import type { CSSObject, Theme } from '@mui/material/styles';
 import {
   selectIsAuthenticated,
   selectIsAuthenticationChecking,
+  selectIsEmailVerified,
   selectIsLoggingOut,
   selectIsUnauthenticated,
   useLogOut,
@@ -170,6 +171,7 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
   const isUnauthenticated = useSelector(selectIsUnauthenticated);
   const isAuthenticationChecking = useSelector(selectIsAuthenticationChecking);
   const isLoggingOut = useSelector(selectIsLoggingOut);
+  const isEmailVerified = useSelector(selectIsEmailVerified);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -240,7 +242,7 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
             icon={<HomeIcon />}
             isDrawerOpen={isOpen}
           />
-          {isAuthenticated && (
+          {isAuthenticated && isEmailVerified && (
             <DrawerLink
               to="/rooms"
               text={strings.common.rooms}
