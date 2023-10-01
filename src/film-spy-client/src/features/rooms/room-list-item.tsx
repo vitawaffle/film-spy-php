@@ -51,7 +51,7 @@ const RoomListItem = ({ room }: RoomListItemProps): React.ReactElement => {
               >
                 {strings.features.rooms.roomListItem.players}:
               </Typography>
-              {' ' + room.users_count}
+              {' ' + room.usersCount}
               {isJoined && `, ${strings.common.joined}`}
             </>
           )}
