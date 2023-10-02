@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from './components';
 import { useCheckAuthentication } from './features/auth';
-import { NotVerifiedEmailAlert } from './features/email';
 import { Layout } from './features/ui';
 
 const App = (): React.ReactElement => {
@@ -14,14 +13,11 @@ const App = (): React.ReactElement => {
   }, []);
 
   return (
-    <>
-      <NotVerifiedEmailAlert />
-      <BrowserRouter>
-        <Layout>
-          <Router />
-        </Layout>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Layout>
+        <Router />
+      </Layout>
+    </BrowserRouter>
   );
 };
 

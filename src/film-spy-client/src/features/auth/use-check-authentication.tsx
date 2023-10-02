@@ -4,9 +4,11 @@ import { joinedRoomsLoaded } from 'features/rooms/rooms-slice';
 import type { User } from 'models';
 import { useDispatch } from 'store';
 import { isUnauthenticatedError } from 'utils';
+import useEmailNotVerifiedSnackbar from './use-email-not-verified-snackbar';
 
 const useCheckAuthentication = (): () => Promise<boolean> => {
   const dispatch = useDispatch();
+  const enqueueEmailNotVerified = useEmailNotVerifiedSnackbar();
 
   return async (): Promise<boolean> => {
     dispatch(authenticationCheckStarted());
@@ -16,6 +18,9 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
 
       dispatch(authenticated(user));
       dispatch(joinedRoomsLoaded(user.rooms));
+
+      if (user.emailVerifiedAt === undefined || user.emailVerifiedAt === null)
+        enqueueEmailNotVerified();
 
       return true;
     } catch (error: unknown) {

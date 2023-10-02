@@ -18,6 +18,7 @@ export type StringsTemplate = {
     logIn: string,
     logOut: string,
     register: string,
+    resend: string,
     name: string,
     ok: string,
     password: string,
@@ -25,10 +26,12 @@ export type StringsTemplate = {
     players: string,
   },
   features: {
-    email: {
-      notVerifiedEmailAlert: {
-        title: string,
+    auth: {
+      useCheckAuthentication: {
+        emailNotVerified: string,
       },
+    },
+    email: {
       resendVerificationEmailButton: {
         resend: string,
         retryAfter: string,

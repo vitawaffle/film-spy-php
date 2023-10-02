@@ -15,6 +15,7 @@ const stringsRu: StringsTemplate = {
     logIn: 'Войти',
     logOut: 'Выйти',
     register: 'Зарегистрироваться',
+    resend: 'Выслать заново',
     name: 'Name',
     ok: 'Хорошо',
     password: 'Пароль',
@@ -22,10 +23,14 @@ const stringsRu: StringsTemplate = {
     players: 'Игроки',
   },
   features: {
-    email: {
-      notVerifiedEmailAlert: {
-        title: 'Электронная почта не подтверждена',
+    auth: {
+      useCheckAuthentication: {
+        emailNotVerified: 'Электронная почта не подтверждена. Некоторый функционал недоступен. Подтвердите свой '
+          + ' адрес электронной почты, чтобы получить полный доступ. Не получили письмо с подтверждением? '
+          + 'Используйте кнопку ниже.',
       },
+    },
+    email: {
       resendVerificationEmailButton: {
         resend: 'Выслать письмо с подтверждением снова',
         retryAfter: 'Попробуйте через',

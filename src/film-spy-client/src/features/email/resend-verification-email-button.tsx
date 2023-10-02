@@ -7,7 +7,12 @@ import client from 'client';
 import { strings } from 'localization';
 import { isTooManyRequestsError } from 'utils';
 
-const ResendVerificationEmailButton = (): React.ReactElement => {
+export type ResendVerificationEmailButtonProps = {
+  variant?: 'text' | 'outlined' | 'contained',
+  color?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+};
+
+const ResendVerificationEmailButton = ({ variant, color }: ResendVerificationEmailButtonProps): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
 
@@ -45,7 +50,8 @@ const ResendVerificationEmailButton = (): React.ReactElement => {
   return (
     <Button
       onClick={handleClick}
-      variant="contained"
+      variant={variant ?? 'contained'}
+      color={color ?? 'primary'}
       loading={isLoading}
       disabled={secondsLeft > 0}
     >

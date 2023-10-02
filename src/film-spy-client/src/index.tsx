@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import App from './app';
 import client from './client';
+import { Notifications } from './components';
 import reportWebVitals from './report-web-vitals';
 import { store } from './store';
 
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render((
   <React.StrictMode>
     <CssBaseline />
     <Provider store={store}>
-      <App />
+      <Notifications>
+        <App />
+      </Notifications>
     </Provider>
   </React.StrictMode>
 ));

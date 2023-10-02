@@ -15,6 +15,7 @@ const stringsEn: StringsTemplate = {
     logIn: 'Log in',
     logOut: 'Log out',
     register: 'Register',
+    resend: 'Resend',
     name: 'Name',
     ok: 'Ok',
     password: 'Password',
@@ -22,10 +23,13 @@ const stringsEn: StringsTemplate = {
     players: 'Players',
   },
   features: {
-    email: {
-      notVerifiedEmailAlert: {
-        title: 'Email not verified',
+    auth: {
+      useCheckAuthentication: {
+        emailNotVerified: 'Email not verified. Some functionality is not available. Confirm your email to get full '
+          + 'access. Didn\'t receive a confirmation email? Use the button below.',
       },
+    },
+    email: {
       resendVerificationEmailButton: {
         resend: 'Resend verification email',
         retryAfter: 'Retry after',
