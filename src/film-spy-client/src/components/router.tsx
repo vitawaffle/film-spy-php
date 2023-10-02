@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Authenticated, EmailVerified } from 'components/guards';
+import { Authenticated, EmailVerified, HasRoom } from 'components/guards';
 import { Error, Home, Login, Register, Room, Rooms } from 'pages';
 import { EmailNotVerified, Forbidden, NotFound } from 'pages/errors';
 
@@ -18,7 +18,9 @@ const Router = (): React.ReactElement => (
     <Route path="rooms/:id" element={(
       <Authenticated>
         <EmailVerified>
-          <Room />
+          <HasRoom>
+            <Room />
+          </HasRoom>
         </EmailVerified>
       </Authenticated>
     )} />

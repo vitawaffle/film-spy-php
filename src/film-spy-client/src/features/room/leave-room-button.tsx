@@ -25,8 +25,11 @@ const LeaveRoomButton = (): React.ReactElement => {
 
     try {
       await client.post(`/api/rooms/${id}/leave`);
-      dispatch(roomLeft(parseInt(id ?? '0')));
       navigate('/rooms');
+
+      setTimeout(() => {
+        dispatch(roomLeft(parseInt(id ?? '0')));
+      }, 0);
     } finally {
       setIsLoading(false);
     }
