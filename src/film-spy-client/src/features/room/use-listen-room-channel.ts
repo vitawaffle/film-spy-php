@@ -14,12 +14,6 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
   const dispatch = useDispatch();
   const currentUser = useSelector(selectUser);
 
-  const handleRoomDeleted = (): void => {
-    enqueueSnackbar(strings.snack.roomDeleted);
-
-    navigate('/rooms');
-  };
-
   const handleUserJoinedRoom = ({ user }: UserJoinedRoom): void => {
     dispatch(userJoined(user));
   };
@@ -45,14 +39,12 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
   return {
     listenRoomChannel: (): void => {
       window.Echo.private(url)
-        .listen('RoomDeleted', handleRoomDeleted)
         .listen('UserJoinedRoom', handleUserJoinedRoom)
         .listen('UserLeftRoom', handleUserLeftRoom)
         .listen('UserKicked', handleUserKicked);
     },
     stopListeningRoomChannel: (): void => {
       window.Echo.private(url)
-        .stopListening('RoomDeleted')
         .stopListening('UserJoinedRoom')
         .stopListening('UserLeftRoom')
         .stopListening('UserKicked');
