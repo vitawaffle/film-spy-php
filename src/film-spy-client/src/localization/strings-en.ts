@@ -24,7 +24,7 @@ const stringsEn: StringsTemplate = {
   },
   features: {
     auth: {
-      useCheckAuthentication: {
+      emailNotVerifiedSnackbar: {
         emailNotVerified: 'Email not verified. Some functionality is not available. Didn\'t receive a confirmation '
           + ' email? Use the button below.',
       },
@@ -45,6 +45,9 @@ const stringsEn: StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: 'Leave room',
+      },
+      roomDeletedSnackbar: {
+        roomDeleted: 'Room deleted',
       },
     },
     rooms: {

@@ -27,7 +27,7 @@ export type StringsTemplate = {
   },
   features: {
     auth: {
-      useCheckAuthentication: {
+      emailNotVerifiedSnackbar: {
         emailNotVerified: string,
       },
     },
@@ -47,6 +47,9 @@ export type StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: string,
+      },
+      roomDeletedSnackbar: {
+        roomDeleted: string,
       },
     },
     rooms: {

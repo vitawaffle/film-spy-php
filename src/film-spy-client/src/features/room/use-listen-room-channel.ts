@@ -1,18 +1,21 @@
+import { useSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { userJoined, userKicked, userLeft } from './room-slice';
 import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
 import { selectUser } from 'features/auth';
 import { roomKicked } from 'features/rooms';
+import { strings } from 'localization';
 import { useDispatch, useSelector } from 'store';
 
 const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningRoomChannel: () => void } => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const currentUser = useSelector(selectUser);
 
   const handleRoomDeleted = (): void => {
-    // TODO add feedback about room deletion
+    enqueueSnackbar(strings.features.room.roomDeletedSnackbar.roomDeleted);
 
     navigate('/rooms');
   };

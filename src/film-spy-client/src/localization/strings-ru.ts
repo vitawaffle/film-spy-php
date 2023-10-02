@@ -24,7 +24,7 @@ const stringsRu: StringsTemplate = {
   },
   features: {
     auth: {
-      useCheckAuthentication: {
+      emailNotVerifiedSnackbar: {
         emailNotVerified: 'Электронная почта не подтверждена. Некоторый функционал недоступен. Не получили письмо с '
           + 'подтверждением? Используйте кнопку ниже.',
       },
@@ -45,6 +45,9 @@ const stringsRu: StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: 'Покинуть комнату',
+      },
+      roomDeletedSnackbar: {
+        roomDeleted: 'Комната удалена',
       },
     },
     rooms: {
