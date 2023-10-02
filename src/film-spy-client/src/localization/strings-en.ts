@@ -23,12 +23,6 @@ const stringsEn: StringsTemplate = {
     players: 'Players',
   },
   features: {
-    auth: {
-      emailNotVerifiedSnackbar: {
-        emailNotVerified: 'Email not verified. Some functionality is not available. Didn\'t receive a confirmation '
-          + ' email? Use the button below.',
-      },
-    },
     email: {
       resendVerificationEmailButton: {
         resend: 'Resend verification email',
@@ -45,9 +39,6 @@ const stringsEn: StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: 'Leave room',
-      },
-      roomDeletedSnackbar: {
-        roomDeleted: 'Room deleted',
       },
     },
     rooms: {
@@ -84,6 +75,12 @@ const stringsEn: StringsTemplate = {
     room: {
       notJoined: 'You are not joined to this room',
     },
+  },
+  snack: {
+    emailNotVerified: 'Email not verified. Some functionality is not available. Didn\'t receive a confirmation '
+          + ' email? Use the button below.',
+    roomDeleted: 'Room deleted',
+    youAreKicked: 'You are kicked from the room',
   },
   validation: {
     emailNotUnique: 'This email already exists',

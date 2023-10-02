@@ -10,7 +10,7 @@ const useEmailNotVerifiedSnackbar = (): () => void => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   return () => {
-    enqueueSnackbar(strings.features.auth.emailNotVerifiedSnackbar.emailNotVerified, {
+    enqueueSnackbar(strings.snack.emailNotVerified, {
       variant: 'warning',
       persist: true,
       action: (snackbarId): React.ReactNode => (

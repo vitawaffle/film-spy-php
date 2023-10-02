@@ -26,11 +26,6 @@ export type StringsTemplate = {
     players: string,
   },
   features: {
-    auth: {
-      emailNotVerifiedSnackbar: {
-        emailNotVerified: string,
-      },
-    },
     email: {
       resendVerificationEmailButton: {
         resend: string,
@@ -47,9 +42,6 @@ export type StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: string,
-      },
-      roomDeletedSnackbar: {
-        roomDeleted: string,
       },
     },
     rooms: {
@@ -85,6 +77,11 @@ export type StringsTemplate = {
     room: {
       notJoined: string,
     },
+  },
+  snack: {
+    emailNotVerified: string,
+    roomDeleted: string,
+    youAreKicked: string,
   },
   validation: {
     emailNotUnique: string,

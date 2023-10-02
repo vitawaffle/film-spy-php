@@ -15,7 +15,7 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
   const currentUser = useSelector(selectUser);
 
   const handleRoomDeleted = (): void => {
-    enqueueSnackbar(strings.features.room.roomDeletedSnackbar.roomDeleted);
+    enqueueSnackbar(strings.snack.roomDeleted);
 
     navigate('/rooms');
   };
@@ -32,7 +32,7 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     dispatch(userKicked(user));
 
     if (currentUser?.id === user.id) {
-      // TODO add feedback about room kicking
+      enqueueSnackbar(strings.snack.youAreKicked);
 
       dispatch(roomKicked(room));
       navigate('/rooms');

@@ -23,12 +23,6 @@ const stringsRu: StringsTemplate = {
     players: 'Игроки',
   },
   features: {
-    auth: {
-      emailNotVerifiedSnackbar: {
-        emailNotVerified: 'Электронная почта не подтверждена. Некоторый функционал недоступен. Не получили письмо с '
-          + 'подтверждением? Используйте кнопку ниже.',
-      },
-    },
     email: {
       resendVerificationEmailButton: {
         resend: 'Выслать письмо с подтверждением снова',
@@ -45,9 +39,6 @@ const stringsRu: StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: 'Покинуть комнату',
-      },
-      roomDeletedSnackbar: {
-        roomDeleted: 'Комната удалена',
       },
     },
     rooms: {
@@ -84,6 +75,12 @@ const stringsRu: StringsTemplate = {
     room: {
       notJoined: 'Вы не присоединились к этой комнате',
     },
+  },
+  snack: {
+    emailNotVerified: 'Электронная почта не подтверждена. Некоторый функционал недоступен. Не получили письмо с '
+          + 'подтверждением? Используйте кнопку ниже.',
+    roomDeleted: 'Комната удалена',
+    youAreKicked: 'Вы исключены из комнаты',
   },
   validation: {
     emailNotUnique: 'Этот адрес электронной уже существует',
