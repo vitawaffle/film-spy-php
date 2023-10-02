@@ -15,7 +15,9 @@ const useEmailNotVerifiedSnackbar = (): () => void => {
       persist: true,
       action: (snackbarId): React.ReactNode => (
         <>
-          <ResendVerificationEmailButton variant="outlined" color="inherit" />
+          <ResendVerificationEmailButton variant="outlined" color="inherit">
+            {strings.common.resend}
+          </ResendVerificationEmailButton>
           <IconButton
             aria-label={strings.common.close}
             color="inherit"

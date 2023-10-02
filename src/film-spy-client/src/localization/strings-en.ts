@@ -25,8 +25,8 @@ const stringsEn: StringsTemplate = {
   features: {
     auth: {
       useCheckAuthentication: {
-        emailNotVerified: 'Email not verified. Some functionality is not available. Confirm your email to get full '
-          + 'access. Didn\'t receive a confirmation email? Use the button below.',
+        emailNotVerified: 'Email not verified. Some functionality is not available. Didn\'t receive a confirmation '
+          + ' email? Use the button below.',
       },
     },
     email: {

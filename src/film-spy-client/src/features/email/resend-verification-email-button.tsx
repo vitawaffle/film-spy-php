@@ -5,14 +5,19 @@ import Button from '@mui/lab/LoadingButton';
 
 import client from 'client';
 import { strings } from 'localization';
+import type { ChildrenProps } from 'props';
 import { isTooManyRequestsError } from 'utils';
 
-export type ResendVerificationEmailButtonProps = {
+export type ResendVerificationEmailButtonProps = ChildrenProps & {
   variant?: 'text' | 'outlined' | 'contained',
   color?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
 };
 
-const ResendVerificationEmailButton = ({ variant, color }: ResendVerificationEmailButtonProps): React.ReactElement => {
+const ResendVerificationEmailButton = ({
+  children,
+  variant,
+  color,
+}: ResendVerificationEmailButtonProps): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
 
@@ -55,7 +60,7 @@ const ResendVerificationEmailButton = ({ variant, color }: ResendVerificationEma
       loading={isLoading}
       disabled={secondsLeft > 0}
     >
-      {strings.features.email.resendVerificationEmailButton.resend + ' '}
+      {(children ?? strings.features.email.resendVerificationEmailButton.resend) + ' '}
       {isCountdownShown && (
         <>({`${strings.features.email.resendVerificationEmailButton.retryAfter} ${secondsLeft}${
           strings.features.email.resendVerificationEmailButton.s}`})</>
