@@ -1,7 +1,8 @@
 import { useSnackbar } from 'notistack';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { userJoined, userKicked, userLeft } from './room-slice';
+import useCurrentRoomId from './use-current-room-id';
 import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
 import { selectUser } from 'features/auth';
 import { roomKicked } from 'features/rooms';
@@ -33,8 +34,8 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     }
   };
 
-  const { id } = useParams();
-  const url = `rooms.${id}`;
+  const roomId = useCurrentRoomId();
+  const url = `rooms.${roomId}`;
 
   return {
     listenRoomChannel: (): void => {

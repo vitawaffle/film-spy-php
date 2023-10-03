@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import '@fontsource/roboto/300.css';
@@ -19,9 +20,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render((
   <React.StrictMode>
     <CssBaseline />
     <Provider store={store}>
-      <Notifications>
-        <App />
-      </Notifications>
+      <BrowserRouter>
+        <Notifications>
+          <App />
+        </Notifications>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 ));

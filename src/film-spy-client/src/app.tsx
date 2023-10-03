@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from './components';
 import { selectIsAuthenticated, selectIsEmailVerified, useCheckAuthentication } from './features/auth';
@@ -24,12 +23,12 @@ const App = (): React.ReactElement => {
   }, [isAuthenticated, isEmailVerified]);
 
   return (
-    <BrowserRouter>
+    <>
       {isAuthenticated && isEmailVerified && <RoomsChannelListener />}
       <Layout>
         <Router />
       </Layout>
-    </BrowserRouter>
+    </>
   );
 };
 

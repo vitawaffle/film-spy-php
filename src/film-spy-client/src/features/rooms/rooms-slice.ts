@@ -12,6 +12,7 @@ export type RoomsState = {
   isJoinedRoomsLoading: boolean,
   isJoinedRoomsLoaded: boolean,
   joinedRooms: Room[],
+  lastDeletedRoomId?: number,
 };
 
 const initialState: RoomsState = {
@@ -59,12 +60,16 @@ const roomsSlice = createSlice({
     roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
       state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload.id);
       state.rooms = state.rooms.filter(room => room.id !== payload.id);
+      state.lastDeletedRoomId = payload.id;
     },
     roomLeft: (state, { payload }: PayloadAction<number>): void => {
       state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload);
     },
     roomKicked: (state, { payload }: PayloadAction<Room>): void => {
       state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload.id);
+    },
+    navigatedAfterDeletion: (state): void => {
+      state.lastDeletedRoomId = undefined;
     },
   },
 });
@@ -83,6 +88,7 @@ export const {
   roomDeleted,
   roomLeft,
   roomKicked,
+  navigatedAfterDeletion,
 } = roomsSlice.actions;
 
 export const selectIsRoomsLoading = ({ rooms }: RootState): boolean => rooms.isRoomsLoading;
@@ -94,3 +100,5 @@ export const selectIsJoinedRoomsLoaded = ({ rooms }: RootState): boolean => room
 export const selectJoinedRooms = ({ rooms }: RootState): Room[] => rooms.joinedRooms;
 export const selectRoomById = (id: number) => ({ rooms }: RootState): Room | undefined =>
   rooms.rooms.find(room => room.id === id);
+export const selectLastDeletedRoomId = ({ rooms }: RootState): number | undefined =>
+  rooms.lastDeletedRoomId;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Button, LinearProgress } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 
+import useCurrentRoomId from './use-current-room-id';
 import client from 'client';
 import { Dialog } from 'features/ui';
 import { strings } from 'localization';
@@ -14,13 +14,13 @@ const DeleteRoomButton = (): React.ReactElement => {
     setIsDialogOpen(true);
   };
 
-  const { id } = useParams();
+  const roomId = useCurrentRoomId();
 
   const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
-      await client.delete(`/api/rooms/${id}`);
+      await client.delete(`/api/rooms/${roomId}`);
     } finally {
       setIsLoading(false);
     }
@@ -42,8 +42,8 @@ const DeleteRoomButton = (): React.ReactElement => {
         isControlDisabled={isLoading}
       >
         {isLoading && (
-          <Box sx={{ width: '100%' }}>
-            <LinearProgress />
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
           </Box>
         )}
       </Dialog>

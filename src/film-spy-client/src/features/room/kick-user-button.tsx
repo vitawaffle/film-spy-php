@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { Box, LinearProgress, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
+import useCurrentRoomId from './use-current-room-id';
 import client from 'client';
 import { Dialog } from 'features/ui';
 import { strings } from 'localization';
@@ -20,13 +20,13 @@ const KickUserButton = ({ user }: KickUserButtonProps): React.ReactElement => {
     setIsDialogOpen(true);
   };
 
-  const { id } = useParams();
+  const roomId = useCurrentRoomId();
 
   const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
-      await client.post(`/api/rooms/${id}/kick`, {
+      await client.post(`/api/rooms/${roomId}/kick`, {
         user_id: user.id,
       });
 
