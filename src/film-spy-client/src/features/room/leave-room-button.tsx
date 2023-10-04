@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, LinearProgress } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 
 import useCurrentRoomId from './use-current-room-id';
 import client from 'client';
@@ -45,8 +45,8 @@ const LeaveRoomButton = (): React.ReactElement => {
         isControlDisabled={isLoading}
       >
         {isLoading && (
-          <Box sx={{ width: '100%' }}>
-            <LinearProgress />
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
           </Box>
         )}
       </Dialog>

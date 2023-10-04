@@ -3,7 +3,8 @@ import type { FieldValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, LinearProgress, Stack, TextField } from '@mui/material';
+import Button from '@mui/lab/LoadingButton';
+import { Stack, TextField } from '@mui/material';
 
 import { roomJoined, selectSelectedRoom } from './rooms-slice';
 import client from 'client';
@@ -62,7 +63,6 @@ const JoinRoomForm = (): React.ReactElement => {
   return (
     <form onSubmit={handleSubmit(joinRoom)}>
       <Stack spacing={2}>
-        {isLoading && <LinearProgress />}
         <TextField
           {...register('password', { onChange })}
           id="password"
@@ -73,7 +73,7 @@ const JoinRoomForm = (): React.ReactElement => {
           error={isInvalidPassword}
           helperText={passwordHelperText}
         />
-        <Button type="submit" variant="contained" disabled={isLoading}>
+        <Button type="submit" variant="contained" loading={isLoading}>
           {strings.common.join}
         </Button>
       </Stack>

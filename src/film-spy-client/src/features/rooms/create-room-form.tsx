@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, LinearProgress, Stack, TextField } from '@mui/material';
+import Button from '@mui/lab/LoadingButton';
+import { Stack, TextField } from '@mui/material';
 
 import client from 'client';
 import { strings } from 'localization';
@@ -60,7 +61,6 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): React.ReactElement 
   return (
     <form onSubmit={handleSubmit(createRoom)}>
       <Stack spacing={2}>
-        {isLoading && <LinearProgress />}
         <TextField
           {...register('name')}
           id="name"
@@ -79,7 +79,7 @@ const CreateRoomForm = ({ onSuccess }: CreateRoomFormProps): React.ReactElement 
           disabled={isLoading}
           helperText={strings.common.keepPasswordEmpty}
         />
-        <Button type="submit" variant="contained" disabled={isLoading}>
+        <Button type="submit" variant="contained" loading={isLoading}>
           {strings.common.create}
         </Button>
       </Stack>
