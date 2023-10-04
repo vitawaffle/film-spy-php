@@ -9,16 +9,23 @@ trait CamelCase
     /** @inheritdoc */
     public function getAttribute(mixed $key): mixed
     {
-        if (array_key_exists($key, $this->getRelations()))
-            return parent::getAttribute($key);
+        $snakedKey = Str::snake($key);
 
-        return parent::getAttribute(Str::snake($key));
+        if (array_key_exists($snakedKey, $this->getRelations()))
+            return parent::getAttribute($snakedKey);
+
+        return parent::getAttribute($key);
     }
 
     /** @inheritdoc */
     public function setAttribute(mixed $key, mixed $value): mixed
     {
-        return parent::setAttribute(Str::snake($key), $value);
+        $snakedKey = Str::snake($key);
+
+        if (array_key_exists($snakedKey, $this->getRelations()))
+            return parent::setAttribute($snakedKey, $value);
+
+        return parent::setAttribute($key, $value);
     }
 
     /** @inheritdoc */
