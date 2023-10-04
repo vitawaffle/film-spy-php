@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
-
 import useCurrentRoomId from './use-current-room-id';
-import { selectUser } from 'features/auth';
-import { selectRoomById, useLoadRooms } from 'features/rooms';
+import { selectOwnedRooms } from 'features/rooms';
 import { useSelector } from 'store';
 
 const useIsRoomOwner = (): boolean => {
   const currentRoomId = useCurrentRoomId();
-  const room = useSelector(selectRoomById(currentRoomId));
-  const user = useSelector(selectUser);
+  const ownedRooms = useSelector(selectOwnedRooms);
 
-  return room !== undefined && user !== undefined && room.owner.id === user.id;
+  return ownedRooms.find(room => room.id === currentRoomId) !== undefined;
 };
 
 export default useIsRoomOwner;

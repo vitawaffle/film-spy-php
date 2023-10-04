@@ -24,6 +24,12 @@ class RoomController extends Controller
         return User::find(Auth::id())->rooms->toArray();
     }
 
+    /** @return array<int, Room> */
+    public function getOwned(): array
+    {
+        return User::find(Auth::id())->ownedRooms->toArray();
+    }
+
     /** @return array<int, User> */
     public function getUsers(Room $room): array
     {

@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->group(function () {
         Route::get('/', 'get');
         Route::get('/joined', 'getJoined');
+        Route::get('/owned', 'getOwned');
         Route::get('/{room}/users', 'getUsers');
 
         Route::delete('/{room}', 'delete');

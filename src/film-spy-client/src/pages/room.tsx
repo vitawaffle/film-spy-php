@@ -3,16 +3,16 @@ import { Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/materi
 
 import { useIsRoomOwner } from 'features/room';
 import { DeleteRoomButton, LeaveRoomButton, RoomChannelListener, UserList } from 'features/room';
-import { useLoadRooms } from 'features/rooms';
+import { useLoadOwnedRooms } from 'features/rooms';
 import { strings } from 'localization';
 
 const Room = (): React.ReactElement => {
   const isRoomOwner = useIsRoomOwner();
 
-  const loadRooms = useLoadRooms();
+  const loadOwnedRooms = useLoadOwnedRooms();
 
   useEffect(() => {
-    void loadRooms();
+    void loadOwnedRooms();
   }, []);
 
   return (
