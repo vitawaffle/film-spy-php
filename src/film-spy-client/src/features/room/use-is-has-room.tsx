@@ -4,9 +4,9 @@ import { useSelector } from 'store';
 
 const useIsHasRoom = (): boolean => {
   const joinedRooms = useSelector(selectJoinedRooms);
-  const roomId = useCurrentRoomId();
+  const currentRoomId = useCurrentRoomId();
 
-  return joinedRooms.find(room => room.id === roomId) !== undefined;
+  return joinedRooms.find(room => room.id === currentRoomId) !== undefined;
 };
 
 export default useIsHasRoom;

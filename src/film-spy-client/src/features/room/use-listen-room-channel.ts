@@ -23,15 +23,17 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     dispatch(userLeft(user));
   };
 
-  const handleUserKicked = ({ room, user }: UserKicked): void => {
+  const handleUserKicked = ({ user }: UserKicked): void => {
     dispatch(userKicked(user));
 
     if (currentUser?.id === user.id) {
       enqueueSnackbar(strings.snack.youAreKicked);
-
-      dispatch(roomKicked(room));
       navigate('/rooms');
     }
+  };
+
+  const handleRoomDeleted = (): void => {
+    navigate('/rooms');
   };
 
   const roomId = useCurrentRoomId();
@@ -39,16 +41,26 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
 
   return {
     listenRoomChannel: (): void => {
+      /* Debug */
+      console.log(`Start listening ${url} channel`);
+      /* ***** */
+
       window.Echo.private(url)
         .listen('UserJoinedRoom', handleUserJoinedRoom)
         .listen('UserLeftRoom', handleUserLeftRoom)
-        .listen('UserKicked', handleUserKicked);
+        .listen('UserKicked', handleUserKicked)
+        .listen('RoomDeleted', handleRoomDeleted);
     },
     stopListeningRoomChannel: (): void => {
+      /* Debug */
+      console.log(`End listening ${url} channel`);
+      /* ***** */
+
       window.Echo.private(url)
         .stopListening('UserJoinedRoom')
         .stopListening('UserLeftRoom')
-        .stopListening('UserKicked');
+        .stopListening('UserKicked')
+        .stopListening('RoomDeleted');
     },
   };
 };

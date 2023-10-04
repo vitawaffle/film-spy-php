@@ -29,6 +29,7 @@ class RoomDeleted implements ShouldBroadcast
     {
         return [
             new PrivateChannel('rooms'),
+            new PrivateChannel('rooms.'.$this->room->id),
         ];
     }
 

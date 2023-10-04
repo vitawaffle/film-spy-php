@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
 
 import { useIsRoomOwner } from 'features/room';
 import { DeleteRoomButton, LeaveRoomButton, RoomChannelListener, UserList } from 'features/room';
+import { useLoadRooms } from 'features/rooms';
 import { strings } from 'localization';
 
 const Room = (): React.ReactElement => {
   const isRoomOwner = useIsRoomOwner();
+
+  const loadRooms = useLoadRooms();
+
+  useEffect(() => {
+    void loadRooms();
+  }, []);
 
   return (
     <>

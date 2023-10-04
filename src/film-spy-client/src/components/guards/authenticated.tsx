@@ -9,8 +9,8 @@ const Authenticated = ({ children }: ChildrenProps): React.ReactElement => {
   const isAuthenticationChecking = useSelector(selectIsAuthenticationChecking);
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
-  return isAuthenticationChecking ? <></> : (
-    <Guard isEnabled={isAuthenticated} navigateOnForbidden="/login">
+  return (
+    <Guard isEnabled={isAuthenticated} isLoading={isAuthenticationChecking} navigateOnForbidden="/login">
       {children}
     </Guard>
   );
