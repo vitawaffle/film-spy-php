@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { Box, LinearProgress, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, CircularProgress, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 import useCurrentRoomId from './use-current-room-id';
 import client from 'client';
@@ -52,8 +52,8 @@ const KickUserButton = ({ user }: KickUserButtonProps): React.ReactElement => {
         isControlDisabled={isLoading}
       >
         {isLoading && (
-          <Box sx={{ width: '100%' }}>
-            <LinearProgress />
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
           </Box>
         )}
       </Dialog>

@@ -39,7 +39,8 @@ const useListenRoomsChannel = (): { listenRoomsChannel: () => void, stopListenin
 
       window.Echo.private('rooms')
         .listen('RoomCreated', handleRoomCreated)
-        .listen('RoomDeleted', handleRoomDeleted);
+        .listen('RoomDeleted', handleRoomDeleted)
+        .listen('UserKicked', handleUserKicked);
     },
     stopListeningRoomsChannel: (): void => {
       /* Debug */
@@ -48,7 +49,8 @@ const useListenRoomsChannel = (): { listenRoomsChannel: () => void, stopListenin
 
       window.Echo.private('rooms')
         .stopListening('RoomCreated')
-        .stopListening('RoomDeleted');
+        .stopListening('RoomDeleted')
+        .stopListening('UserKicked');
     },
   };
 };
