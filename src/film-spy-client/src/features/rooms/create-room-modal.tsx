@@ -10,12 +10,10 @@ export type CreateRoomModalProps = {
   onClose?: () => Promise<void> | void,
 };
 
-const CreateRoomModal = ({ isOpen, onSuccess, onClose }: CreateRoomModalProps): React.ReactElement => {
-  return (
-    <Modal isOpen={isOpen} onClose={onClose} id="createRoom" title={strings.features.rooms.createRoomModal.title}>
-      <CreateRoomForm onSuccess={onSuccess} />
-    </Modal>
-  );
-};
+const CreateRoomModal = ({ isOpen, onSuccess, onClose }: CreateRoomModalProps): React.ReactElement => (
+  <Modal isOpen={isOpen} onClose={onClose} id="createRoom" title={strings.features.rooms.createRoomModal.title}>
+    <CreateRoomForm onSuccess={onSuccess} />
+  </Modal>
+);
 
 export default CreateRoomModal;

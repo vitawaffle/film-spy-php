@@ -80,7 +80,11 @@ export type StringsTemplate = {
   },
   snack: {
     emailNotVerified: string,
+    roomCreated: string,
     roomDeleted: string,
+    userJoined: string,
+    userKicked: string,
+    userLeft: string,
     youAreKicked: string,
   },
   validation: {

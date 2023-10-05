@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Button, CircularProgress } from '@mui/material';
 
 import useCurrentRoomId from './use-current-room-id';
@@ -16,14 +15,12 @@ const DeleteRoomButton = (): React.ReactElement => {
   };
 
   const roomId = useCurrentRoomId();
-  const navigate = useNavigate();
 
   const handleOk = async (): Promise<void> => {
     setIsLoading(true);
 
     try {
       await client.delete(`/api/rooms/${roomId}`);
-      navigate('/rooms');
     } finally {
       setIsLoading(false);
     }

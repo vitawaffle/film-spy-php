@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
+import Button from '@mui/material/Button';
 
 import CreateRoomModal from './create-room-modal';
 import { strings } from 'localization';

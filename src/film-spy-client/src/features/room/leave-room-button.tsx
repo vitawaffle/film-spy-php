@@ -4,8 +4,10 @@ import { Box, Button, CircularProgress } from '@mui/material';
 
 import useCurrentRoomId from './use-current-room-id';
 import client from 'client';
+import { roomLeft } from 'features/rooms';
 import { Dialog } from 'features/ui';
 import { strings } from 'localization';
+import { useDispatch }  from 'store';
 
 const LeaveRoomButton = (): React.ReactElement => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -17,6 +19,7 @@ const LeaveRoomButton = (): React.ReactElement => {
 
   const roomId = useCurrentRoomId();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOk = async (): Promise<void> => {
     setIsLoading(true);
@@ -24,6 +27,7 @@ const LeaveRoomButton = (): React.ReactElement => {
     try {
       await client.post(`/api/rooms/${roomId}/leave`);
       navigate('/rooms');
+      dispatch(roomLeft(roomId));
     } finally {
       setIsLoading(false);
     }

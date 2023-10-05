@@ -7,19 +7,15 @@ import type { RootState } from 'store';
 export type RoomsState = {
   isRoomsLoading: boolean,
   rooms: Room[],
-  selectedRoom?: Room,
-  isJoinedRoomsLoading: boolean,
   joinedRooms: Room[],
-  isOwnedRoomsLoading: boolean,
   ownedRooms: Room[],
+  selectedRoom?: Room,
 };
 
 const initialState: RoomsState = {
   isRoomsLoading: false,
   rooms: [],
-  isJoinedRoomsLoading: false,
   joinedRooms: [],
-  isOwnedRoomsLoading: false,
   ownedRooms: [],
 };
 
@@ -38,35 +34,34 @@ const roomsSlice = createSlice({
       state.rooms.push(payload);
     },
     roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
-      state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload.id);
       state.rooms = state.rooms.filter(room => room.id !== payload.id);
-    },
-    roomSelected: (state, { payload }: PayloadAction<Room>): void => {
-      state.selectedRoom = payload;
-    },
-    roomUnselected: (state): void => {
-      state.selectedRoom = undefined;
-    },
-    joinedRoomsLoadingStarted: (state): void => {
-      state.isJoinedRoomsLoading = true;
+      state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload.id);
+      state.ownedRooms = state.ownedRooms.filter(room => room.id !== payload.id);
     },
     joinedRoomsLoaded: (state, { payload }: PayloadAction<Room[]>): void => {
-      state.isJoinedRoomsLoading = false;
       state.joinedRooms = payload;
     },
     roomJoined: (state, { payload }: PayloadAction<Room>): void => {
       state.joinedRooms.push(payload);
       state.selectedRoom = undefined;
     },
+    roomLeft: (state, { payload }: PayloadAction<number>): void => {
+      state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload);
+    },
     roomKicked: (state, { payload }: PayloadAction<Room>): void => {
       state.joinedRooms = state.joinedRooms.filter(room => room.id !== payload.id);
     },
-    ownedRoomsLoadingStarted: (state): void => {
-      state.isOwnedRoomsLoading = true;
-    },
     ownedRoomsLoaded: (state, { payload }: PayloadAction<Room[]>): void => {
-      state.isOwnedRoomsLoading = false;
       state.ownedRooms = payload;
+    },
+    ownedRoomCreated: (state, { payload }: PayloadAction<Room>): void => {
+      state.ownedRooms.push(payload);
+    },
+    roomSelected: (state, { payload }: PayloadAction<Room>): void => {
+      state.selectedRoom = payload;
+    },
+    roomUnselected: (state): void => {
+      state.selectedRoom = undefined;
     },
   },
 });
@@ -78,22 +73,20 @@ export const {
   roomsLoaded,
   roomCreated,
   roomDeleted,
+  roomJoined,
+  roomLeft,
+  roomKicked,
+  joinedRoomsLoaded,
+  ownedRoomsLoaded,
+  ownedRoomCreated,
   roomSelected,
   roomUnselected,
-  joinedRoomsLoadingStarted,
-  joinedRoomsLoaded,
-  roomJoined,
-  roomKicked,
-  ownedRoomsLoadingStarted,
-  ownedRoomsLoaded,
 } = roomsSlice.actions;
 
 export const selectIsRoomsLoading = ({ rooms }: RootState): boolean => rooms.isRoomsLoading;
 export const selectRooms = ({ rooms }: RootState): Room[] => rooms.rooms;
-export const selectSelectedRoom = ({ rooms }: RootState): Room | undefined => rooms.selectedRoom;
-export const selectIsJoinedRoomsLoading = ({ rooms }: RootState): boolean => rooms.isJoinedRoomsLoading;
-export const selectJoinedRooms = ({ rooms }: RootState): Room[] => rooms.joinedRooms;
 export const selectRoomById = (id: number) => ({ rooms }: RootState): Room | undefined =>
   rooms.rooms.find(room => room.id === id);
-export const selectIsOwnedRoomsLoading = ({ rooms }: RootState): boolean => rooms.isOwnedRoomsLoading;
+export const selectJoinedRooms = ({ rooms }: RootState): Room[] => rooms.joinedRooms;
 export const selectOwnedRooms = ({ rooms }: RootState): Room[] => rooms.ownedRooms;
+export const selectSelectedRoom = ({ rooms }: RootState): Room | undefined => rooms.selectedRoom;

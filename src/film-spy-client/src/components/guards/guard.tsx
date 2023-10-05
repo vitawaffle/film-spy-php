@@ -2,19 +2,18 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { Backdrop, CircularProgress } from '@mui/material';
 
-import type { ChildrenProps } from 'props';
+import type GuardBasicProps from './guard-basic-props';
 
-export type GuardProps = ChildrenProps & {
-  isEnabled?: boolean,
+export type GuardProps = GuardBasicProps & {
   isLoading?: boolean,
-  navigateOnForbidden?: string,
 };
 
-// const Guard = ({ children, isEnabled, navigateOnForbidden }: GuardProps): React.ReactElement => isEnabled === false ? (
-//   <Navigate to={navigateOnForbidden ? navigateOnForbidden : '/errors/forbidden'} />
-// ) : <>{children}</>;
-
-const Guard = ({ children, isEnabled, isLoading, navigateOnForbidden }: GuardProps): React.ReactElement => {
+const Guard = ({
+  children,
+  isEnabled,
+  isLoading,
+  navigateOnForbidden,
+}: GuardProps): React.ReactElement => {
   if (isLoading) {
     return (
       <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true}>
@@ -24,7 +23,7 @@ const Guard = ({ children, isEnabled, isLoading, navigateOnForbidden }: GuardPro
   }
 
   if (isEnabled === false)
-    return <Navigate to={navigateOnForbidden ? navigateOnForbidden : '/errors/forbidden'} />;
+    return <Navigate to={navigateOnForbidden ?? '/errors/forbidden'} />;
 
   return <>{children}</>;
 };

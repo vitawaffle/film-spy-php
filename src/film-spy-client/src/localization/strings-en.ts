@@ -79,7 +79,11 @@ const stringsEn: StringsTemplate = {
   snack: {
     emailNotVerified: 'Email not verified. Some functionality is not available. Didn\'t receive a confirmation '
           + ' email? Use the button below.',
+    roomCreated: 'Room created',
     roomDeleted: 'Room deleted',
+    userJoined: 'User joined',
+    userKicked: 'User kicked',
+    userLeft: 'User left',
     youAreKicked: 'You are kicked from the room',
   },
   validation: {

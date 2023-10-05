@@ -5,31 +5,32 @@ import { userJoined, userKicked, userLeft } from './room-slice';
 import useCurrentRoomId from './use-current-room-id';
 import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
 import { selectUser } from 'features/auth';
-import { roomKicked } from 'features/rooms';
 import { strings } from 'localization';
 import { useDispatch, useSelector } from 'store';
 
 const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningRoomChannel: () => void } => {
-  const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectUser);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleUserJoinedRoom = ({ user }: UserJoinedRoom): void => {
+    enqueueSnackbar(`${user.name} - ${strings.snack.userJoined}`);
     dispatch(userJoined(user));
   };
 
   const handleUserLeftRoom = ({ user }: UserLeftRoom): void => {
+    enqueueSnackbar(`${user.name} - ${strings.snack.userLeft}`);
     dispatch(userLeft(user));
   };
 
+  const currentUser = useSelector(selectUser);
+  const navigate = useNavigate();
+
   const handleUserKicked = ({ user }: UserKicked): void => {
+    enqueueSnackbar(`${user.name} - ${strings.snack.userKicked}`);
     dispatch(userKicked(user));
 
-    if (currentUser?.id === user.id) {
-      enqueueSnackbar(strings.snack.youAreKicked);
+    if (currentUser?.id === user.id)
       navigate('/rooms');
-    }
   };
 
   const handleRoomDeleted = (): void => {
