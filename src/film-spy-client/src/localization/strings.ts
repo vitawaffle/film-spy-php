@@ -33,6 +33,11 @@ export type StringsTemplate = {
         s: string,
       },
     },
+    games: {
+      gameList: {
+        empty: string,
+      },
+    },
     room: {
       deleteRoomButton: {
         deleteRoom: string,

@@ -24,3 +24,5 @@ Broadcast::channel(
 );
 
 Broadcast::channel('rooms', fn () => Auth::check());
+
+Broadcast::channel('games', fn () => Auth::check());

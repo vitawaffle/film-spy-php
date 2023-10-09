@@ -30,6 +30,11 @@ const stringsEn: StringsTemplate = {
         s: 's',
       },
     },
+    games: {
+      gameList: {
+        empty: 'No games found',
+      },
+    },
     room: {
       deleteRoomButton: {
         deleteRoom: 'Delete room',

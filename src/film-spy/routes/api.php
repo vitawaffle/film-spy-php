@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{RoomController, UserController};
+use App\Http\Controllers\{GameController, RoomController, UserController};
 use Illuminate\Support\Facades\{Broadcast, Route};
 
 /*
@@ -36,6 +36,13 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::post('/join', 'join');
         Route::post('/{room}/leave', 'leave');
         Route::post('/{room}/kick', 'kick');
+    });
+
+Route::middleware(['auth:sanctum', 'verified'])
+    ->prefix('/games')
+    ->controller(GameController::class)
+    ->group(function () {
+        Route::post('/start', 'start');
     });
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);

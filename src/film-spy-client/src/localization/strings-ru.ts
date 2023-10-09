@@ -30,6 +30,11 @@ const stringsRu: StringsTemplate = {
         s: 'с',
       },
     },
+    games: {
+      gameList: {
+        empty: 'Не найдено ни одной игры',
+      },
+    },
     room: {
       deleteRoomButton: {
         deleteRoom: 'Удалить комнату',

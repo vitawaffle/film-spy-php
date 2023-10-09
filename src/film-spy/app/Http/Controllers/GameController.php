@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GameCreated;
 use App\Http\Requests\StartGameRequest;
 use App\Models\{Game, Room};
 use Illuminate\Support\Facades\Gate;
@@ -15,8 +16,10 @@ class GameController extends Controller
         if (!Gate::allows('room-owner', $room))
             abort(403);
 
-        Game::create([
+        $game = Game::create([
             'users' => $room->users,
         ]);
+
+        GameCreated::dispatch($game);
     }
 }

@@ -1,7 +1,7 @@
 import { authenticationCheckStarted, authenticated, unauthenticated } from './auth-slice';
 import client from 'client';
-import { ownedRoomsLoaded } from 'features/rooms/rooms-slice';
-import { joinedRoomsLoaded } from 'features/rooms/rooms-slice';
+import { gamesLoaded } from 'features/games';
+import { joinedRoomsLoaded, ownedRoomsLoaded } from 'features/rooms/rooms-slice';
 import type { User } from 'models';
 import { useDispatch } from 'store';
 import { isUnauthenticatedError } from 'utils';
@@ -20,6 +20,7 @@ const useCheckAuthentication = (): () => Promise<boolean> => {
       dispatch(authenticated(user));
       dispatch(joinedRoomsLoaded(user.rooms));
       dispatch(ownedRoomsLoaded(user.ownedRooms));
+      dispatch(gamesLoaded(user.games));
 
       if (user.emailVerifiedAt === undefined || user.emailVerifiedAt === null)
         enqueueEmailNotVerified();
