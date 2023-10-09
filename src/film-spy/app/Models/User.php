@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property Collection<Room> $rooms
  * @property Collection<Room> $ownedRooms
+ * @property Collection<Game> $games
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -56,5 +57,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function ownedRooms(): HasMany
     {
         return $this->hasMany(Room::class, 'owner_id');
+    }
+
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class, 'users_games');
     }
 }
