@@ -7,9 +7,10 @@ import type { Game } from 'models';
 
 export type GameListItemProps = {
   game: Game,
+  number: number,
 };
 
-const GameListItem = ({ game }: GameListItemProps): React.ReactElement => {
+const GameListItem = ({ game, number }: GameListItemProps): React.ReactElement => {
   const navigate = useNavigate();
 
   const handleClick = (): void => {
@@ -19,8 +20,10 @@ const GameListItem = ({ game }: GameListItemProps): React.ReactElement => {
   return (
     <ListItem alignItems="flex-start" disablePadding>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary
+        <ListItemText primary={`${number}. ${game.room.name}`} />
       </ListItemButton>
     </ListItem>
   );
 };
+
+export default GameListItem;

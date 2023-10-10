@@ -7,6 +7,7 @@ const stringsEn: StringsTemplate = {
     confirmPassword: 'Confirm password',
     create: 'Create',
     email: 'Email',
+    games: 'Games',
     home: 'Home',
     isRemember: 'Remember me',
     join: 'Join',
@@ -44,6 +45,9 @@ const stringsEn: StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: 'Leave room',
+      },
+      startGameButton: {
+        startGame: 'Start game',
       },
     },
     rooms: {

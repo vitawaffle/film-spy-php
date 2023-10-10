@@ -7,6 +7,7 @@ const stringsRu: StringsTemplate = {
     confirmPassword: 'Подтвердите пароль',
     create: 'Создать',
     email: 'Электронная почта',
+    games: 'Игры',
     home: 'Главная',
     isRemember: 'Запомни меня',
     join: 'Присоединиться',
@@ -44,6 +45,9 @@ const stringsRu: StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: 'Покинуть комнату',
+      },
+      startGameButton: {
+        startGame: 'Начать игру',
       },
     },
     rooms: {

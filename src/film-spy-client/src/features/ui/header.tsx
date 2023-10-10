@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Casino as CasinoIcon,
   ChevronLeft as ChevronLeftIcon,
+  Group as GroupIcon,
   Home as HomeIcon,
   Menu as MenuIcon,
+  SportsEsports as SportsEsportsIcon,
 } from '@mui/icons-material';
 import {
   AppBar as MuiAppBar,
@@ -242,12 +243,20 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
             isDrawerOpen={isOpen}
           />
           {isAuthenticated && isEmailVerified && (
-            <DrawerLink
-              to="/rooms"
-              text={strings.common.rooms}
-              icon={<CasinoIcon />}
-              isDrawerOpen={isOpen}
-            />
+            <>
+              <DrawerLink
+                to="/rooms"
+                text={strings.common.rooms}
+                icon={<GroupIcon />}
+                isDrawerOpen={isOpen}
+              />
+              <DrawerLink
+                to="/games"
+                text={strings.common.games}
+                icon={<SportsEsportsIcon />}
+                isDrawerOpen={isOpen}
+              />
+            </>
           )}
         </List>
       </Drawer>

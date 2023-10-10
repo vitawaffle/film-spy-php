@@ -1,6 +1,6 @@
 import { authenticationCheckStarted, authenticated, unauthenticated } from './auth-slice';
 import client from 'client';
-import { gamesLoaded } from 'features/games';
+import { gamesLoaded } from 'features/games/games-slice';
 import { joinedRoomsLoaded, ownedRoomsLoaded } from 'features/rooms/rooms-slice';
 import type { User } from 'models';
 import { useDispatch } from 'store';

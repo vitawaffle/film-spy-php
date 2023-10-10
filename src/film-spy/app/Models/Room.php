@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\{Collection, Model};
+use Illuminate\Database\Eloquent\{Collection, Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
 
 /**
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
  */
 class Room extends Model
 {
-    use HasFactory, CamelCase;
+    use HasFactory, CamelCase, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

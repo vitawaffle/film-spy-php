@@ -9,6 +9,6 @@ class UserController extends Controller
 {
     public function getMe(): User
     {
-        return User::with(['rooms', 'ownedRooms', 'games'])->find(Auth::id());
+        return User::with(['rooms', 'ownedRooms', 'games.room'])->find(Auth::id());
     }
 }

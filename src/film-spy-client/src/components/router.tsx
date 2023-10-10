@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Authenticated, EmailVerified, HasRoom } from 'components/guards';
-import { Error, Home, Login, Register, Room, Rooms } from 'pages';
+import { Error, Games, Home, Login, Register, Room, Rooms } from 'pages';
 import { EmailNotVerified, Forbidden, NotFound } from 'pages/errors';
 
 const Router = (): React.ReactElement => (
@@ -12,6 +12,13 @@ const Router = (): React.ReactElement => (
       <Route path="forbidden" element={<Forbidden />} />
       <Route path="not-found" element={<NotFound />} />
     </Route>
+    <Route path="games" element={(
+      <Authenticated>
+        <EmailVerified>
+          <Games />
+        </EmailVerified>
+      </Authenticated>
+    )} />
     <Route path="home" element={<Home />} />
     <Route path="login" element={<Login />} />
     <Route path="register" element={<Register />} />

@@ -10,6 +10,7 @@ export type StringsTemplate = {
     confirmPassword: string,
     create: string,
     email: string,
+    games: string,
     home: string,
     isRemember: string,
     join: string,
@@ -47,6 +48,9 @@ export type StringsTemplate = {
       },
       leaveRoomButton: {
         leaveRoom: string,
+      },
+      startGameButton: {
+        startGame: string,
       },
     },
     rooms: {
