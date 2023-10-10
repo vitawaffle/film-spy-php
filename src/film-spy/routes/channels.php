@@ -23,6 +23,4 @@ Broadcast::channel(
     fn (User $user, Room $room) => $user->rooms->contains(fn ($item) => $item->id === $room->id),
 );
 
-Broadcast::channel('rooms', fn () => Auth::check());
-
-Broadcast::channel('games', fn () => Auth::check());
+Broadcast::channel('common', fn () => Auth::check());

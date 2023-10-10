@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { Router } from './components';
+import { CommonChannelListener, Router } from './components';
 import { selectIsAuthenticated, selectIsEmailVerified, useCheckAuthentication } from './features/auth';
-import { RoomsChannelListener, useLoadRooms } from './features/rooms';
+import { useLoadRooms } from './features/rooms';
 import { Layout } from './features/ui';
 import { useSelector } from './store';
 
@@ -24,7 +24,7 @@ const App = (): React.ReactElement => {
 
   return (
     <>
-      {isAuthenticated && isEmailVerified && <RoomsChannelListener />}
+      {isAuthenticated && isEmailVerified && <CommonChannelListener />}
       <Layout>
         <Router />
       </Layout>

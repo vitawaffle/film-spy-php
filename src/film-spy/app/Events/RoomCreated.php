@@ -28,7 +28,7 @@ class RoomCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('rooms'),
+            new PrivateChannel('common'),
         ];
     }
 
