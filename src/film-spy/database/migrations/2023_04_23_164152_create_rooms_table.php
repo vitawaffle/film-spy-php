@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->softDeletes();
             $table->string('name')->unique();
             $table->string('password')->nullable();
             $table->foreignId('owner_id')->constrained(table: 'users');

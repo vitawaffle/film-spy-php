@@ -89,6 +89,7 @@ export type StringsTemplate = {
   },
   snack: {
     emailNotVerified: string,
+    gameStarted: string,
     roomCreated: string,
     roomDeleted: string,
     userJoined: string,

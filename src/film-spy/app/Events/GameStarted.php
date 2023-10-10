@@ -9,14 +9,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class GameCreated implements ShouldBroadcast
+class GameStarted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(private readonly Game $game)
+    public function __construct(private readonly Game $game, private readonly int $userId)
     {
         //
     }
@@ -29,7 +29,7 @@ class GameCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('common'),
+            new PrivateChannel('personal'.$this->userId),
         ];
     }
 

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 
-import type { RoomCreated, RoomDeleted, UserKicked } from 'broadcast-events';
+import type { RoomCreated, RoomDeleted } from 'broadcast-events';
 import { selectUser } from 'features/auth';
-import { ownedRoomCreated, roomCreated, roomDeleted, roomKicked } from 'features/rooms';
+import { ownedRoomCreated, roomCreated, roomDeleted } from 'features/rooms';
 import { strings } from 'localization';
 import { useDispatch, useSelector } from 'store';
 
@@ -32,33 +32,24 @@ export const useListenCommonChannel = (): {
     dispatch(roomDeleted(room));
   };
 
-  const handleUserKicked = ({ user, room }: UserKicked): void => {
-    if (currentUser?.id === user.id) {
-      enqueueSnackbar(`${room.name} - ${strings.snack.youAreKicked}`);
-      dispatch(roomKicked(room));
-    }
-  };
-
   return {
     listenCommonChannel: (): void => {
       /* Debug */
-      console.log('Start listening rooms channel');
+      console.log('Start listening common channel');
       /* ***** */
 
       window.Echo.private('common')
         .listen('RoomCreated', handleRoomCreated)
-        .listen('RoomDeleted', handleRoomDeleted)
-        .listen('UserKicked', handleUserKicked);
+        .listen('RoomDeleted', handleRoomDeleted);
     },
     stopListeningCommonChannel: (): void => {
       /* Debug */
-      console.log('End listening rooms channel');
+      console.log('End listening common channel');
       /* ***** */
 
       window.Echo.private('common')
         .stopListening('RoomCreated')
-        .stopListening('RoomDeleted')
-        .stopListening('UserKicked');
+        .stopListening('RoomDeleted');
     },
   };
 };

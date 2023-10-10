@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Collection, Model};
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int $room_id
- * @property Room $room
  * @property Collection<User> $users
  */
 class Game extends Model
@@ -21,7 +19,7 @@ class Game extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'room_id',
+        'name',
     ];
 
     /**
@@ -32,11 +30,6 @@ class Game extends Model
     protected $hidden = [
         //
     ];
-
-    public function room(): BelongsTo
-    {
-        return $this->belongsTo(Room::class,);
-    }
 
     public function users(): BelongsToMany
     {

@@ -28,7 +28,7 @@ class UserKicked implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('common'),
+            new PrivateChannel('personal.'.$this->user->id),
             new PrivateChannel('rooms.'.$this->room->id),
         ];
     }

@@ -19,7 +19,7 @@ const gamesSlice = createSlice({
     gamesLoaded: (state, { payload }: PayloadAction<Game[]>): void => {
       state.games = payload;
     },
-    gameCreated: (state, { payload }: PayloadAction<Game>): void => {
+    gameStarted: (state, { payload }: PayloadAction<Game>): void => {
       state.games.push(payload);
     },
   },
@@ -27,6 +27,6 @@ const gamesSlice = createSlice({
 
 export default gamesSlice.reducer;
 
-export const { gamesLoaded, gameCreated } = gamesSlice.actions;
+export const { gamesLoaded, gameStarted } = gamesSlice.actions;
 
 export const selectGames = ({ games }: RootState): Game[] => games.games;

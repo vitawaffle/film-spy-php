@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\{Auth, Broadcast};
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+Broadcast::channel(
+    'personal.{user}',
+    fn (User $authenticatedUser, User $user) => (int) $authenticatedUser->id === $user->id,
+);
 
 Broadcast::channel(
     'rooms.{room}',

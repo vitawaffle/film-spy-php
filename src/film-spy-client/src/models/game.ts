@@ -1,9 +1,8 @@
 import type Model from './model';
-import type Room from './room';
 import type User from './user';
 
 type Game = Model & {
-  room: Room,
+  name: string,
   users: User[],
 };
 

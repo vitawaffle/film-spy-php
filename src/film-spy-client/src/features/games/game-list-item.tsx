@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { ListItem, ListItemButton, ListItemText } from '@mui/material';
 
-import { strings } from 'localization';
 import type { Game } from 'models';
 
 export type GameListItemProps = {
@@ -20,7 +19,7 @@ const GameListItem = ({ game, number }: GameListItemProps): React.ReactElement =
   return (
     <ListItem alignItems="flex-start" disablePadding>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary={`${number}. ${game.room.name}`} />
+        <ListItemText primary={`${number}. ${game.name}`} />
       </ListItemButton>
     </ListItem>
   );
