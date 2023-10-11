@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::post('/join', 'join');
         Route::post('/{room}/leave', 'leave');
         Route::post('/{room}/kick', 'kick');
+        Route::post('/{room}/change-password', 'changePassword');
     });
 
 Route::middleware(['auth:sanctum', 'verified'])

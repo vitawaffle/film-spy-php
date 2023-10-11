@@ -1,3 +1,4 @@
+export { default as ChangeRoomPasswordButton } from './change-room-password-button';
 export { default as DeleteRoomButton } from './delete-room-button';
 export { default as LeaveRoomButton } from './leave-room-button';
 export { default as RoomChannelListener } from './room-channel-listener';

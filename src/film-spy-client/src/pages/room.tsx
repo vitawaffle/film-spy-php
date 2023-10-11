@@ -2,7 +2,14 @@ import React from 'react';
 import { Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
 
 import { useIsRoomOwner } from 'features/room';
-import { DeleteRoomButton, LeaveRoomButton, RoomChannelListener, StartGameButton, UserList } from 'features/room';
+import {
+  ChangeRoomPasswordButton,
+  DeleteRoomButton,
+  LeaveRoomButton,
+  RoomChannelListener,
+  StartGameButton,
+  UserList,
+} from 'features/room';
 import { strings } from 'localization';
 
 const Room = (): React.ReactElement => {
@@ -33,6 +40,7 @@ const Room = (): React.ReactElement => {
                 {isRoomOwner && (
                   <>
                     <Divider variant="middle" />
+                    <ChangeRoomPasswordButton />
                     <DeleteRoomButton />
                   </>
                 )}

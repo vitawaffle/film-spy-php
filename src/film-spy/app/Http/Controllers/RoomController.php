@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\{RoomCreated, RoomDeleted, UserJoinedRoom, UserKicked, UserLeftRoom};
-use App\Http\Requests\{CreateRoomRequest, JoinRoomRequest, KickPlayerRequest};
+use App\Http\Requests\{ChangeRoomPasswordRequest, CreateRoomRequest, JoinRoomRequest, KickPlayerRequest};
 use App\Models\{Room, User};
 use Illuminate\Support\Facades\{Auth, Gate};
 
@@ -96,5 +96,14 @@ class RoomController extends Controller
         $user->save();
 
         UserKicked::dispatch($user, $room);
+    }
+
+    public function changePassword(Room $room, ChangeRoomPasswordRequest $request): void
+    {
+        if (!Gate::allows('room-owner', $room))
+            abort(403);
+
+        $room->password = $request->validated()['password'];
+        $room->save();
     }
 }

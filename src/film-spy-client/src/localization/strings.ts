@@ -6,6 +6,7 @@ import stringsRu from './strings-ru';
 export type StringsTemplate = {
   common: {
     cancel: string,
+    change: string,
     close: string,
     confirmPassword: string,
     create: string,
@@ -40,6 +41,13 @@ export type StringsTemplate = {
       },
     },
     room: {
+      changeRoomPasswordButton: {
+        changeRoomPassword: string,
+        passwordChanged: string,
+      },
+      changeRoomPasswordModal: {
+        title: string,
+      },
       deleteRoomButton: {
         deleteRoom: string,
       },

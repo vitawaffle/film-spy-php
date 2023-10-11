@@ -3,6 +3,7 @@ import type { StringsTemplate } from './strings';
 const stringsEn: StringsTemplate = {
   common: {
     cancel: 'Cancel',
+    change: 'Change',
     close: 'Close',
     confirmPassword: 'Confirm password',
     create: 'Create',
@@ -37,6 +38,13 @@ const stringsEn: StringsTemplate = {
       },
     },
     room: {
+      changeRoomPasswordButton: {
+        changeRoomPassword: 'Change room password',
+        passwordChanged: 'Password changed',
+      },
+      changeRoomPasswordModal: {
+        title: 'Change room password',
+      },
       deleteRoomButton: {
         deleteRoom: 'Delete room',
       },
