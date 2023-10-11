@@ -11,7 +11,6 @@ import {
   AppBar as MuiAppBar,
   Box,
   Button,
-  CircularProgress,
   Container,
   Divider,
   Drawer as MuiDrawer,
@@ -31,7 +30,6 @@ import type { CSSObject, Theme } from '@mui/material/styles';
 
 import {
   selectIsAuthenticated,
-  selectIsAuthenticationChecking,
   selectIsEmailVerified,
   selectIsLoggingOut,
   selectIsUnauthenticated,
@@ -170,7 +168,6 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
 
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isUnauthenticated = useSelector(selectIsUnauthenticated);
-  const isAuthenticationChecking = useSelector(selectIsAuthenticationChecking);
   const isLoggingOut = useSelector(selectIsLoggingOut);
   const isEmailVerified = useSelector(selectIsEmailVerified);
 
@@ -198,32 +195,24 @@ const Header = ({ children }: ChildrenProps): React.ReactElement => {
           >
             Film Spy
           </Typography>
-          {isAuthenticationChecking ? (
-            <Box display="flex">
-              <CircularProgress color="inherit" />
-            </Box>
-          ) : (
+          {isAuthenticated && (
+            <LoadingButton
+              onClick={handleLogoutClick}
+              variant="text"
+              loading={isLoggingOut}
+              color="inherit"
+            >
+              {strings.common.logOut}
+            </LoadingButton>
+          )}
+          {isUnauthenticated && (
             <>
-              {isAuthenticated && (
-                <LoadingButton
-                  onClick={handleLogoutClick}
-                  variant="text"
-                  loading={isLoggingOut}
-                  color="inherit"
-                >
-                  {strings.common.logOut}
-                </LoadingButton>
-              )}
-              {isUnauthenticated && (
-                <>
-                  <Button component={Link} to="/register" color="inherit">
-                    {strings.common.register}
-                  </Button>
-                  <Button component={Link} to="/login" color="inherit">
-                    {strings.common.logIn}
-                  </Button>
-                </>
-              )}
+              <Button component={Link} to="/register" color="inherit">
+                {strings.common.register}
+              </Button>
+              <Button component={Link} to="/login" color="inherit">
+                {strings.common.logIn}
+              </Button>
             </>
           )}
         </Toolbar>

@@ -29,7 +29,7 @@ class GameStarted implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('personal'.$this->userId),
+            new PrivateChannel('personal.'.$this->userId),
         ];
     }
 
