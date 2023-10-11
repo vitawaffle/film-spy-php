@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { Box, CircularProgress, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 import useCurrentRoomId from './use-current-room-id';
 import client from 'client';
-import { Dialog } from 'features/ui';
+import { ConfirmableActionButton } from 'features/ui';
 import { strings } from 'localization';
 import type { User } from 'models';
 
@@ -13,57 +12,23 @@ export type KickUserButtonProps = {
 };
 
 const KickUserButton = ({ user }: KickUserButtonProps): React.ReactElement => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleClick = (): void => {
-    setIsDialogOpen(true);
-  };
-
   const roomId = useCurrentRoomId();
 
-  const handleOk = async (): Promise<void> => {
-    setIsLoading(true);
-
-    try {
-      await client.post(`/api/rooms/${roomId}/kick`, {
-        user_id: user.id,
-      });
-
-      setIsDialogOpen(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const closeDialog = (): void => {
-    setIsDialogOpen(false);
+  const kickUser = async (): Promise<void> => {
+    await client.post(`/api/rooms/${roomId}/kick`, { user_id: user.id });
   };
 
   return (
-    <>
-      <Dialog
-        isOpen={isDialogOpen}
-        id={`kickUser${user.id}`}
-        title={strings.features.room.kickUserButton.kickUser + '?'}
-        onOk={handleOk}
-        onCancel={closeDialog}
-        onClose={closeDialog}
-        isControlDisabled={isLoading}
-      >
-        {isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress />
-          </Box>
-        )}
-      </Dialog>
-      <ListItemButton onClick={handleClick} sx={{ pl: 4 }}>
-        <ListItemIcon>
-          <RemoveCircleOutlineIcon />
-        </ListItemIcon>
-        <ListItemText primary={strings.features.room.kickUserButton.kickUser} />
-      </ListItemButton>
-    </>
+    <ConfirmableActionButton
+      id={`kickUser${user.id}`}
+      title={strings.features.room.kickUserButton.kickUser}
+      component="list-item"
+      icon={<RemoveCircleOutlineIcon />}
+      color="error"
+      action={kickUser}
+    >
+      {strings.features.room.kickUserButton.kickUser}
+    </ConfirmableActionButton>
   );
 };
 

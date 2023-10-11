@@ -41,7 +41,7 @@ const stringsEn: StringsTemplate = {
         deleteRoom: 'Delete room',
       },
       kickUserButton: {
-        kickUser: 'Kick player',
+        kickUser: 'Kick user',
       },
       leaveRoomButton: {
         leaveRoom: 'Leave room',

@@ -28,11 +28,11 @@ const Room = (): React.ReactElement => {
           <Card>
             <CardContent>
               <Stack spacing={2}>
+                {isRoomOwner && <StartGameButton />}
                 <LeaveRoomButton />
                 {isRoomOwner && (
                   <>
                     <Divider variant="middle" />
-                    <StartGameButton />
                     <DeleteRoomButton />
                   </>
                 )}

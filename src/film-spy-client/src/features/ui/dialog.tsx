@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { Button, Stack } from '@mui/material';
 
 import Modal from './modal';
@@ -11,6 +12,8 @@ export type DialogProps = ModalProps & {
   isOkDisabled?: boolean,
   isCancelDisabled?: boolean,
   isControlDisabled?: boolean,
+  isLoading?: boolean,
+  okButtonColor?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
 };
 
 const Dialog = ({
@@ -24,6 +27,8 @@ const Dialog = ({
   isOkDisabled,
   isCancelDisabled,
   isControlDisabled,
+  isLoading,
+  okButtonColor,
 }: DialogProps): React.ReactElement => {
   const handleOkClick = async (): Promise<void> => {
     if (onOk)
@@ -43,15 +48,20 @@ const Dialog = ({
       <Stack spacing={3}>
         {children}
         <Stack spacing={2} direction="row">
-          <Button
+          <LoadingButton
             onClick={handleOkClick}
             disabled={isOkDisabled || isControlDisabled}
+            loading={isLoading}
             variant="contained"
-            color="error"
+            color={okButtonColor ?? 'primary'}
           >
             {strings.common.ok}
-          </Button>
-          <Button onClick={handleCancelClick} disabled={isCancelDisabled || isControlDisabled} variant="outlined">
+          </LoadingButton>
+          <Button
+            onClick={handleCancelClick}
+            disabled={isCancelDisabled || isControlDisabled || isLoading}
+            variant="outlined"
+          >
             {strings.common.cancel}
           </Button>
         </Stack>
