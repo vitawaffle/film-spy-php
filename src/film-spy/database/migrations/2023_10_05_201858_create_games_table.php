@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name')->nullable(false);
+            $table->foreignId('spy_id')->constrained(table: 'users');
         });
     }
 

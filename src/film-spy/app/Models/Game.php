@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Collection, Model};
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property Collection<User> $users
+ * @property int $spy_id
+ * @property User $spy
  */
 class Game extends Model
 {
@@ -20,6 +24,7 @@ class Game extends Model
      */
     protected $fillable = [
         'name',
+        'spy_id',
     ];
 
     /**
@@ -28,11 +33,30 @@ class Game extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        //
+        'spy_id',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'is_spy',
     ];
 
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_games');
+    }
+
+    public function spy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'spy_id');
+    }
+
+    protected function isSpy(): Attribute
+    {
+        return new Attribute(get: fn () => Auth::id() === $this->spy_id);
     }
 }

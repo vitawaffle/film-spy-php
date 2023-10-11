@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { userJoined, userKicked, userLeft } from './room-slice';
 import useCurrentRoomId from './use-current-room-id';
-import type { UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
+import type { GameStarted, UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
 import { selectUser } from 'features/auth';
 import { strings } from 'localization';
 import { useDispatch, useSelector } from 'store';
@@ -37,6 +37,10 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
     navigate('/rooms');
   };
 
+  const handleGameStarted = ({ game }: GameStarted): void => {
+    navigate(`/games/${game.id}`);
+  };
+
   const roomId = useCurrentRoomId();
   const url = `rooms.${roomId}`;
 
@@ -50,7 +54,8 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
         .listen('UserJoinedRoom', handleUserJoinedRoom)
         .listen('UserLeftRoom', handleUserLeftRoom)
         .listen('UserKicked', handleUserKicked)
-        .listen('RoomDeleted', handleRoomDeleted);
+        .listen('RoomDeleted', handleRoomDeleted)
+        .listen('GameStarted', handleGameStarted);
     },
     stopListeningRoomChannel: (): void => {
       /* Debug */
@@ -61,7 +66,8 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
         .stopListening('UserJoinedRoom')
         .stopListening('UserLeftRoom')
         .stopListening('UserKicked')
-        .stopListening('RoomDeleted');
+        .stopListening('RoomDeleted')
+        .stopListening('GameStarted');
     },
   };
 };

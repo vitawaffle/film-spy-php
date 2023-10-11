@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
+import { Card, CardContent, Stack, Typography } from '@mui/material';
 
 import { GameList } from 'features/games';
 import { strings } from 'localization';

@@ -16,14 +16,21 @@ class GameController extends Controller
         if (!Gate::allows('room-owner', $room))
             abort(403);
 
-        $game = Game::create(['name' => 'Game from "'.$room->name.'" room']);
+        $users = $room->users;
 
-        foreach ($room->users as $user)
+        $game = Game::create([
+            'name' => 'Game from "'.$room->name.'" room',
+            'spy_id' => $users->get(rand(0, count($users) - 1))->id,
+        ]);
+
+        foreach ($users as $user)
             $game->users()->attach($user);
 
         $game->save();
 
-        foreach ($game->users as $user)
-            GameStarted::dispatch($game, $user->id);
+        GameStarted::dispatch($game, null, $room->id);
+
+        foreach ($users as $user)
+            GameStarted::dispatch($game, $user->id, null);
     }
 }
