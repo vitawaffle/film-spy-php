@@ -30,6 +30,8 @@ class GameController extends Controller
 
         $game->save();
 
+        $game->load('users');
+
         GameStarted::dispatch($game, null, $room->id);
 
         foreach ($users as $user)

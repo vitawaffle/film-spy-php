@@ -5,6 +5,7 @@ import { userJoined, userKicked, userLeft } from './room-slice';
 import useCurrentRoomId from './use-current-room-id';
 import type { GameStarted, UserJoinedRoom, UserKicked, UserLeftRoom } from 'broadcast-events';
 import { selectUser } from 'features/auth';
+import { gameStarted } from 'features/games';
 import { strings } from 'localization';
 import { useDispatch, useSelector } from 'store';
 
@@ -38,6 +39,8 @@ const useListenRoomChannel = (): { listenRoomChannel: () => void, stopListeningR
   };
 
   const handleGameStarted = ({ game }: GameStarted): void => {
+    enqueueSnackbar(`${game.name} - ${strings.snack.gameStarted}`);
+    dispatch(gameStarted(game));
     navigate(`/games/${game.id}`);
   };
 
