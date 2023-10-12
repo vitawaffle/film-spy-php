@@ -1,5 +1,11 @@
 import React from 'react';
 
-const Game = (): React.ReactElement => <></>;
+import { GameChannelListener } from 'features/game';
+
+const Game = (): React.ReactElement => (
+  <>
+    <GameChannelListener />
+  </>
+);
 
 export default Game;

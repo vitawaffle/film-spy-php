@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Authenticated, EmailVerified, HasRoom } from 'components/guards';
+import { Authenticated, EmailVerified, HasGame, HasRoom } from 'components/guards';
 import { Error, Game, Games, Home, Login, Register, Room, Rooms } from 'pages';
 import { EmailNotVerified, Forbidden, NotFound } from 'pages/errors';
 
@@ -15,7 +15,9 @@ const Router = (): React.ReactElement => (
     <Route path="games/:id" element={(
       <Authenticated>
         <EmailVerified>
-          <Game />
+          <HasGame>
+            <Game />
+          </HasGame>
         </EmailVerified>
       </Authenticated>
     )} />
