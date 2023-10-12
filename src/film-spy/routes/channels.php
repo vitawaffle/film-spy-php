@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\{Room, User};
+use App\Models\{Game, Room, User};
 use Illuminate\Support\Facades\{Auth, Broadcast};
 
 /*
@@ -15,13 +15,18 @@ use Illuminate\Support\Facades\{Auth, Broadcast};
 */
 
 Broadcast::channel(
-    'personal.{user}',
-    fn (User $authenticatedUser, User $user) => (int) $authenticatedUser->id === $user->id,
+    'personal.{id}',
+    fn (User $user, int $id) => (int) $user->id === $id,
 );
 
 Broadcast::channel(
-    'rooms.{room}',
-    fn (User $user, Room $room) => $user->rooms->contains(fn ($item) => $item->id === $room->id),
+    'rooms.{id}',
+    fn (User $user, int $id) => $user->rooms->contains(fn ($room) => $room->id === $id),
+);
+
+Broadcast::channel(
+    'games.{id}',
+    fn (User $user, int $id) => $user->games->contains(fn ($game) => $game->id === $id),
 );
 
 Broadcast::channel('common', fn () => Auth::check());

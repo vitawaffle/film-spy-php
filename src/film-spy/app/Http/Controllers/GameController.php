@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\GameStarted;
 use App\Http\Requests\StartGameRequest;
 use App\Models\{Game, Room};
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 
 class GameController extends Controller
@@ -21,6 +22,7 @@ class GameController extends Controller
         $game = Game::create([
             'name' => 'Game from "'.$room->name.'" room',
             'spy_id' => $users->get(rand(0, count($users) - 1))->id,
+            'started_at' => Carbon::now()->addSecond(10),
         ]);
 
         foreach ($users as $user)

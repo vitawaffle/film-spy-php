@@ -25,6 +25,7 @@ class Game extends Model
     protected $fillable = [
         'name',
         'spy_id',
+        'started_at',
     ];
 
     /**
@@ -34,6 +35,15 @@ class Game extends Model
      */
     protected $hidden = [
         'spy_id',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'started_at' => 'datetime',
     ];
 
     /**

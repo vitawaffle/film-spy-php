@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Room;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name')->nullable(false);
             $table->foreignId('spy_id')->constrained(table: 'users');
+            $table->timestamp('started_at');
         });
     }
 

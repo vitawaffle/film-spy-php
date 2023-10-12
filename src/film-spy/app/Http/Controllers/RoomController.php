@@ -33,7 +33,7 @@ class RoomController extends Controller
     /** @return array<int, User> */
     public function getUsers(Room $room): array
     {
-        if (!Gate::allows('get-users-of-room', $room->id))
+        if (!Gate::allows('has-room', $room->id))
             abort(403);
 
         return $room->users->toArray();
