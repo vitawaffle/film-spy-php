@@ -26,7 +26,8 @@ const roomSlice = createSlice({
       state.users = payload;
     },
     userJoined: (state, { payload }: PayloadAction<User>): void => {
-      state.users.push(payload);
+      if (state.users.find(user => user.id === payload.id) === undefined)
+        state.users.push(payload);
     },
     userLeft: (state, { payload }: PayloadAction<User>): void => {
       state.users = state.users.filter(user => user.id !== payload.id);

@@ -31,7 +31,8 @@ const roomsSlice = createSlice({
       state.rooms = payload;
     },
     roomCreated: (state, { payload }: PayloadAction<Room>): void => {
-      state.rooms.push(payload);
+      if (state.rooms.find(room => room.id === payload.id) === undefined)
+        state.rooms.push(payload);
     },
     roomDeleted: (state, { payload }: PayloadAction<Room>): void => {
       state.rooms = state.rooms.filter(room => room.id !== payload.id);
@@ -42,7 +43,8 @@ const roomsSlice = createSlice({
       state.joinedRooms = payload;
     },
     roomJoined: (state, { payload }: PayloadAction<Room>): void => {
-      state.joinedRooms.push(payload);
+      if (state.joinedRooms.find(room => room.id === payload.id) === undefined)
+        state.joinedRooms.push(payload);
       state.selectedRoom = undefined;
     },
     roomLeft: (state, { payload }: PayloadAction<number>): void => {
@@ -55,7 +57,8 @@ const roomsSlice = createSlice({
       state.ownedRooms = payload;
     },
     ownedRoomCreated: (state, { payload }: PayloadAction<Room>): void => {
-      state.ownedRooms.push(payload);
+      if (state.ownedRooms.find(room => room.id === payload.id) === undefined)
+        state.ownedRooms.push(payload);
     },
     roomSelected: (state, { payload }: PayloadAction<Room>): void => {
       state.selectedRoom = payload;

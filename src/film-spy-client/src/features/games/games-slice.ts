@@ -20,7 +20,8 @@ const gamesSlice = createSlice({
       state.games = payload;
     },
     gameStarted: (state, { payload }: PayloadAction<Game>): void => {
-      state.games.push(payload);
+      if (state.games.find(game => game.id === payload.id) === undefined)
+        state.games.push(payload);
     },
   },
 });
