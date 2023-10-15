@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Gate;
 
 class GameController extends Controller
 {
+    private const PREPARATION_TIME = 10;
+
     public function start(StartGameRequest $request): void
     {
         $room = Room::find($request->validated()['room_id']);
@@ -22,7 +24,7 @@ class GameController extends Controller
         $game = Game::create([
             'name' => 'Game from "'.$room->name.'" room',
             'spy_id' => $users->get(rand(0, count($users) - 1))->id,
-            'started_at' => Carbon::now()->addSecond(10),
+            'started_at' => Carbon::now()->addSecond(self::PREPARATION_TIME),
         ]);
 
         foreach ($users as $user)
