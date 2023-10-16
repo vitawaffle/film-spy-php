@@ -43,6 +43,8 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('/games')
     ->controller(GameController::class)
     ->group(function () {
+        Route::get('/{game}', 'getById');
+
         Route::post('/start', 'start');
     });
 

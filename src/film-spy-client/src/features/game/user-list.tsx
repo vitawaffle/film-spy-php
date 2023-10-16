@@ -1,14 +1,19 @@
 import React from 'react';
-import { List } from '@mui/material';
+import { Box, CircularProgress, List } from '@mui/material';
 
-import useCurrentGame from './use-current-game';
+import { selectIsGameLoading, selectUsers } from './game-slice';
 import UserListItem from './user-list-item';
+import { useSelector } from 'store';
 
 const UserList = (): React.ReactElement => {
-  const currentGame = useCurrentGame();
-  const users = currentGame.users;
+  const isGameLoading = useSelector(selectIsGameLoading);
+  const users = useSelector(selectUsers);
 
-  return (
+  return isGameLoading ? (
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <CircularProgress />
+    </Box>
+  ) : (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {users.map((user, i) => <UserListItem key={i} user={user} />)}
     </List>

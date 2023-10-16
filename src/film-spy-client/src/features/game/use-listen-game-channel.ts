@@ -14,7 +14,7 @@ const useListenGameChannel = (): { listenGameChannel: () => void, stopListeningG
     },
     stopListeningGameChannel: (): void => {
       /* Debug */
-      console.log(`Start listening ${url} channel`);
+      console.log(`End listening ${url} channel`);
       /* ***** */
 
       window.Echo.private(url);
